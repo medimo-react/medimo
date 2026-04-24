@@ -1,0 +1,22 @@
+info:
+  name: 로그인
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: Medimo-env.eba-7hpcuhdc.ap-southeast-2.elasticbeanstalk.com/api/auth/login
+  body:
+    type: json
+    data: |-
+      {
+          "email": "khjoo1203@naver.com",
+          "password": "12345678"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

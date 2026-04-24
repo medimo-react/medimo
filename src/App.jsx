@@ -1,16 +1,16 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+// import Bookmark from './pages/Bookmark/Bookmark'
 import './App.css'
+import { Routes, Route } from 'react-router-dom'
+import AppLayout from './layout/AppLayout'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      
-    </>
+    <Routes>
+      <Route element={<AppLayout />}>
+        <Route path="/" element={null} />
+        {/* <Route path="/bookmark" element={<Bookmark />} /> */}
+      </Route>
+    </Routes>
   )
 }
 

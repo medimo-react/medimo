@@ -1,0 +1,18 @@
+info:
+  name: 북마크 추가
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: Medimo-env.eba-7hpcuhdc.ap-southeast-2.elasticbeanstalk.com/api/bookmarks
+  body:
+    type: json
+    data: ""
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
