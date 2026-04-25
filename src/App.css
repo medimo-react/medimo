@@ -1,0 +1,16 @@
+:root {
+  /* color */
+  --primary:#6367ff;
+  --secondary: #8494FF;
+  --background: #fff;
+
+  /* text */
+  --pretendard: 'Pretendard', sans-serif;
+
+  --main-text: #1A1A1A;
+  --sub-text: #8f8f8f;
+
+  /* border */
+  --border-color: #dbdbdb;
+
+}
