@@ -234,7 +234,7 @@ export default function Bookmark() {
                         <div className={styles.dropdownDivider} />
                         {folders.filter((f) => f !== '전체').map((folder) => (
                           <label key={folder} className={styles.dropdownCheckItem}>
-                            <Input
+                            <input
                               type="checkbox"
                               className={styles.folderCheckbox}
                               checked={folderMoveSelection.includes(folder)}
@@ -251,14 +251,14 @@ export default function Bookmark() {
                           </label>
                         ))}
                         <div className={styles.dropdownDivider} />
-                        <Button
+                        <button
                           type="button"
                           className={styles.folderMoveApply}
                           onClick={() => applyFolderMove(medicine)}
                           disabled={folderMoveSelection.length === 0}
                         >
                           적용
-                        </Button>
+                        </button>
                       </>
                     ) : folderAddId === medicine.id ? (
                       <>
@@ -267,7 +267,7 @@ export default function Bookmark() {
                         </button>
                         <div className={styles.dropdownDivider} />
                         <div className={styles.folderAddWrap}>
-                          <input
+                          <Input
                             className={styles.folderAddInput}
                             type="text"
                             placeholder="폴더 이름 입력"
