@@ -1,13 +1,10 @@
-*, *::before, *::after {
-  box-sizing: border-box;
-}
+/*
 
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
+  INDEX.CSS
+  (import)
 
-#root {
-  height: 100%;
-}
+*/
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+
+@import "./styles/global.css";
