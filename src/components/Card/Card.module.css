@@ -21,7 +21,7 @@
 }
 
 .radiusFull {
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-max);
 }
 
 /* variant */
