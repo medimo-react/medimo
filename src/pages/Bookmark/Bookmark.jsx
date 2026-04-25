@@ -1,7 +1,9 @@
 import { useEffect, useMemo } from 'react';
 import styles from './Bookmark.module.css';
 import { FaStar, FaRegStar, FaExclamationTriangle, FaPills, FaClock, FaFolder, FaTrash, FaSearch } from 'react-icons/fa';
+import Input from '../../components/Input/Input';
 import { useBookmarkStore } from '../../store/bookmarkStore';
+import { Button } from '@radix-ui/themes/dist/cjs/index.js';
 
 const FOLDER_COLORS = [
   { bg: '#DBEAFE', text: '#1D4ED8' },
@@ -116,7 +118,7 @@ export default function Bookmark() {
       <div className={styles.topBar}>
         <div className={styles.searchBox}>
           <FaSearch className={styles.searchIcon} size={16} color="#9CA3AF" />
-          <input
+          <Input
             className={styles.searchInput}
             type="text"
             placeholder="약 이름으로 검색..."
@@ -125,19 +127,21 @@ export default function Bookmark() {
           />
         </div>
         <div className={styles.topActions}>
-          <button
+          <Button
+            variant='outline'
             className={`${styles.filterBtn} ${filterMode === '전체' ? styles.filterBtnActive : ''}`}
             onClick={() => setFilterMode('전체')}
           >
             전체
-          </button>
-          <button
+          </Button>
+          <Button
+            variant='outline'
             className={`${styles.favBtn} ${filterMode === '즐겨찾기' ? styles.favBtnActive : ''}`}
             onClick={() => setFilterMode('즐겨찾기')}
           >
             <StarIcon filled={filterMode === '즐겨찾기'} />
             즐겨찾기
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -230,7 +234,7 @@ export default function Bookmark() {
                         <div className={styles.dropdownDivider} />
                         {folders.filter((f) => f !== '전체').map((folder) => (
                           <label key={folder} className={styles.dropdownCheckItem}>
-                            <input
+                            <Input
                               type="checkbox"
                               className={styles.folderCheckbox}
                               checked={folderMoveSelection.includes(folder)}
@@ -247,14 +251,14 @@ export default function Bookmark() {
                           </label>
                         ))}
                         <div className={styles.dropdownDivider} />
-                        <button
+                        <Button
                           type="button"
                           className={styles.folderMoveApply}
                           onClick={() => applyFolderMove(medicine)}
                           disabled={folderMoveSelection.length === 0}
                         >
                           적용
-                        </button>
+                        </Button>
                       </>
                     ) : folderAddId === medicine.id ? (
                       <>
@@ -272,46 +276,47 @@ export default function Bookmark() {
                             onKeyDown={(e) => e.key === 'Enter' && addToNewFolder()}
                             autoFocus
                           />
-                          <button
+                          <Button
                             type="button"
                             className={styles.folderAddConfirm}
                             onClick={() => addToNewFolder()}
                             disabled={!newFolderName.trim()}
                           >
                             추가
-                          </button>
+                          </Button>
                         </div>
                       </>
                     ) : (
                       <>
-                        <button type="button" className={styles.dropdownItem} onClick={() => toggleStar(medicine)}>
+                        <Button type="button" className={styles.dropdownItem} onClick={() => toggleStar(medicine)}>
                           <StarIcon filled={medicine.starred} />
                           {medicine.starred ? '즐겨찾기 해제' : '즐겨찾기 추가'}
-                        </button>
-                        <button
+                        </Button>
+                        <Button
                           type="button"
                           className={styles.dropdownItem}
                           onClick={() => openFolderMove(medicine)}
                         >
                           <FolderIcon />
                           폴더 이동
-                        </button>
-                        <button
+                        </Button>
+                        <Button
                           type="button"
                           className={styles.dropdownItem}
                           onClick={() => openFolderAdd(medicine.id)}
                         >
                           <FolderIcon />
                           폴더 추가
-                        </button>
-                        <button
-                          type="button"
+                        </Button>
+                        <Button
+                              type="button"
+                              variant='danger'
                           className={`${styles.dropdownItem} ${styles.dropdownItemDanger}`}
                           onClick={() => deleteMedicine(medicine)}
                         >
                           <TrashIcon />
                           삭제
-                        </button>
+                        </Button>
                       </>
                     )}
                   </div>
