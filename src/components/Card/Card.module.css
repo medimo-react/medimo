@@ -1,0 +1,41 @@
+.card {
+  --card-border-width: 0px;
+  width: 100%;
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* radius size */
+.radiusSm {
+  border-radius: var(--radius-sm);
+}
+
+.radiusMd {
+  border-radius: var(--radius-md);
+}
+
+.radiusLg {
+  border-radius: var(--radius-lg);
+}
+
+.radiusFull {
+  border-radius: var(--radius-full);
+}
+
+/* variant */
+.default {
+  border-color: var(--border-color);
+  background-color: var(--background-color);
+}
+
+.primary {
+  border-color: var(--primary-color);
+  background-color: var(--background-color);
+}
+
+.subtle {
+  border-color: transparent;
+  background-color: #f8f8ff;
+}
