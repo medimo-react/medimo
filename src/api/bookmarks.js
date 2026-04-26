@@ -1,30 +1,23 @@
+import axios from 'axios';
+
 const API_BASE = import.meta.env.VITE_API_BASE;
 const getToken = () => localStorage.getItem('token');
 
-const apiFetch = (path, options = {}) =>
-  fetch(`${API_BASE}${path}`, {
-    ...options,
-    headers: {
-      // Authorization: `Bearer ${getToken()}`,
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OWU4Nzg0NGUwMzg4NmE0M2U2ZjEyZjgiLCJpYXQiOjE3NzY4NDkxNTYsImV4cCI6MTc3NzQ1Mzk1Nn0.o7ZDEJT_C8usp58HuuVFNQoP8Ip9k1WQx0SPF9bP5FA',
-      'Content-Type': 'application/json',
-      ...options.headers,
-    },
-  }).then(r => r.json());
+const api = axios.create({ baseURL: API_BASE });
 
-export const getBookmarks = () => apiFetch('/bookmarks');
+api.interceptors.request.use(config => {
+  // config.headers.Authorization = `Bearer ${getToken()}`;
+  config.headers.Authorization = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OWU4Nzg0NGUwMzg4NmE0M2U2ZjEyZjgiLCJpYXQiOjE3NzY4NDkxNTYsImV4cCI6MTc3NzQ1Mzk1Nn0.o7ZDEJT_C8usp58HuuVFNQoP8Ip9k1WQx0SPF9bP5FA'
+  return config;
+});
+
+export const getBookmarks = () => api.get('/bookmarks').then(r => r.data);
 
 export const addBookmark = (id, folder) =>
-  apiFetch('/bookmarks', {
-    method: 'POST',
-    body: JSON.stringify({ id, folder }),
-  });
+  api.post('/bookmarks', { id, folder }).then(r => r.data);
 
 export const updateBookmark = (id, patch) =>
-  apiFetch(`/bookmarks/${id}`, {
-    method: 'PATCH',
-    body: JSON.stringify(patch),
-  });
+  api.patch(`/bookmarks/${id}`, patch).then(r => r.data);
 
 export const deleteBookmark = (id) =>
-  apiFetch(`/bookmarks/${id}`, { method: 'DELETE' });
+  api.delete(`/bookmarks/${id}`).then(r => r.data);
