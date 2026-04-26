@@ -41,8 +41,7 @@
 }
 
 .primaryBtn {
-  background: #06b6d4;
-  border-color: #06b6d4;
+  background: var(--primary-color);
   color: #fff;
 }
 
@@ -65,9 +64,9 @@
 }
 
 .card {
-  background: #fff;
-  border: 1px solid #d8e2e8;
-  border-radius: 16px;
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
   padding: 16px;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
 }
@@ -82,15 +81,15 @@
 
 .cardHeader h2 {
   margin: 0;
-  font-size: 20px;
+  font-size: var(--font-size-title-sm);
   color: #0f172a;
 }
 
 .dateChip {
   padding: 4px 10px;
-  border-radius: 999px;
+  border-radius: var(--radius-max);
   background: #dff5fb;
-  color: #0891b2;
+  color: var(--sub-text-color);
   font-size: 12px;
 }
 
@@ -185,27 +184,27 @@
   height: 24px;
   border-radius: 999px;
   padding: 2px;
-  background: #cbd5e1;
+  background: var(--sub-text-color);
   cursor: pointer;
   display: flex;
   align-items: center;
 }
 
 .toggleOn {
-  background: #06b6d4;
+  background: var(--primary-color);
   justify-content: flex-end;
 }
 
 .toggleThumb {
   width: 20px;
   height: 20px;
-  border-radius: 50%;
-  background: #fff;
+  border-radius: var(--radius-max);
+  background: var(--background-color);
 }
 
 .sideTitle {
   margin: 0 0 12px;
-  font-size: 20px;
+  font-size: var(--font-size-title-sm);
   color: #0f172a;
 }
 
@@ -214,8 +213,8 @@
   height: 150px;
   margin: 0 auto 14px;
   border-radius: 50%;
-  border: 12px solid #dbe8ed;
-  border-top-color: #0891b2;
+  border: 12px solid var(--border-color);
+  border-top-color: var(--primary-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -262,13 +261,13 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
-  color: #334155;
+  color: var(--text-color);
 }
 
 .progress {
   height: 10px;
   border-radius: 999px;
-  background: #e2e8f0;
+  background: var(--border-color);
   overflow: hidden;
   margin-bottom: 18px;
 }
@@ -277,7 +276,7 @@
   display: block;
   width: 89%;
   height: 100%;
-  background: #0891b2;
+  background: var(--primary-color);
 }
 
 .quickSetting h4 {
@@ -289,8 +288,8 @@
 .settingBtn {
   width: 100%;
   text-align: left;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
   padding: 10px 12px;
   margin-top: 8px;
   background: #fff;
