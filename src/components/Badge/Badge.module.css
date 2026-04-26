@@ -31,33 +31,58 @@
 
 /* variant */
 .primary {
-  color: var(--primary-color);
-  background-color: rgba(99, 103, 255, 0.12);
+  color: #1D4ED8;
+  background-color: #DBEAFE;
+}
+
+.success {
+  color: #065F46;
+  background-color: #D1FAE5;
+}
+
+.danger {
+  color: #B91C1C;
+  background-color: #FEE2E2;
+}
+
+.warning {
+  color: #92400E;
+  background-color: #FEF3C7;
 }
 
 .secondary {
-  color: var(--secondary-color);
-  background-color: rgba(132, 148, 255, 0.14);
+  color: #5B21B6;
+  background-color: #EDE9FE;
+}
+
+.pink {
+  color: #9D174D;
+  background-color: #FCE7F3;
+}
+
+.teal {
+  color: #0F766E;
+  background-color: #CCFBF1;
+}
+
+.orange {
+  color: #C2410C;
+  background-color: #FED7AA;
+}
+
+.indigo {
+  color: #3730A3;
+  background-color: #E0E7FF;
+}
+
+.greenLight {
+  color: #166534;
+  background-color: #F0FDF4;
 }
 
 .gray {
   color: var(--sub-text-color);
   background-color: #f3f4f6;
-}
-
-.success {
-  color: #16a34a;
-  background-color: rgba(22, 163, 74, 0.12);
-}
-
-.warning {
-  color: #f59e0b;
-  background-color: rgba(245, 158, 11, 0.14);
-}
-
-.danger {
-  color: #e5484d;
-  background-color: rgba(229, 72, 77, 0.12);
 }
 
 .outline {

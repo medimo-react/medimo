@@ -1,0 +1,50 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.pageList {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.button,
+.pageButton {
+  min-width: 2.25rem;
+  height: 2.25rem;
+  padding: 0 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-small);
+  cursor: pointer;
+}
+
+.button:hover,
+.pageButton:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.active {
+  border-color: var(--primary-color);
+  background-color: var(--primary-color);
+  color: var(--background-color);
+}
+
+.active:hover {
+  color: var(--background-color);
+}
+
+.button:disabled,
+.pageButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

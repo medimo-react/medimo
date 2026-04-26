@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Button from "./Button/Button";
 import Card from "./Card/Card";
@@ -11,12 +11,28 @@ import Textarea from "./Textarea/Textarea";
 import Select from "./Select/Select";
 import Checkbox from "./Checkbox/Checkbox";
 import Radio from "./Radio/Radio";
+import Pagination from "./Pagination/Pagination";
+import Tabs from "./Tabs/Tabs";
+import {
+  CheckIcon,
+  Cross2Icon,
+  InfoCircledIcon,
+  ExclamationTriangleIcon,
+  MagnifyingGlassIcon,
+  PlusIcon,
+  GearIcon,
+  TrashIcon,
+  HeartIcon,
+  StarIcon,
+} from "@radix-ui/react-icons";
 
 const Demo = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("폼 제출");
   };
+
+  const [currentPage, setCurrentPage] = useState(1);
 
   const primaryButtonStyle = {
     backgroundColor: "var(--primary-color)",
@@ -165,9 +181,46 @@ const Demo = () => {
     },
   ];
 
+  const iconList = [
+    { name: "CheckIcon", icon: <CheckIcon /> },
+    { name: "Cross2Icon", icon: <Cross2Icon /> },
+    { name: "InfoCircledIcon", icon: <InfoCircledIcon /> },
+    { name: "ExclamationTriangleIcon", icon: <ExclamationTriangleIcon /> },
+    { name: "MagnifyingGlassIcon", icon: <MagnifyingGlassIcon /> },
+    { name: "PlusIcon", icon: <PlusIcon /> },
+    { name: "GearIcon", icon: <GearIcon /> },
+    { name: "TrashIcon", icon: <TrashIcon /> },
+    { name: "HeartIcon", icon: <HeartIcon /> },
+    { name: "StarIcon", icon: <StarIcon /> },
+  ];
+
+  const radiusList = [
+    {
+      name: "--radius-sm",
+      value: "0.5rem",
+      usage: "var(--radius-sm)",
+    },
+    {
+      name: "--radius-md",
+      value: "1rem",
+      usage: "var(--radius-md)",
+    },
+    {
+      name: "--radius-lg",
+      value: "1.5rem",
+      usage: "var(--radius-lg)",
+    },
+    {
+      name: "--radius-max",
+      value: "999em",
+      usage: "var(--radius-max)",
+    },
+  ];
+
   return (
     <Container>
       <h1 style={pageTitleStyle}>공통 UI 컴포넌트 Demo</h1>
+      <h2 style={{ margin: 0 }}>Radix UI 사용</h2>
 
       <p style={{ ...smallTextStyle, marginTop: "8px" }}>
         * 호버효과는 같이 상의해 보아요
@@ -422,7 +475,197 @@ CSS: src/styles/global.css
       </section>
 
       <section style={{ marginTop: "32px" }}>
-        <h2 style={{...sectionTitleStyle, marginBottom: "20px" }}>Badge</h2>
+        <h2 style={sectionTitleStyle}>Radius</h2>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: "16px",
+            marginTop: "16px",
+          }}
+        >
+          {radiusList.map((radius) => (
+            <Card key={radius.name}>
+              <div
+                style={{
+                  width: "100%",
+                  height: "80px",
+                  border: "1px solid var(--border-color)",
+                  borderRadius: radius.usage,
+                  backgroundColor: "#f8f8ff",
+                }}
+              />
+
+              <div style={{ marginTop: "12px" }}>
+                <strong style={cardTitleStyle}>{radius.name}</strong>
+
+                <p style={{ ...smallTextStyle, marginTop: "6px" }}>
+                  {radius.value}
+                </p>
+
+                <code style={colorCodeStyle}>{radius.usage}</code>
+              </div>
+            </Card>
+          ))}
+        </div>
+
+        <pre style={codeBoxStyle}>
+          {`// Radius 변수 경로
+CSS: src/styles/global.css
+
+// Radius
+--radius-sm: 0.5rem;
+--radius-md: 1rem;
+--radius-lg: 1.5rem;
+--radius-max: 999em;
+
+// 사용 방법
+.card {
+  border-radius: var(--radius-md);
+}
+
+.button {
+  border-radius: var(--radius-sm);
+}
+
+.badge {
+  border-radius: var(--radius-max);
+}`}
+        </pre>
+      </section>
+
+      <section style={{ marginTop: "32px" }}>
+        <h2 style={sectionTitleStyle}>Icons</h2>
+
+        <Card style={{ marginTop: "16px" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              gap: "16px",
+              marginBottom: "20px",
+            }}
+          >
+            <div>
+              <strong style={cardTitleStyle}>Radix Icons</strong>
+              <p style={{ ...smallTextStyle, marginTop: "6px" }}>
+                자주 사용할 아이콘 일부입니다. 더 많은 아이콘은 공식 페이지에서
+                확인할 수 있습니다.
+              </p>
+            </div>
+
+            <a
+              href="https://www.radix-ui.com/icons"
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                color: "var(--primary-color)",
+                fontSize: "var(--font-size-small)",
+                fontWeight: "var(--font-weight-semibold)",
+                textDecoration: "underline",
+                whiteSpace: "nowrap",
+              }}
+            >
+              전체 아이콘 보기
+            </a>
+          </div>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(5, 1fr)",
+              gap: "16px",
+            }}
+          >
+            {iconList.map((item) => (
+              <div
+                key={item.name}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: "8px",
+                  minWidth: 0,
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "48px",
+                    height: "48px",
+                    borderRadius: "var(--radius-sm)",
+                    backgroundColor: "#f8f8ff",
+                    color: "var(--primary-color)",
+                  }}
+                >
+                  {item.icon}
+                </div>
+
+                <p
+                  style={{
+                    margin: 0,
+                    color: "var(--sub-text-color)",
+                    fontSize: "var(--font-size-small)",
+                    fontWeight: "var(--font-weight-regular)",
+                    lineHeight: "var(--line-height-small)",
+                    textAlign: "center",
+                    wordBreak: "break-word",
+                  }}
+                >
+                  {item.name}
+                </p>
+              </div>
+            ))}
+          </div>
+        </Card>
+
+        <pre style={codeBoxStyle}>
+          {`// Radix Icons 설치
+npm install @radix-ui/react-icons
+
+// 불러오기
+import {
+  CheckIcon,
+  Cross2Icon,
+  InfoCircledIcon,
+  ExclamationTriangleIcon,
+  MagnifyingGlassIcon,
+  PlusIcon,
+  GearIcon,
+  TrashIcon,
+  HeartIcon,
+  StarIcon,
+} from "@radix-ui/react-icons";
+
+// 전체 아이콘 확인
+https://www.radix-ui.com/icons
+
+// 사용 방법
+<CheckIcon />
+<Cross2Icon />
+<InfoCircledIcon />
+<ExclamationTriangleIcon />
+
+// 버튼 안에서 사용 예시
+<Button>
+  <PlusIcon />
+  추가하기
+</Button>
+
+// 뱃지 안에서 사용 예시
+<Badge variant="success">
+  <CheckIcon />
+  완료
+</Badge>`}
+        </pre>
+      </section>
+
+      <section style={{ marginTop: "32px" }}>
+        <h2 style={{ ...sectionTitleStyle, marginBottom: "20px" }}>Badge</h2>
 
         <div
           style={{
@@ -433,12 +676,15 @@ CSS: src/styles/global.css
           }}
         >
           <Badge>기본</Badge>
-          <Badge variant="secondary">보조</Badge>
-          <Badge variant="gray">대기</Badge>
           <Badge variant="success">완료</Badge>
-          <Badge variant="warning">주의</Badge>
           <Badge variant="danger">오류</Badge>
-          <Badge variant="outline">Outline</Badge>
+          <Badge variant="warning">주의</Badge>
+          <Badge variant="secondary">보라</Badge>
+          <Badge variant="pink">핑크</Badge>
+          <Badge variant="teal">청록</Badge>
+          <Badge variant="orange">주황</Badge>
+          <Badge variant="indigo">인디고</Badge>
+          <Badge variant="greenLight">연두</Badge>
         </div>
 
         <pre style={codeBoxStyle}>
@@ -452,6 +698,18 @@ import Badge from "./Badge/Badge";
 // 사용 방법
 <Badge>기본</Badge>
 
+<Badge variant="primary">
+  기본
+</Badge>
+
+<Badge variant="secondary">
+  보조
+</Badge>
+
+<Badge variant="gray">
+  대기
+</Badge>
+
 <Badge variant="success">
   완료
 </Badge>
@@ -464,8 +722,41 @@ import Badge from "./Badge/Badge";
   오류
 </Badge>
 
+<Badge variant="pink">
+  핑크
+</Badge>
+
+<Badge variant="teal">
+  청록
+</Badge>
+
+<Badge variant="orange">
+  주황
+</Badge>
+
+<Badge variant="indigo">
+  인디고
+</Badge>
+
+<Badge variant="greenLight">
+  연두
+</Badge>
+
 <Badge variant="outline">
   Outline
+</Badge>
+
+// size
+<Badge size="sm">
+  작은 뱃지
+</Badge>
+
+<Badge size="md">
+  기본 뱃지
+</Badge>
+
+<Badge size="lg">
+  큰 뱃지
 </Badge>`}
         </pre>
       </section>
@@ -919,6 +1210,124 @@ const handleSubmit = (e) => {
     저장
   </Button>
 </Form>`}
+        </pre>
+      </section>
+
+      <section style={{ marginTop: "32px" }}>
+        <h2 style={sectionTitleStyle}>Tabs</h2>
+
+        <div style={{ marginTop: "16px" }}>
+          <Tabs
+            tabs={[
+              {
+                label: "전체",
+                value: "all",
+                content: (
+                  <Card>
+                    <strong style={cardTitleStyle}>전체 내용</strong>
+                    <p style={cardTextStyle}>
+                      전체 데이터를 보여주는 탭입니다.
+                    </p>
+                  </Card>
+                ),
+              },
+              {
+                label: "진행중",
+                value: "progress",
+                content: (
+                  <Card>
+                    <strong style={cardTitleStyle}>진행중</strong>
+                    <p style={cardTextStyle}>
+                      진행중인 항목을 보여주는 탭입니다.
+                    </p>
+                  </Card>
+                ),
+              },
+              {
+                label: "완료",
+                value: "done",
+                content: (
+                  <Card>
+                    <strong style={cardTitleStyle}>완료</strong>
+                    <p style={cardTextStyle}>
+                      완료된 항목을 보여주는 탭입니다.
+                    </p>
+                  </Card>
+                ),
+              },
+            ]}
+          />
+        </div>
+
+        <pre style={codeBoxStyle}>
+          {`// Tabs 컴포넌트 경로
+JSX: src/components/Tabs/Tabs.jsx
+CSS Module: src/components/Tabs/Tabs.module.css
+
+// 불러오기
+import Tabs from "./Tabs/Tabs";
+
+// 사용 방법
+<Tabs
+  tabs={[
+    {
+      label: "전체",
+      value: "all",
+      content: <div>전체 내용</div>,
+    },
+    {
+      label: "진행중",
+      value: "progress",
+      content: <div>진행중 내용</div>,
+    },
+    {
+      label: "완료",
+      value: "done",
+      content: <div>완료 내용</div>,
+    },
+  ]}
+/>
+
+// 기본 선택 탭 지정
+<Tabs
+  defaultValue="progress"
+  tabs={tabs}
+/>`}
+        </pre>
+      </section>
+
+      <section style={{ marginTop: "32px" }}>
+        <h2 style={sectionTitleStyle}>Pagination</h2>
+
+        <div style={{ marginTop: "16px" }}>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={5}
+            onPageChange={setCurrentPage}
+          />
+        </div>
+
+        <pre style={codeBoxStyle}>
+          {`// Pagination 컴포넌트 경로
+JSX: src/components/Pagination/Pagination.jsx
+CSS Module: src/components/Pagination/Pagination.module.css
+
+// 불러오기
+import Pagination from "./Pagination/Pagination";
+
+// 사용 방법
+const [currentPage, setCurrentPage] = useState(1);
+
+<Pagination
+  currentPage={currentPage}
+  totalPages={5}
+  onPageChange={setCurrentPage}
+/>
+
+// props 설명
+currentPage: 현재 페이지
+totalPages: 전체 페이지 수
+onPageChange: 페이지 변경 함수`}
         </pre>
       </section>
     </Container>
