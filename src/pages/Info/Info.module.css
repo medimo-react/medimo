@@ -111,11 +111,11 @@
 }
 
 .scheduleItem {
-  grid-template-columns: auto auto 1fr auto;
+  grid-template-columns: auto auto 1fr auto auto auto;
 }
 
 .alarmItem {
-  grid-template-columns: 1fr auto auto;
+  grid-template-columns: 1fr auto auto auto;
 }
 
 .dot {
@@ -294,6 +294,287 @@
   margin-top: 8px;
   background: #fff;
   cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.settingBtnOn {
+  background: #dff5fb;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* done / delete buttons */
+.doneBtn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid #cbd5e1;
+  background: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.doneBtnDone {
+  background: #10b981;
+  border-color: #10b981;
+  color: #fff;
+}
+
+.deleteBtn {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 18px;
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.deleteBtn:hover {
+  color: #ef4444;
+}
+
+.emptyMsg {
+  text-align: center;
+  color: #94a3b8;
+  font-size: 14px;
+  padding: 20px 0;
+  margin: 0;
+}
+
+/* Modal */
+.modalContent {
+  border-radius: 16px !important;
+  padding: 28px !important;
+  max-width: 440px !important;
+  width: 100% !important;
+}
+
+.calendarModal {
+  border-radius: 16px !important;
+  padding: 28px !important;
+  max-width: 380px !important;
+  width: 100% !important;
+}
+
+.modalTitle {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: #0f172a !important;
+  margin-bottom: 4px !important;
+}
+
+.modalDesc {
+  font-size: 13px !important;
+  color: #64748b !important;
+  margin-bottom: 20px !important;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.input {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 14px;
+  background: #f8fafc;
+  color: #0f172a;
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--primary-color);
+  background: #fff;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.cancelBtn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  color: #64748b;
+}
+
+.confirmBtn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  background: var(--primary-color);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Reminder email modal */
+.emailResult {
+  padding: 20px 0;
+  text-align: center;
+}
+
+.emailSuccess {
+  color: #10b981;
+  font-weight: 600;
+  font-size: 15px;
+  margin: 0;
+}
+
+.emailError {
+  color: #ef4444;
+  font-size: 14px;
+  margin: 0;
+}
+
+.reminderList {
+  margin-bottom: 4px;
+}
+
+.reminderListTitle {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  margin: 0 0 8px;
+}
+
+.reminderListItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #fff;
+  margin-top: 6px;
+}
+
+.confirmBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Calendar */
+.calNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.calNavBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calMonthLabel {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.calGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.calDayName {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #94a3b8;
+  padding: 4px 0 8px;
+}
+
+.calCell {
+  text-align: center;
+  padding: 8px 4px;
+  font-size: 13px;
+  border-radius: 8px;
+  color: #0f172a;
+  position: relative;
+}
+
+.calCellOther {
+  color: #cbd5e1;
+}
+
+.calCellToday {
+  background: var(--primary-color);
+  color: #fff;
+  font-weight: 700;
+}
+
+.calDot {
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #fff;
+  margin: 2px auto 0;
+}
+
+.calLegend {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 14px;
+}
+
+.calLegendDot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary-color);
 }
 
 @media (max-width: 1024px) {
@@ -332,11 +613,11 @@
   }
 
   .scheduleItem {
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto 1fr auto auto;
     grid-template-areas:
-      "dot time"
-      "info info"
-      "status status";
+      "dot time done del"
+      "info info info info"
+      "status status status status";
   }
 
   .dot {
@@ -355,5 +636,21 @@
   .status {
     grid-area: status;
     justify-self: flex-start;
+  }
+
+  .doneBtn {
+    grid-area: done;
+  }
+
+  .deleteBtn {
+    grid-area: del;
+  }
+
+  .alarmItem {
+    grid-template-columns: 1fr auto auto auto;
+  }
+
+  .formRow {
+    grid-template-columns: 1fr;
   }
 }
