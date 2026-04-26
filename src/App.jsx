@@ -3,6 +3,7 @@ import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import AppLayout from './layout/AppLayout'
 import Demo from './components/Demo'
+import Info from './pages/Info/Info'
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Route element={<AppLayout />}>
         <Route path="/" element={null} />
         <Route path="/bookmark" element={<Bookmark />} />
+        <Route path="/alert" element={ <Info />} />
         <Route path="/demo" element={<Demo />} />
       </Route>
     </Routes>
