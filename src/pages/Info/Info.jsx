@@ -1,8 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import { Dialog } from '@radix-ui/themes';
+import { Button, Dialog, Select } from '@radix-ui/themes';
 import { useInfoStore } from '../../store/infoStore';
-import { useUserStore } from '../../store/userStore';
-import { sendReminderEmail } from '../../api/email';
 import styles from './Info.module.css';
 
 const DAY_NAMES = ['일', '월', '화', '수', '목', '금', '토'];
@@ -38,25 +36,19 @@ const EMPTY_ALARM_FORM = { name: '', times: '', dose: '1정', repeat: '매일' }
 
 export default function Info() {
   const {
-    schedules, alarms,
+    schedules, alarms, doneHistory,
     toggleScheduleDone, toggleAlarm,
     addSchedule, addAlarm,
     deleteAlarm, deleteSchedule,
     soundEnabled, toggleSound,
   } = useInfoStore();
 
-  const { email: userEmail, name: userName } = useUserStore();
-
   const [addScheduleOpen, setAddScheduleOpen] = useState(false);
   const [addAlarmOpen, setAddAlarmOpen] = useState(false);
   const [calendarOpen, setCalendarOpen] = useState(false);
-  const [reminderOpen, setReminderOpen] = useState(false);
 
   const [scheduleForm, setScheduleForm] = useState(EMPTY_SCHEDULE_FORM);
   const [alarmForm, setAlarmForm] = useState(EMPTY_ALARM_FORM);
-  const [reminderEmail, setReminderEmail] = useState('');
-  const [reminderName, setReminderName] = useState('');
-  const [emailStatus, setEmailStatus] = useState('idle'); // 'idle' | 'sending' | 'success' | 'error'
 
   const today = new Date();
   const [calYear, setCalYear] = useState(today.getFullYear());
@@ -79,12 +71,10 @@ export default function Info() {
     if (!alarmForm.name.trim() || !alarmForm.times.trim()) return;
     const times = alarmForm.times.split(',').map((t) => t.trim()).filter(Boolean);
     const rule = `${alarmForm.times} · ${alarmForm.dose} · ${alarmForm.repeat}`;
-    addAlarm({ name: alarmForm.name.trim(), rule, times });
+    addAlarm({ name: alarmForm.name.trim(), rule, times, dose: alarmForm.dose });
     setAlarmForm(EMPTY_ALARM_FORM);
     setAddAlarmOpen(false);
   };
-
-  const activeAlarms = alarms.filter((a) => a.active);
 
   const playAlarmSound = () => {
     try {
@@ -128,7 +118,6 @@ export default function Info() {
     });
   };
 
-  // 알람 시간에 맞춰 OS 알림 + 알림음 + 이메일 자동 발송 (30초마다 체크)
   const sentTodayRef = useRef(new Set());
   useEffect(() => {
     const check = () => {
@@ -153,51 +142,12 @@ export default function Info() {
 
       showOsNotification(matchingAlarms, currentTime);
       if (soundEnabled) playAlarmSound();
-
-      if (userEmail) {
-        sendReminderEmail({
-          toEmail: userEmail,
-          toName: userName,
-          medicines: matchingAlarms,
-          time: currentTime,
-        }).catch(console.error);
-      }
     };
 
     const interval = setInterval(check, 30000);
     check();
     return () => clearInterval(interval);
-  }, [alarms, userEmail, userName, soundEnabled]);
-
-  const handleSendReminder = async () => {
-    if (!reminderEmail.trim()) return;
-    setEmailStatus('sending');
-    try {
-      await sendReminderEmail({
-        toEmail: reminderEmail.trim(),
-        toName: reminderName.trim(),
-        medicines: activeAlarms,
-      });
-      setEmailStatus('success');
-    } catch {
-      setEmailStatus('error');
-    }
-  };
-
-  const handleReminderOpen = () => {
-    setReminderEmail(userEmail);
-    setReminderName(userName);
-    setReminderOpen(true);
-  };
-
-  const handleReminderClose = (open) => {
-    setReminderOpen(open);
-    if (!open) {
-      setEmailStatus('idle');
-      setReminderEmail('');
-      setReminderName('');
-    }
-  };
+  }, [alarms, soundEnabled]);
 
   const prevMonth = () => {
     const d = new Date(calYear, calMonth - 1);
@@ -224,20 +174,21 @@ export default function Info() {
           <p className={styles.pageSubTitle}>오늘의 복용 일정을 확인하고 관리하세요</p>
         </div>
         <div className={styles.headerActions}>
-          <button
+          <Button
+            variant='outline'
             type="button"
             className={styles.outlineBtn}
             onClick={() => setCalendarOpen(true)}
           >
             캘린더 보기
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
             className={styles.primaryBtn}
             onClick={() => setAddScheduleOpen(true)}
           >
             + 알림 추가
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -277,11 +228,11 @@ export default function Info() {
           </div>
           <div className={styles.modalFooter}>
             <Dialog.Close asChild>
-              <button type="button" className={styles.cancelBtn}>취소</button>
+              <Button variant='outline' type="button" className={styles.cancelBtn}>취소</Button>
             </Dialog.Close>
-            <button type="button" className={styles.confirmBtn} onClick={handleAddSchedule}>
+            <Button type="button" className={styles.confirmBtn} onClick={handleAddSchedule}>
               추가
-            </button>
+            </Button>
           </div>
         </Dialog.Content>
       </Dialog.Root>
@@ -367,7 +318,8 @@ export default function Info() {
                 cell.day === todayDate &&
                 calMonth === todayMonth &&
                 calYear === todayYear;
-              const hasDone = isToday && doneCount > 0;
+              const dateStr = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-${String(cell.day).padStart(2, '0')}`;
+              const hasDone = cell.current && (doneHistory ?? []).includes(dateStr);
               return (
                 <div
                   key={idx}
@@ -390,77 +342,6 @@ export default function Info() {
             <Dialog.Close asChild>
               <button type="button" className={styles.confirmBtn}>닫기</button>
             </Dialog.Close>
-          </div>
-        </Dialog.Content>
-      </Dialog.Root>
-
-      {/* 미리 알림 이메일 모달 */}
-      <Dialog.Root open={reminderOpen} onOpenChange={handleReminderClose}>
-        <Dialog.Content className={styles.modalContent}>
-          <Dialog.Title className={styles.modalTitle}>미리 알림 이메일 전송</Dialog.Title>
-          <Dialog.Description className={styles.modalDesc}>
-            복용 예정인 약 목록을 이메일로 전송합니다.
-          </Dialog.Description>
-
-          {emailStatus === 'success' ? (
-            <div className={styles.emailResult}>
-              <p className={styles.emailSuccess}>이메일이 성공적으로 전송됐습니다!</p>
-            </div>
-          ) : emailStatus === 'error' ? (
-            <div className={styles.emailResult}>
-              <p className={styles.emailError}>전송에 실패했습니다. 이메일 주소와 설정을 확인해주세요.</p>
-            </div>
-          ) : (
-            <>
-              <div className={styles.formGroup}>
-                <label className={styles.label}>이름 (선택)</label>
-                <input
-                  className={styles.input}
-                  placeholder="예: 홍길동"
-                  value={reminderName}
-                  onChange={(e) => setReminderName(e.target.value)}
-                />
-              </div>
-              <div className={styles.formGroup}>
-                <label className={styles.label}>수신 이메일</label>
-                <input
-                  className={styles.input}
-                  type="email"
-                  placeholder="예: example@email.com"
-                  value={reminderEmail}
-                  onChange={(e) => setReminderEmail(e.target.value)}
-                />
-              </div>
-              {activeAlarms.length > 0 ? (
-                <div className={styles.reminderList}>
-                  <p className={styles.reminderListTitle}>전송할 복용 예정 목록</p>
-                  {activeAlarms.map((s) => (
-                    <div key={s.id} className={styles.reminderListItem}>
-                      <p className={styles.medicine}>{s.name}</p>
-                      <p className={styles.detail}>{s.rule}</p>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p className={styles.emptyMsg}>복용 예정인 약이 없습니다.</p>
-              )}
-            </>
-          )}
-
-          <div className={styles.modalFooter}>
-            <Dialog.Close asChild>
-              <button type="button" className={styles.cancelBtn}>닫기</button>
-            </Dialog.Close>
-            {emailStatus === 'idle' && (
-              <button
-                type="button"
-                className={styles.confirmBtn}
-                onClick={handleSendReminder}
-                disabled={!reminderEmail.trim() || activeAlarms.length === 0}
-              >
-                이메일 전송
-              </button>
-            )}
           </div>
         </Dialog.Content>
       </Dialog.Root>
@@ -555,8 +436,11 @@ export default function Info() {
         <aside className={styles.rightCol}>
           <article className={styles.card}>
             <h3 className={styles.sideTitle}>오늘의 복용률</h3>
-            <div className={styles.rateCircle} style={{ '--rate': `${rate}%` }}>
-              {rate}%
+            <div
+              className={`${styles.rateCircle} ${rate === 100 ? styles.rateCircleFull : ''}`}
+              style={{ '--rate': `${rate}%` }}
+            >
+              <span>{rate}%</span>
             </div>
             <div className={styles.metrics}>
               <div className={`${styles.metric} ${styles.metricDone}`}>복용 완료 {doneCount}</div>
@@ -567,14 +451,6 @@ export default function Info() {
           </article>
 
           <article className={styles.card}>
-            <h3 className={styles.sideTitle}>주간 통계</h3>
-            <div className={styles.statRow}>
-              <span>복용 순응도</span>
-              <strong>89%</strong>
-            </div>
-            <div className={styles.progress}>
-              <span />
-            </div>
             <div className={styles.quickSetting}>
               <h4>빠른 설정</h4>
               <button
@@ -584,7 +460,6 @@ export default function Info() {
               >
                 {soundEnabled ? '🔔 알림 소리 켜짐' : '🔕 알림 소리 꺼짐'}
               </button>
-              <button type="button" className={styles.settingBtn} onClick={handleReminderOpen}>미리 알림</button>
             </div>
           </article>
         </aside>
