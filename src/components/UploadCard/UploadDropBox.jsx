@@ -1,15 +1,20 @@
 import styles from "./UploadDropBox.module.css";
 import { MdOutlineFileUpload } from "react-icons/md";
 
-const UploadDropBox = () => {
+const UploadDropBox = ({onChange,file}) => {
   return (
       <label className={styles.drop_box}>
-          <input type="file" hidden />
-          <div className={styles.icon}><MdOutlineFileUpload /></div>
-          <p className={styles.title}>처방전 사진을 업로드하세요</p>
-          <span className={styles.desc}>
-            드래그 앤 드롭 또는 클릭하여 선택
-          </span>
+        <input type="file" hidden onChange={onChange} />
+        <div className={styles.icon}><MdOutlineFileUpload /></div>
+        { !file ? (
+              <>
+                <p className={styles.title}>처방전 사진을 업로드하세요</p>
+                <span className={styles.desc}>
+                  드래그 앤 드롭 또는 클릭하여 선택
+                </span>
+              </>
+          ): <p className={styles.file_name}>{file.name}</p>
+        }
       </label>
   )
 }
