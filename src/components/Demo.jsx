@@ -4,6 +4,7 @@ import Button from "./Button/Button";
 import Card from "./Card/Card";
 import Input from "./Input/Input";
 import Form from "./Form/Form";
+import PageHeader from "./PageHeader/PageHeader";
 import Container from "./Container/Container";
 import Badge from "./Badge/Badge";
 import Modal from "./Modal/Modal";
@@ -14,17 +15,17 @@ import Radio from "./Radio/Radio";
 import Pagination from "./Pagination/Pagination";
 import Tabs from "./Tabs/Tabs";
 import {
-  CheckIcon,
-  Cross2Icon,
-  InfoCircledIcon,
-  ExclamationTriangleIcon,
-  MagnifyingGlassIcon,
-  PlusIcon,
-  GearIcon,
-  TrashIcon,
-  HeartIcon,
-  StarIcon,
-} from "@radix-ui/react-icons";
+  FiCheck,
+  FiX,
+  FiInfo,
+  FiAlertTriangle,
+  FiSearch,
+  FiPlus,
+  FiSettings,
+  FiTrash2,
+  FiHeart,
+  FiStar,
+} from "react-icons/fi";
 
 const Demo = () => {
   const handleSubmit = (e) => {
@@ -57,13 +58,6 @@ const Demo = () => {
     backgroundColor: "var(--border-color)",
     border: "1px solid var(--border-color)",
     color: "var(--sub-text-color)",
-  };
-
-  const pageTitleStyle = {
-    margin: 0,
-    fontSize: "var(--font-size-title-lg)",
-    fontWeight: "var(--font-weight-bold)",
-    lineHeight: "var(--line-height-title)",
   };
 
   const sectionTitleStyle = {
@@ -182,16 +176,16 @@ const Demo = () => {
   ];
 
   const iconList = [
-    { name: "CheckIcon", icon: <CheckIcon /> },
-    { name: "Cross2Icon", icon: <Cross2Icon /> },
-    { name: "InfoCircledIcon", icon: <InfoCircledIcon /> },
-    { name: "ExclamationTriangleIcon", icon: <ExclamationTriangleIcon /> },
-    { name: "MagnifyingGlassIcon", icon: <MagnifyingGlassIcon /> },
-    { name: "PlusIcon", icon: <PlusIcon /> },
-    { name: "GearIcon", icon: <GearIcon /> },
-    { name: "TrashIcon", icon: <TrashIcon /> },
-    { name: "HeartIcon", icon: <HeartIcon /> },
-    { name: "StarIcon", icon: <StarIcon /> },
+    { name: "FiCheck", icon: <FiCheck /> },
+    { name: "FiX", icon: <FiX /> },
+    { name: "FiInfo", icon: <FiInfo /> },
+    { name: "FiAlertTriangle", icon: <FiAlertTriangle /> },
+    { name: "FiSearch", icon: <FiSearch /> },
+    { name: "FiPlus", icon: <FiPlus /> },
+    { name: "FiSettings", icon: <FiSettings /> },
+    { name: "FiTrash2", icon: <FiTrash2 /> },
+    { name: "FiHeart", icon: <FiHeart /> },
+    { name: "FiStar", icon: <FiStar /> },
   ];
 
   const radiusList = [
@@ -219,7 +213,7 @@ const Demo = () => {
 
   return (
     <Container>
-      <h1 style={pageTitleStyle}>공통 UI 컴포넌트 Demo</h1>
+      <PageHeader title="공통 UI 컴포넌트 Demo" />
       <h2 style={{ margin: 0 }}>Radix UI 사용</h2>
 
       <p style={{ ...smallTextStyle, marginTop: "8px" }}>
@@ -246,23 +240,107 @@ const Demo = () => {
           style={{
             width: "100%",
             marginTop: "16px",
-            padding: "24px 0",
             border: "1px dashed var(--primary-color)",
             borderRadius: "var(--radius-md)",
             backgroundColor: "#f8f8ff",
           }}
         >
           <Container>
-            <Card>
-              <strong style={cardTitleStyle}>Container 내부 영역</strong>
-              <p style={cardTextStyle}>
-                이 영역은 max-width와 반응형 좌우 padding이 적용된 공통
-                레이아웃입니다.
-                <br />
-                상하 여백은 페이지나 섹션마다 달라지는 경우가 많아 넣지
-                않겠습니다.
-              </p>
-            </Card>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1.5rem 1fr 1.5rem",
+                gridTemplateRows: "1.5rem auto 1.5rem",
+                alignItems: "stretch",
+                width: "calc(100% + 3rem)",
+                margin: "-1.5rem",
+                gap: 0,
+              }}
+            >
+              {/* 상단 padding 표시 - 가운데만 */}
+              <div
+                style={{
+                  gridColumn: "2 / 3",
+                  gridRow: "1 / 2",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "var(--primary-color)",
+                  fontSize: "var(--font-size-tiny)",
+                  fontWeight: "var(--font-weight-semibold)",
+                }}
+              >
+                1.5rem / 24px
+              </div>
+
+              {/* 좌측 padding 표시 */}
+              <div
+                style={{
+                  gridColumn: "1 / 2",
+                  gridRow: "2 / 3",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "var(--primary-color)",
+                  fontSize: "var(--font-size-tiny)",
+                  fontWeight: "var(--font-weight-semibold)",
+                  writingMode: "vertical-rl",
+                }}
+              >
+                1.5rem
+              </div>
+
+              {/* 실제 콘텐츠 영역 */}
+              <Card
+                radius="sm"
+                style={{
+                  gridColumn: "2 / 3",
+                  gridRow: "2 / 3",
+                }}
+              >
+                <strong style={cardTitleStyle}>Container 내부 영역</strong>
+
+                <p style={cardTextStyle}>
+                  이 영역은 max-width와 반응형 상하좌우 padding이 적용된 공통
+                  레이아웃입니다.
+                  <br />
+                  padding은 1.5rem이며, 16px = 1rem 기준으로 24px입니다.
+                </p>
+              </Card>
+
+              {/* 우측 padding 표시 */}
+              <div
+                style={{
+                  gridColumn: "3 / 4",
+                  gridRow: "2 / 3",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "var(--primary-color)",
+                  fontSize: "var(--font-size-tiny)",
+                  fontWeight: "var(--font-weight-semibold)",
+                  writingMode: "vertical-rl",
+                }}
+              >
+                1.5rem
+              </div>
+
+              {/* 하단 padding 표시 - 가운데만 */}
+              <div
+                style={{
+                  gridColumn: "2 / 3",
+                  gridRow: "3 / 4",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "var(--primary-color)",
+                  fontSize: "var(--font-size-tiny)",
+                  fontWeight: "var(--font-weight-semibold)",
+                }}
+              >
+                1.5rem / 24px
+              </div>
+            </div>
           </Container>
         </div>
 
@@ -270,6 +348,12 @@ const Demo = () => {
           {`// Container 컴포넌트 경로
 JSX: src/components/Container/Container.jsx
 CSS Module: src/components/Container/Container.module.css
+
+// 역할
+Container는 페이지 콘텐츠의 최대 너비와 상하좌우 여백을 잡는 컴포넌트입니다.
+
+// 기본 padding
+padding: 1.5rem; /* 24px */
 
 // 불러오기
 import Container from "./Container/Container";
@@ -288,6 +372,36 @@ import Container from "./Container/Container";
     </Card>
   </Container>
 </main>`}
+        </pre>
+      </section>
+
+      <section style={{ marginTop: "32px" }}>
+        <h2 style={sectionTitleStyle}>PageHeader</h2>
+
+        <div style={{ marginTop: "16px" }}>
+          <Card>
+            <PageHeader
+              title="페이지 제목"
+            />
+            <p style={cardTextStyle}>페이지의 가장 필수적인 부분입니다.</p>
+          </Card>
+        </div>
+
+        <pre style={codeBoxStyle}>
+          {`// PageHeader 컴포넌트 경로
+JSX: src/components/PageHeader/PageHeader.jsx
+CSS Module: src/components/PageHeader/PageHeader.module.css
+
+// 불러오기
+import Container from "./Container/Container";
+import PageHeader from "./PageHeader/PageHeader";
+
+// 사용 방법
+<Container>
+  <PageHeader
+    title="페이지 제목"
+  />
+</Container>`}
         </pre>
       </section>
 
@@ -424,7 +538,7 @@ border: "1px solid var(--border-color)"`}
                 fontSize: "var(--font-size-small)",
                 fontWeight: "var(--font-weight-regular)",
                 lineHeight: "var(--line-height-small)",
-                color: "var(--sub-text-color)",
+                color: "var(--text-color)",
               }}
             >
               Small Text
@@ -433,6 +547,24 @@ border: "1px solid var(--border-color)"`}
               0.875rem / 14px · weight 400
             </p>
             <code style={colorCodeStyle}>var(--font-size-small)</code>
+          </Card>
+
+          <Card>
+            <p
+              style={{
+                margin: 0,
+                fontSize: "var(--font-size-tiny)",
+                fontWeight: "var(--font-weight-regular)",
+                lineHeight: "var(--line-height-small)",
+                color: "var(--text-color)",
+              }}
+            >
+              Tiny Text
+            </p>
+            <p style={{ ...smallTextStyle, marginTop: "8px" }}>
+              0.75rem / 12px · weight 400
+            </p>
+            <code style={colorCodeStyle}>var(--font-size-tiny)</code>
           </Card>
         </div>
 
@@ -446,6 +578,7 @@ CSS: src/styles/global.css
 --font-size-title-sm: 1.25rem;
 --font-size-body: 1rem;
 --font-size-small: 0.875rem;
+--font-size-tiny: 0.8125rem;
 
 // Font Weight
 --font-weight-regular: 400;
@@ -549,7 +682,7 @@ CSS: src/styles/global.css
             }}
           >
             <div>
-              <strong style={cardTitleStyle}>Radix Icons</strong>
+              <strong style={cardTitleStyle}>React Icons</strong>
               <p style={{ ...smallTextStyle, marginTop: "6px" }}>
                 자주 사용할 아이콘 일부입니다. 더 많은 아이콘은 공식 페이지에서
                 확인할 수 있습니다.
@@ -557,7 +690,7 @@ CSS: src/styles/global.css
             </div>
 
             <a
-              href="https://www.radix-ui.com/icons"
+              href="https://react-icons.github.io/react-icons/"
               target="_blank"
               rel="noreferrer"
               style={{
@@ -624,41 +757,41 @@ CSS: src/styles/global.css
         </Card>
 
         <pre style={codeBoxStyle}>
-          {`// Radix Icons 설치
-npm install @radix-ui/react-icons
+          {`// React Icons 설치
+npm install react-icons
 
 // 불러오기
 import {
-  CheckIcon,
-  Cross2Icon,
-  InfoCircledIcon,
-  ExclamationTriangleIcon,
-  MagnifyingGlassIcon,
-  PlusIcon,
-  GearIcon,
-  TrashIcon,
-  HeartIcon,
-  StarIcon,
-} from "@radix-ui/react-icons";
+  FiCheck,
+  FiX,
+  FiInfo,
+  FiAlertTriangle,
+  FiSearch,
+  FiPlus,
+  FiSettings,
+  FiTrash2,
+  FiHeart,
+  FiStar,
+} from "react-icons/fi";
 
 // 전체 아이콘 확인
-https://www.radix-ui.com/icons
+https://react-icons.github.io/react-icons/
 
 // 사용 방법
-<CheckIcon />
-<Cross2Icon />
-<InfoCircledIcon />
-<ExclamationTriangleIcon />
+<FiCheck />
+<FiX />
+<FiInfo />
+<FiAlertTriangle />
 
 // 버튼 안에서 사용 예시
 <Button>
-  <PlusIcon />
+  <FiPlus />
   추가하기
 </Button>
 
 // 뱃지 안에서 사용 예시
 <Badge variant="success">
-  <CheckIcon />
+  <FiCheck />
   완료
 </Badge>`}
         </pre>
