@@ -19,17 +19,28 @@ export const useInfoStore = create(
       schedules: INITIAL_SCHEDULES,
       alarms: INITIAL_ALARMS,
       soundEnabled: true,
+      doneHistory: ['2026-04-26', '2026-04-27'],
 
       toggleSound: () => set((s) => ({ soundEnabled: !s.soundEnabled })),
 
       toggleScheduleDone: (id) =>
-        set((s) => ({
-          schedules: s.schedules.map((item) =>
+        set((s) => {
+          const target = s.schedules.find((i) => i.id === id);
+          const willBeDone = target ? !target.done : false;
+          const updatedSchedules = s.schedules.map((item) =>
             item.id === id
               ? { ...item, done: !item.done, state: !item.done ? '복용 완료' : '복용 대기' }
               : item
-          ),
-        })),
+          );
+          let newHistory = s.doneHistory ?? [];
+          if (willBeDone) {
+            const today = new Date().toISOString().slice(0, 10);
+            if (!newHistory.includes(today)) {
+              newHistory = [...newHistory, today];
+            }
+          }
+          return { schedules: updatedSchedules, doneHistory: newHistory };
+        }),
 
       toggleAlarm: (id) =>
         set((s) => {
@@ -107,7 +118,7 @@ export const useInfoStore = create(
     }),
     {
       name: 'medimo-info-store',
-      partialize: (state) => ({ schedules: state.schedules, alarms: state.alarms, soundEnabled: state.soundEnabled }),
+      partialize: (state) => ({ schedules: state.schedules, alarms: state.alarms, soundEnabled: state.soundEnabled, doneHistory: state.doneHistory }),
     }
   )
 );

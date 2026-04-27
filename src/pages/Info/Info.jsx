@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Dialog } from '@radix-ui/themes';
+import { Button, Dialog, Select } from '@radix-ui/themes';
 import { useInfoStore } from '../../store/infoStore';
 import styles from './Info.module.css';
 
@@ -36,7 +36,7 @@ const EMPTY_ALARM_FORM = { name: '', times: '', dose: '1정', repeat: '매일' }
 
 export default function Info() {
   const {
-    schedules, alarms,
+    schedules, alarms, doneHistory,
     toggleScheduleDone, toggleAlarm,
     addSchedule, addAlarm,
     deleteAlarm, deleteSchedule,
@@ -174,20 +174,21 @@ export default function Info() {
           <p className={styles.pageSubTitle}>오늘의 복용 일정을 확인하고 관리하세요</p>
         </div>
         <div className={styles.headerActions}>
-          <button
+          <Button
+            variant='outline'
             type="button"
             className={styles.outlineBtn}
             onClick={() => setCalendarOpen(true)}
           >
             캘린더 보기
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
             className={styles.primaryBtn}
             onClick={() => setAddScheduleOpen(true)}
           >
             + 알림 추가
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -227,11 +228,11 @@ export default function Info() {
           </div>
           <div className={styles.modalFooter}>
             <Dialog.Close asChild>
-              <button type="button" className={styles.cancelBtn}>취소</button>
+              <Button variant='outline' type="button" className={styles.cancelBtn}>취소</Button>
             </Dialog.Close>
-            <button type="button" className={styles.confirmBtn} onClick={handleAddSchedule}>
+            <Button type="button" className={styles.confirmBtn} onClick={handleAddSchedule}>
               추가
-            </button>
+            </Button>
           </div>
         </Dialog.Content>
       </Dialog.Root>
@@ -317,7 +318,8 @@ export default function Info() {
                 cell.day === todayDate &&
                 calMonth === todayMonth &&
                 calYear === todayYear;
-              const hasDone = isToday && doneCount > 0;
+              const dateStr = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-${String(cell.day).padStart(2, '0')}`;
+              const hasDone = cell.current && (doneHistory ?? []).includes(dateStr);
               return (
                 <div
                   key={idx}
