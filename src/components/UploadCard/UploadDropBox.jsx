@@ -1,9 +1,15 @@
 import styles from "./UploadDropBox.module.css";
 import { MdOutlineFileUpload } from "react-icons/md";
 
-const UploadDropBox = ({onChange,file}) => {
+const UploadDropBox = ({onChange, onDrop, file, isDrag, setIsDrag}) => {
   return (
-      <label className={styles.drop_box}>
+      <label className={`${styles.drop_box} ${isDrag ? styles.active : ''}`}
+             onDrop={onDrop}
+             onDragOver={(e) => {
+                e.preventDefault();
+                setIsDrag(true);
+             }}
+             onDragLeave={() => setIsDrag(false)}>
         <input type="file" hidden onChange={onChange} />
         <div className={styles.icon}><MdOutlineFileUpload /></div>
         { !file ? (
