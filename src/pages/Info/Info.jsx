@@ -79,7 +79,7 @@ export default function Info() {
     if (!alarmForm.name.trim() || !alarmForm.times.trim()) return;
     const times = alarmForm.times.split(',').map((t) => t.trim()).filter(Boolean);
     const rule = `${alarmForm.times} · ${alarmForm.dose} · ${alarmForm.repeat}`;
-    addAlarm({ name: alarmForm.name.trim(), rule, times });
+    addAlarm({ name: alarmForm.name.trim(), rule, times, dose: alarmForm.dose });
     setAlarmForm(EMPTY_ALARM_FORM);
     setAddAlarmOpen(false);
   };
@@ -555,8 +555,11 @@ export default function Info() {
         <aside className={styles.rightCol}>
           <article className={styles.card}>
             <h3 className={styles.sideTitle}>오늘의 복용률</h3>
-            <div className={styles.rateCircle} style={{ '--rate': `${rate}%` }}>
-              {rate}%
+            <div
+              className={`${styles.rateCircle} ${rate === 100 ? styles.rateCircleFull : ''}`}
+              style={{ '--rate': `${rate}%` }}
+            >
+              <span>{rate}%</span>
             </div>
             <div className={styles.metrics}>
               <div className={`${styles.metric} ${styles.metricDone}`}>복용 완료 {doneCount}</div>
@@ -567,14 +570,6 @@ export default function Info() {
           </article>
 
           <article className={styles.card}>
-            <h3 className={styles.sideTitle}>주간 통계</h3>
-            <div className={styles.statRow}>
-              <span>복용 순응도</span>
-              <strong>89%</strong>
-            </div>
-            <div className={styles.progress}>
-              <span />
-            </div>
             <div className={styles.quickSetting}>
               <h4>빠른 설정</h4>
               <button
