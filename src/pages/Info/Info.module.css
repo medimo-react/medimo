@@ -1,0 +1,662 @@
+.page {
+  padding: 24px;
+  background: #edf6f8;
+  min-height: 100dvh;
+}
+
+.headerRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.pageTitle {
+  margin: 0;
+  font-size: 28px;
+  color: #0f172a;
+}
+
+.pageSubTitle {
+  margin: 6px 0 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.headerActions {
+  display: flex;
+  gap: 8px;
+}
+
+.outlineBtn,
+.primaryBtn,
+.outlineBtnSmall {
+  border-radius: 10px;
+  border: 1px solid #d4dde2;
+  padding: 10px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  background: #fff;
+}
+
+.primaryBtn {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+.outlineBtnSmall {
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.9fr) minmax(280px, 1fr);
+  gap: 16px;
+}
+
+.leftCol,
+.rightCol {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.cardHeader h2 {
+  margin: 0;
+  font-size: var(--font-size-title-sm);
+  color: #0f172a;
+}
+
+.dateChip {
+  padding: 4px 10px;
+  border-radius: var(--radius-max);
+  background: #dff5fb;
+  color: var(--sub-text-color);
+  font-size: 12px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.scheduleItem,
+.alarmItem {
+  display: grid;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 12px;
+  background: #fff;
+}
+
+.scheduleItem {
+  grid-template-columns: auto auto 1fr auto auto auto;
+}
+
+.alarmItem {
+  grid-template-columns: 1fr auto auto auto;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dotDone {
+  background: #10b981;
+}
+
+.dotWait {
+  background: #f59e0b;
+}
+
+.time {
+  min-width: 52px;
+  font-size: 18px;
+  color: #0f172a;
+}
+
+.scheduleInfo,
+.alarmInfo {
+  min-width: 0;
+}
+
+.medicine {
+  margin: 0 0 4px;
+  font-size: 15px;
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.detail {
+  margin: 0;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.status {
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.statusDone {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.statusWait {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.toggleLabel {
+  color: #64748b;
+  font-size: 12px;
+}
+
+.toggle {
+  border: none;
+  width: 44px;
+  height: 24px;
+  border-radius: 999px;
+  padding: 2px;
+  background: var(--sub-text-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.toggleOn {
+  background: var(--primary-color);
+  justify-content: flex-end;
+}
+
+.toggleThumb {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-max);
+  background: var(--background-color);
+}
+
+.sideTitle {
+  margin: 0 0 12px;
+  font-size: var(--font-size-title-sm);
+  color: #0f172a;
+}
+
+.rateCircle {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  background: conic-gradient(var(--primary-color) var(--rate), var(--border-color) 0%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 700;
+  color: #0f172a;
+  position: relative;
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+
+.rateCircle::before {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border-radius: 50%;
+  background: var(--background-color);
+}
+
+.rateCircle span {
+  position: relative;
+  z-index: 1;
+}
+
+.rateCircleFull {
+  background: conic-gradient(#22c55e var(--rate), #dcfce7 0%);
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.35);
+}
+
+.rateCircleFull span {
+  color: #16a34a;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.metric {
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.metricDone {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.metricWait {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.metricFuture {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+.metricMiss {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.progress span {
+  display: block;
+  width: 89%;
+  height: 100%;
+  background: var(--primary-color);
+}
+
+.quickSetting h4 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  color: #0f172a;
+}
+
+.settingBtn {
+  width: 100%;
+  text-align: left;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  margin-top: 8px;
+  background: #fff;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.settingBtnOn {
+  background: #dff5fb;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* done / delete buttons */
+.doneBtn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid #cbd5e1;
+  background: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.doneBtnDone {
+  background: #10b981;
+  border-color: #10b981;
+  color: #fff;
+}
+
+.deleteBtn {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 18px;
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.deleteBtn:hover {
+  color: #ef4444;
+}
+
+.emptyMsg {
+  text-align: center;
+  color: #94a3b8;
+  font-size: 14px;
+  padding: 20px 0;
+  margin: 0;
+}
+
+/* Modal */
+.modalContent {
+  border-radius: 16px !important;
+  padding: 28px !important;
+  max-width: 440px !important;
+  width: 100% !important;
+}
+
+.calendarModal {
+  border-radius: 16px !important;
+  padding: 28px !important;
+  max-width: 380px !important;
+  width: 100% !important;
+}
+
+.modalTitle {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: #0f172a !important;
+  margin-bottom: 4px !important;
+}
+
+.modalDesc {
+  font-size: 13px !important;
+  color: #64748b !important;
+  margin-bottom: 20px !important;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.input {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 14px;
+  background: #f8fafc;
+  color: #0f172a;
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--primary-color);
+  background: #fff;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.cancelBtn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  color: #64748b;
+}
+
+.confirmBtn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  background: var(--primary-color);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Reminder email modal */
+.emailResult {
+  padding: 20px 0;
+  text-align: center;
+}
+
+.emailSuccess {
+  color: #10b981;
+  font-weight: 600;
+  font-size: 15px;
+  margin: 0;
+}
+
+.emailError {
+  color: #ef4444;
+  font-size: 14px;
+  margin: 0;
+}
+
+.reminderList {
+  margin-bottom: 4px;
+}
+
+.reminderListTitle {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  margin: 0 0 8px;
+}
+
+.reminderListItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #fff;
+  margin-top: 6px;
+}
+
+.confirmBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Calendar */
+.calNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.calNavBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calMonthLabel {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.calGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.calDayName {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #94a3b8;
+  padding: 4px 0 8px;
+}
+
+.calCell {
+  text-align: center;
+  padding: 8px 4px;
+  font-size: 13px;
+  border-radius: 8px;
+  color: #0f172a;
+  position: relative;
+}
+
+.calCellOther {
+  color: #cbd5e1;
+}
+
+.calCellToday {
+  background: var(--primary-color);
+  color: #fff;
+  font-weight: 700;
+}
+
+.calDot {
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #fff;
+  margin: 2px auto 0;
+}
+
+.calLegend {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 14px;
+}
+
+.calLegendDot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary-color);
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .headerRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding: 16px;
+  }
+
+  .pageTitle {
+    font-size: 24px;
+  }
+
+  .headerActions {
+    width: 100%;
+  }
+
+  .outlineBtn,
+  .primaryBtn {
+    flex: 1;
+    text-align: center;
+  }
+
+  .cardHeader h2 {
+    font-size: 18px;
+  }
+
+  .scheduleItem {
+    grid-template-columns: auto 1fr auto auto;
+    grid-template-areas:
+      "dot time done del"
+      "info info info info"
+      "status status status status";
+  }
+
+  .dot {
+    grid-area: dot;
+    align-self: center;
+  }
+
+  .time {
+    grid-area: time;
+  }
+
+  .scheduleInfo {
+    grid-area: info;
+  }
+
+  .status {
+    grid-area: status;
+    justify-self: flex-start;
+  }
+
+  .doneBtn {
+    grid-area: done;
+  }
+
+  .deleteBtn {
+    grid-area: del;
+  }
+
+  .alarmItem {
+    grid-template-columns: 1fr auto auto auto;
+  }
+
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+}
