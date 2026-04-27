@@ -6,7 +6,6 @@ import { AiOutlinePicture } from "react-icons/ai";
 const UploadActionBtn = () => {
   return (
     <div className={styles.btn_wrap}>
-      <Button variant="outline"><AiOutlinePicture /> 갤러리</Button>
       <Button><MdOutlinePhotoCamera /> 카메라</Button>
     </div>
   )
