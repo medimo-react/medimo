@@ -23,15 +23,19 @@
   border-bottom: 1px solid var(--border-color);
 }
 
-.logoText {
+.logoButton {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  border: 0;
+  background: none;
+  padding: 0.625rem 0.25rem;
+  cursor: pointer;
 }
 
-.logoTitle img {
-  width: 90%;
+.logoButton img {
   display: block;
-  padding: 1.25rem 0.75rem;
+  width: 80%;
+  height: auto;
 }
 
 /* ── nav ── */
@@ -79,7 +83,9 @@
   cursor: pointer;
 
   /* 전환 효과 */
-  transition: background-color 0.15s ease, color 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .navItem:hover {

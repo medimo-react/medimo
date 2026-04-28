@@ -70,11 +70,14 @@ export default function Navbar() {
 
       <nav className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
         <div className={styles.logo}>
-          <div className={styles.logoText}>
-            <span className={styles.logoTitle}>
-              <img src="/logo.png" alt="로고" />
-            </span>
-          </div>
+          <button
+            type="button"
+            className={styles.logoButton}
+            onClick={() => handleNavigate("/dashboard")}
+            aria-label="대시보드로 이동"
+          >
+            <img src="/logo.png" alt="로고" />
+          </button>
         </div>
 
         <ul className={styles.navList}>
