@@ -1,10 +1,13 @@
 .card {
   --card-border-width: 0px;
+
   width: 100%;
-  padding: 1.5rem;
+  min-width: 0;
+  padding: var(--layout-padding-pc);
   border: 1px solid var(--border-color);
   background-color: var(--background-color);
   color: var(--text-color);
+  box-sizing: border-box;
 }
 
 /* radius size */
@@ -38,4 +41,23 @@
 .subtle {
   border-color: transparent;
   background-color: #f8f8ff;
+}
+
+/* responsive */
+@media (max-width: 1024px) {
+  .card {
+    padding: var(--layout-padding-tablet);
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: var(--layout-padding-tablet);
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: var(--layout-padding-mobile);
+  }
 }
