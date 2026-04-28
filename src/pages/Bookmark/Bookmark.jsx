@@ -4,6 +4,7 @@ import { FaStar, FaRegStar, FaExclamationTriangle, FaPills, FaClock, FaFolder, F
 import Input from '../../components/Input/Input';
 import { useBookmarkStore } from '../../store/bookmarkStore';
 import { Button } from '@radix-ui/themes/dist/cjs/index.js';
+import { Container } from '@radix-ui/themes';
 
 const FOLDER_COLORS = [
   { bg: '#DBEAFE', text: '#1D4ED8' },
@@ -103,6 +104,7 @@ export default function Bookmark() {
   if (loading) return <div className={styles.page}>불러오는 중...</div>;
 
   return (
+    <Container>
     <div className={styles.page}>
       {openMenuId != null && (
         <div
@@ -326,6 +328,7 @@ export default function Bookmark() {
           ))}
         </div>
       </div>
-    </div>
+      </div>
+    </Container>  
   );
 }
