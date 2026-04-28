@@ -1,46 +1,64 @@
-import {useState} from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Card from "../Card/Card.jsx";
 import UploadDropBox from "./UploadDropBox.jsx";
 import UploadActionBtn from "./UploadActionBtn.jsx";
 import styles from "./UploadCard.module.css";
+import { scanImageOcr } from "../../api/ocr.js";
+import { useOcrStore } from "../../../../../Desktop/src/store/ocrStore.js";
 
 const UploadCard = () => {
-  // 올린 파일 받기 위한 state
   const [file, setFile] = useState(null);
-
-  // 드래그 상태를 알기 위한 state
   const [isDrag, setIsDrag] = useState(false);
+  const [isScanning, setIsScanning] = useState(false);
+  const [ocrError, setOcrError] = useState("");
 
-  // input file 클릭후 올리고 파일 정보 받기
+  const setOcrText = useOcrStore((s) => s.setOcrText);
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     const selectedFile = e.target.files[0];
     if (!selectedFile) return;
-
     setFile(selectedFile);
-  }
+  };
 
-  // input drag기능
   const handleDrop = (e) => {
     e.preventDefault();
     setIsDrag(false);
-
     const droppedFile = e.dataTransfer.files[0];
-
     setFile(droppedFile);
   };
 
-  // 업로드된 파일 삭제
   const handleRemove = () => {
     setFile(null);
+    setOcrError("");
+  };
+
+  const handleCameraCapture = async (capturedFile) => {
+    setFile(capturedFile);
+    setOcrError("");
+    setIsScanning(true);
+    try {
+      const text = await scanImageOcr(capturedFile);
+      setOcrText(text);
+      navigate("/ai-summary");
+    } catch (err) {
+      setOcrError("OCR 스캔에 실패했습니다. 다시 시도해 주세요.");
+      console.error(err);
+    } finally {
+      setIsScanning(false);
+    }
   };
 
   return (
-      <Card radius={'sm'}>
-        <p className={styles.title}>처방전 업로드</p>
-        <UploadDropBox isDrag={isDrag} setIsDrag={setIsDrag} onChange={handleChange} onDrop={handleDrop} file={file}/>
-        <UploadActionBtn file={file} onClick={handleRemove}/>
-      </Card>
-  )
-}
+    <Card radius={"sm"}>
+      <p className={styles.title}>처방전 업로드</p>
+      <UploadDropBox isDrag={isDrag} setIsDrag={setIsDrag} onChange={handleChange} onDrop={handleDrop} file={file} />
+      <UploadActionBtn file={file} onClick={handleRemove} onCameraCapture={handleCameraCapture} isScanning={isScanning} />
+      {isScanning && <p className={styles.ocr_status}>처방전을 분석하고 있습니다...</p>}
+      {ocrError && <p className={styles.ocr_error}>{ocrError}</p>}
+    </Card>
+  );
+};
 
 export default UploadCard;

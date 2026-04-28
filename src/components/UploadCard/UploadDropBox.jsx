@@ -10,7 +10,7 @@ const UploadDropBox = ({onChange, onDrop, file, isDrag, setIsDrag}) => {
                 setIsDrag(true);
              }}
              onDragLeave={() => setIsDrag(false)}>
-        <input type="file" hidden onChange={onChange} />
+        <input type="file" hidden onChange={onChange} capture="environment" />
         <div className={styles.icon}><MdOutlineFileUpload /></div>
         { !file ? (
               <>
