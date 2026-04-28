@@ -1,6 +1,6 @@
 .page {
   padding: 24px;
-  background: #edf6f8;
+  background: var(--background-color);
   min-height: 100dvh;
 }
 
@@ -14,13 +14,13 @@
 
 .pageTitle {
   margin: 0;
-  font-size: 28px;
-  color: #0f172a;
+  font-size: 24px;
+  color: var(--text-color);
 }
 
 .pageSubTitle {
   margin: 6px 0 0;
-  color: #64748b;
+  color: var(--sub-text-color);
   font-size: 14px;
 }
 
@@ -40,10 +40,6 @@
   background: #fff;
 }
 
-.primaryBtn {
-  background: var(--primary-color);
-  color: #fff;
-}
 
 .outlineBtnSmall {
   padding: 8px 12px;

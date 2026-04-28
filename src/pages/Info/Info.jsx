@@ -182,13 +182,6 @@ export default function Info() {
           >
             캘린더 보기
           </Button>
-          <Button
-            type="button"
-            className={styles.primaryBtn}
-            onClick={() => setAddScheduleOpen(true)}
-          >
-            + 알림 추가
-          </Button>
         </div>
       </div>
 
