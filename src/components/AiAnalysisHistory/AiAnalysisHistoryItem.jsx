@@ -1,4 +1,3 @@
-import * as Popover from '@radix-ui/react-popover';
 import styles from "./AiAnalysisHistoryItem.module.css";
 import HistoryItemActionMenu
   from "./HistoryItemActionMenu.jsx";

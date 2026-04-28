@@ -19,26 +19,42 @@ export const useInfoStore = create(
       schedules: INITIAL_SCHEDULES,
       alarms: INITIAL_ALARMS,
       soundEnabled: true,
-      doneHistory: ['2026-04-26', '2026-04-27'],
+      doneHistory: {
+        '2026-04-26': ['메트포르민 정 500mg'],
+        '2026-04-27': ['메트포르민 정 500mg', '타이레놀 정 500mg'],
+      },
 
       toggleSound: () => set((s) => ({ soundEnabled: !s.soundEnabled })),
 
       toggleScheduleDone: (id) =>
         set((s) => {
           const target = s.schedules.find((i) => i.id === id);
-          const willBeDone = target ? !target.done : false;
+          if (!target) return s;
+          const willBeDone = !target.done;
           const updatedSchedules = s.schedules.map((item) =>
             item.id === id
               ? { ...item, done: !item.done, state: !item.done ? '복용 완료' : '복용 대기' }
               : item
           );
-          let newHistory = s.doneHistory ?? [];
+
+          const today = new Date().toISOString().slice(0, 10);
+          const base = (s.doneHistory && !Array.isArray(s.doneHistory)) ? s.doneHistory : {};
+          const dayMeds = [...(base[today] ?? [])];
+
           if (willBeDone) {
-            const today = new Date().toISOString().slice(0, 10);
-            if (!newHistory.includes(today)) {
-              newHistory = [...newHistory, today];
-            }
+            if (!dayMeds.includes(target.name)) dayMeds.push(target.name);
+          } else {
+            const idx = dayMeds.indexOf(target.name);
+            if (idx !== -1) dayMeds.splice(idx, 1);
           }
+
+          const newHistory = { ...base };
+          if (dayMeds.length > 0) {
+            newHistory[today] = dayMeds;
+          } else {
+            delete newHistory[today];
+          }
+
           return { schedules: updatedSchedules, doneHistory: newHistory };
         }),
 

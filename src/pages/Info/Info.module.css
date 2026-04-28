@@ -1,5 +1,5 @@
 .page {
-  padding: 24px;
+  /* padding: 24px; */
   background: var(--background-color);
   min-height: 100dvh;
 }
@@ -14,7 +14,7 @@
 
 .pageTitle {
   margin: 0;
-  font-size: 24px;
+  font-size: var(--font-size-title-md);
   color: var(--text-color);
 }
 
@@ -554,13 +554,98 @@
   font-weight: 700;
 }
 
+.calCellClickable {
+  cursor: pointer;
+}
+
+.calCellClickable:hover {
+  background: #f1f5f9;
+}
+
+.calCellSelected {
+  outline: 2px solid var(--primary-color);
+  outline-offset: -2px;
+}
+
 .calDot {
   display: block;
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--primary-color);
   margin: 2px auto 0;
+}
+
+.calCellToday .calDot {
+  background: #fff;
+}
+
+.calDayDetail {
+  margin-top: 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: #f8fafc;
+}
+
+.calDayDetailHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.calDayDetailTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.calDayDetailClose {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #94a3b8;
+  line-height: 1;
+  padding: 0;
+}
+
+.calDayDetailClose:hover {
+  color: #475569;
+}
+
+.calDayDetailList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.calDayDetailItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.calDayDetailItem::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  flex-shrink: 0;
+}
+
+.calDayDetailEmpty {
+  font-size: 13px;
+  color: #94a3b8;
+  text-align: center;
+  margin: 0;
 }
 
 .calLegend {
