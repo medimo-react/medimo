@@ -1,0 +1,36 @@
+.drop_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 1.25rem 1rem;
+  border: 0.0625rem dashed var(--border-color);
+  border-radius:var(--radius-sm);
+  word-break: keep-all;
+  text-align: center;
+  cursor: pointer;
+
+  .icon {
+    display: flex;
+    width: 2.25rem;
+    height: 2.25rem;
+    margin-bottom:1rem;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.2rem;
+    border-radius:var(--radius-sm);
+    background-color: var(--primary);
+  }
+
+  .title {
+    font-size: 1.125rem;
+    font-weight:var(--font-weight-medium)
+  }
+
+  .desc {
+    margin-top: 0.225rem;
+    color: var(--sub-text-color);
+    font-size: var(--font-size-small);
+  }
+}

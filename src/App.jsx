@@ -5,6 +5,7 @@ import AppLayout from './layout/AppLayout'
 import Demo from './components/Demo'
 import Info from './pages/Info/Info'
 import Login from './pages/Login/Login'
+import Dashboard from "./pages/Dashboard/Dashboard.jsx";
 
 function App() {
   return (
