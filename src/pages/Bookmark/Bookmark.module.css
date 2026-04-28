@@ -1,5 +1,5 @@
 .page {
-  padding: 24px;
+  /* padding: 24px; */
   background: var(--background-color);
   min-height: 100dvh;
   font-family: var(--font-body);
@@ -567,7 +567,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .page {
     padding: 12px;
   }

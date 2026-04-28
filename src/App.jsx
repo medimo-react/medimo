@@ -13,7 +13,7 @@ function App() {
       <Route element={<AppLayout />}>
         <Route path="/" element={null} />
         <Route path="/bookmark" element={<Bookmark />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        {/* <Route path="/dashboard" element={<Dashboard />} /> */}
         <Route path="/alert" element={ <Info />} />
         <Route path="/demo" element={<Demo />} />
         <Route path="/ai-summary" element={<AlSummary />} />

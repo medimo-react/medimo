@@ -28,6 +28,7 @@
 
   --font-size-body: 1rem;          /* 16px - 본문 */
   --font-size-small: 0.875rem;     /* 14px - 보조 설명 */
+  --font-size-tiny: 0.75rem;       /* 12px - 아주 작은 텍스트 */
 
   --font-weight-regular: 400;
   --font-weight-medium: 500;
@@ -40,9 +41,9 @@
 
   /* Layout */
   --layout-max-width: 1200px;
-  --layout-padding-pc: 40px;
-  --layout-padding-tablet: 24px;
-  --layout-padding-mobile: 20px;
+  --layout-padding-pc: 1.5rem;
+  --layout-padding-tablet: 1.25rem;
+  --layout-padding-mobile: 1rem;
 
   /* Radius */
   --radius-sm: 0.5rem;

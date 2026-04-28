@@ -2,17 +2,17 @@
   width: 100%;
   max-width: var(--layout-max-width);
   margin: 0 auto;
-  padding: 0 var(--layout-padding-pc);
+  padding: var(--layout-padding-pc);
 }
 
 @media (max-width: 1200px) {
   .container {
-    padding: 0 var(--layout-padding-tablet);
+    padding: var(--layout-padding-tablet);
   }
 }
 
 @media (max-width: 480px) {
   .container {
-    padding: 0 var(--layout-padding-mobile);
+    padding: var(--layout-padding-mobile);
   }
 }
