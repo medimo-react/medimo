@@ -46,6 +46,7 @@ export default function Info() {
   const [addScheduleOpen, setAddScheduleOpen] = useState(false);
   const [addAlarmOpen, setAddAlarmOpen] = useState(false);
   const [calendarOpen, setCalendarOpen] = useState(false);
+  const [selectedCalDay, setSelectedCalDay] = useState(null);
 
   const [scheduleForm, setScheduleForm] = useState(EMPTY_SCHEDULE_FORM);
   const [alarmForm, setAlarmForm] = useState(EMPTY_ALARM_FORM);
@@ -153,12 +154,27 @@ export default function Info() {
     const d = new Date(calYear, calMonth - 1);
     setCalYear(d.getFullYear());
     setCalMonth(d.getMonth());
+    setSelectedCalDay(null);
   };
 
   const nextMonth = () => {
     const d = new Date(calYear, calMonth + 1);
     setCalYear(d.getFullYear());
     setCalMonth(d.getMonth());
+    setSelectedCalDay(null);
+  };
+
+  const safeHistory = (doneHistory && !Array.isArray(doneHistory)) ? doneHistory : {};
+
+  const handleCalDayClick = (cell, dateStr) => {
+    if (!cell.current) return;
+    setSelectedCalDay((prev) => (prev === dateStr ? null : dateStr));
+  };
+
+  const formatCalDayLabel = (dateStr) => {
+    if (!dateStr) return '';
+    const [, m, d] = dateStr.split('-');
+    return `${Number(m)}월 ${Number(d)}일`;
   };
 
   const calendarDays = buildCalendarDays(calYear, calMonth);
@@ -312,15 +328,18 @@ export default function Info() {
                 calMonth === todayMonth &&
                 calYear === todayYear;
               const dateStr = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-${String(cell.day).padStart(2, '0')}`;
-              const hasDone = cell.current && (doneHistory ?? []).includes(dateStr);
+              const hasDone = cell.current && !!safeHistory[dateStr];
+              const isSelected = selectedCalDay === dateStr;
               return (
                 <div
                   key={idx}
                   className={[
                     styles.calCell,
-                    !cell.current ? styles.calCellOther : '',
+                    !cell.current ? styles.calCellOther : styles.calCellClickable,
                     isToday ? styles.calCellToday : '',
+                    isSelected ? styles.calCellSelected : '',
                   ].join(' ')}
+                  onClick={() => handleCalDayClick(cell, dateStr)}
                 >
                   {cell.day}
                   {hasDone && <span className={styles.calDot} />}
@@ -328,6 +347,33 @@ export default function Info() {
               );
             })}
           </div>
+
+          {selectedCalDay && (
+            <div className={styles.calDayDetail}>
+              <div className={styles.calDayDetailHeader}>
+                <span className={styles.calDayDetailTitle}>
+                  {formatCalDayLabel(selectedCalDay)} 복용 기록
+                </span>
+                <button
+                  type="button"
+                  className={styles.calDayDetailClose}
+                  onClick={() => setSelectedCalDay(null)}
+                >
+                  ×
+                </button>
+              </div>
+              {(safeHistory[selectedCalDay] ?? []).length > 0 ? (
+                <ul className={styles.calDayDetailList}>
+                  {safeHistory[selectedCalDay].map((med, i) => (
+                    <li key={i} className={styles.calDayDetailItem}>{med}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p className={styles.calDayDetailEmpty}>복용 기록이 없습니다.</p>
+              )}
+            </div>
+          )}
+
           <div className={styles.calLegend}>
             <span className={styles.calLegendDot} /> 복용 기록 있음
           </div>
