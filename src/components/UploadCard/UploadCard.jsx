@@ -5,7 +5,7 @@ import UploadDropBox from "./UploadDropBox.jsx";
 import UploadActionBtn from "./UploadActionBtn.jsx";
 import styles from "./UploadCard.module.css";
 import { scanImageOcr } from "../../api/ocr.js";
-import { useOcrStore } from "../../../../../Desktop/src/store/ocrStore.js";
+import {useOcrStore} from "../../store/ocrStore.js";
 
 const UploadCard = () => {
   const [file, setFile] = useState(null);

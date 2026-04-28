@@ -1,4 +1,4 @@
-import { useOcrStore } from '../../../../../Desktop/src/store/ocrStore.js';
+import {useOcrStore} from "../../store/ocrStore.js";
 
 const AlSummary = () => {
   const ocrText = useOcrStore((s) => s.ocrText);
