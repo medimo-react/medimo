@@ -1,0 +1,327 @@
+.pageWrapper {
+  min-height: 100vh;
+  display: flex;
+  background-color: var(--background-color);
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* --- 왼쪽 히어로 섹션 --- */
+.heroSection {
+  flex: 1;
+  background-color: var(--primary-color);
+  padding: 4rem var(--layout-padding-pc);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #FFFFFF; /* 배경색 대비 가독성을 위해 흰색 고정 */
+}
+
+/* 1024px 이상 데스크탑 */
+@media (max-width: 1024px) {
+  .heroSection {
+    padding: 3rem var(--layout-padding-tablet);
+  }
+  .mainTitle {
+    font-size: var(--font-size-title-md); 
+  }
+  .formCard {
+    max-width: 380px; 
+    padding: 2.5rem 2rem;
+  }
+}
+/* 768px 이하 */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column; /* 좌우에서 상하로 변경 */
+  }
+
+  .heroSection {
+    flex: none;
+    padding: 2.5rem var(--layout-padding-mobile);
+    min-height: auto; /* 높이 고정 해제 */
+  }
+
+  .logoArea {
+    margin-bottom: 2rem;
+  }
+
+  .heroFooter {
+    display: none; /* 상하 구조에서 하단 정보는 복잡해 보일 수 있어 숨김 */
+  }
+
+  .formSection {
+    padding: 2rem var(--layout-padding-mobile);
+    background-color: var(--background-color);
+  }
+
+  .formCard {
+    max-width: 100%;
+    box-shadow: none; /* 모바일 체감상 카드 그림자 제거가 깔끔함 */
+    padding: 1rem 0;
+  }
+}
+
+/* 480px 이하 */
+@media (max-width: 480px) {
+  .heroSection {
+    padding: 2rem var(--layout-padding-mobile);
+  }
+
+  .mainTitle {
+    font-size: var(--font-size-title-sm); /* 모바일에서는 제목을 조금 더 작게 */
+  }
+
+  .subTitle {
+    font-size: var(--font-size-tiny); /* 부제목도 작게 유지 */
+  }
+
+  .socialGroup {
+    flex-direction: column; /* 버튼 세로 정렬 */
+    gap: 0.75rem;
+  }
+}
+
+.logoArea {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 5rem;
+}
+
+.logoSymbol {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-max);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.logoText {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-title-sm);
+  letter-spacing: -0.02em;
+}
+
+.mainTitle {
+  font-size: var(--font-size-title-lg);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-title);
+  margin-bottom: 1.5rem;
+}
+
+.subTitle {
+  color: var(--secondary-color);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  filter: brightness(1.4); /* 배경색에 맞춰 가독성 보정 */
+}
+
+.heroFooter {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.userAvatars {
+  display: flex;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-max);
+  background: var(--secondary-color);
+  border: 2px solid var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-tiny);
+  font-weight: var(--font-weight-bold);
+  margin-left: -12px;
+}
+
+.avatar:first-child { margin-left: 0; }
+
+.userCount {
+  font-size: var(--font-size-small);
+  opacity: 0.9;
+}
+
+/* --- 오른쪽 폼 섹션 --- */
+.formSection {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--layout-padding-pc);
+  background-color: #F9FAFB;
+}
+
+.formCard {
+  width: 100%;
+  max-width: 440px;
+  background: var(--background-color);
+  padding: 3rem 2.5rem;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.formHeader {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.formHeader h2 {
+  font-size: var(--font-size-title-md);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-color);
+}
+
+.formHeader p {
+  color: var(--sub-text-color);
+  font-size: var(--font-size-small);
+  margin-top: 0.5rem;
+}
+
+.inputGroup {
+  margin-bottom: 1.5rem;
+}
+
+.labelWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.label {
+  display: block;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 1rem;
+  color: var(--sub-text-color);
+  font-size: 1.2rem;
+}
+
+.inputField {
+  width: 100%;
+  padding: 0.875rem 1rem 0.875rem 2.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-body);
+  transition: all 0.2s ease;
+}
+
+.inputField:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(99, 103, 255, 0.1);
+}
+
+.eyeButton {
+  position: absolute;
+  right: 1rem;
+  color: var(--sub-text-color);
+  display: flex;
+  align-items: center;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--primary-color);
+  color: #FFFFFF;
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-body);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: opacity 0.2s;
+  margin-top: 2rem;
+}
+
+.submitButton:hover {
+  opacity: 0.9;
+}
+
+.divider {
+  margin: 2rem 0;
+  position: relative;
+  text-align: center;
+}
+
+.divider::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--border-color);
+}
+
+.divider span {
+  position: relative;
+  background-color: var(--background-color);
+  padding: 0 1rem;
+  color: var(--sub-text-color);
+  font-size: var(--font-size-tiny);
+}
+
+.socialGroup {
+  display: flex;
+  gap: 1rem;
+}
+
+.socialBtn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.2s;
+}
+
+.socialBtn:hover {
+  background-color: #F9FAFB;
+}
+
+.formFooter {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: var(--font-size-small);
+  color: var(--sub-text-color);
+}
+
+.textLink {
+  color: var(--primary-color);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-small);
+}
