@@ -14,7 +14,7 @@
 
 .pageTitle {
   margin: 0;
-  font-size: 24px;
+  font-size: var(--font0size-title-md);
   color: var(--text-color);
 }
 
