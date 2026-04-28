@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Button, Dialog, Select } from '@radix-ui/themes';
+import { Button, Container, Dialog, Select } from '@radix-ui/themes';
 import { useInfoStore } from '../../store/infoStore';
 import styles from './Info.module.css';
 
@@ -183,6 +183,7 @@ export default function Info() {
   const todayYear = today.getFullYear();
 
   return (
+    <Container>
     <div className={styles.page}>
       <div className={styles.headerRow}>
         <div>
@@ -503,6 +504,7 @@ export default function Info() {
           </article>
         </aside>
       </div>
-    </div>
+      </div>
+    </Container>  
   );
 }
