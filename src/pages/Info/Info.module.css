@@ -656,3 +656,86 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 360px) {
+  .page {
+    padding: 10px 8px;
+  }
+
+  .pageTitle {
+    font-size: 20px;
+  }
+
+  .pageSubTitle {
+    font-size: 12px;
+  }
+
+  .cardHeader {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .cardHeader h2 {
+    font-size: 16px;
+  }
+
+  .outlineBtnSmall {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  .card {
+    padding: 12px;
+  }
+
+  .time {
+    font-size: 15px;
+    min-width: 44px;
+  }
+
+  .medicine {
+    font-size: 13px;
+  }
+
+  .alarmItem {
+    grid-template-columns: 1fr auto auto;
+    grid-template-areas:
+      "info info info"
+      "label toggle del";
+    gap: 6px;
+  }
+
+  .alarmInfo {
+    grid-area: info;
+  }
+
+  .toggleLabel {
+    grid-area: label;
+    align-self: center;
+  }
+
+  .toggle {
+    grid-area: toggle;
+  }
+
+  .alarmItem .deleteBtn {
+    grid-area: del;
+  }
+
+  .modalContent {
+    padding: 16px !important;
+  }
+
+  .calendarModal {
+    padding: 16px !important;
+  }
+
+  .calCell {
+    font-size: 11px;
+    padding: 6px 2px;
+  }
+
+  .calDayName {
+    font-size: 10px;
+  }
+}
