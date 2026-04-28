@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom'
 import AppLayout from './layout/AppLayout'
 import Demo from './components/Demo'
 import Info from './pages/Info/Info'
+import Dashboard from "./pages/Dashboard/Dashboard.jsx";
 
 function App() {
   return (
