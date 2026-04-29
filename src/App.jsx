@@ -20,7 +20,7 @@ function App() {
          <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/alert" element={ <Info />} />
         <Route path="/demo" element={<Demo />} />
-        <Route path="/ai-summary" element={<AlSummary />} />
+        <Route path="/ai-summary" element={<AiSummary />} />
       </Route>
     </Routes>
   )
