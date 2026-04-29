@@ -7,17 +7,15 @@ function Badge({
   className = "",
   ...props
 }) {
-  const badgeClassName = [
-    styles.badge,
-    styles[variant],
-    styles[size],
-    className,
-  ]
+  const Badge = [styles.badge, styles[variant], styles[size], className]
     .filter(Boolean)
     .join(" ");
 
   return (
-    <span className={badgeClassName} {...props}>
+    <span
+      className={`${styles.badge} ${styles[variant]} ${styles[size]} ${className}`}
+      {...props}
+    >
       {children}
     </span>
   );

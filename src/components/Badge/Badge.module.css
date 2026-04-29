@@ -3,18 +3,20 @@
   align-items: center;
   justify-content: center;
   width: fit-content;
+  flex-shrink: 0;
+  align-self: center;
   border: 1px solid transparent;
   border-radius: var(--radius-sm);
   font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-small);
+  line-height: 1;
   white-space: nowrap;
 }
 
 /* size */
 .sm {
-  min-height: 1.5rem;
+  min-height: 1.25rem;
   padding: 0 0.5rem;
-  font-size: var(--font-size-small);
+  font-size: var(--font-size-tiny);
 }
 
 .md {
@@ -24,60 +26,20 @@
 }
 
 .lg {
-  min-height: 2rem;
-  padding: 0 0.75rem;
+  min-height: 2.25rem;
+  padding: 0 0.875rem;
   font-size: var(--font-size-body);
 }
 
 /* variant */
 .primary {
-  color: #1D4ED8;
-  background-color: #DBEAFE;
-}
-
-.success {
-  color: #065F46;
-  background-color: #D1FAE5;
-}
-
-.danger {
-  color: #B91C1C;
-  background-color: #FEE2E2;
-}
-
-.warning {
-  color: #92400E;
-  background-color: #FEF3C7;
+  color: var(--primary-color);
+  background-color: #efefff;
 }
 
 .secondary {
-  color: #5B21B6;
-  background-color: #EDE9FE;
-}
-
-.pink {
-  color: #9D174D;
-  background-color: #FCE7F3;
-}
-
-.teal {
-  color: #0F766E;
-  background-color: #CCFBF1;
-}
-
-.orange {
-  color: #C2410C;
-  background-color: #FED7AA;
-}
-
-.indigo {
-  color: #3730A3;
-  background-color: #E0E7FF;
-}
-
-.greenLight {
-  color: #166534;
-  background-color: #F0FDF4;
+  color: var(--secondary-color);
+  background-color: #e0e7ff;
 }
 
 .gray {
@@ -85,8 +47,49 @@
   background-color: #f3f4f6;
 }
 
+.success {
+  color: #065f46;
+  background-color: #d1fae5;
+}
+
+.warning {
+  color: #92400e;
+  background-color: #fef3c7;
+}
+
+.danger {
+  color: #b91c1c;
+  background-color: #fee2e2;
+}
+
+.pink {
+  color: #9d174d;
+  background-color: #fce7f3;
+}
+
+.teal {
+  color: #0f766e;
+  background-color: #ccfbf1;
+}
+
+.orange {
+  color: #c2410c;
+  background-color: #fed7aa;
+}
+
+.indigo {
+  color: #3730a3;
+  background-color: #e0e7ff;
+}
+
+.greenLight {
+  color: #166534;
+  background-color: #f0fdf4;
+}
+
+/* outline */
 .outline {
   color: var(--primary-color);
-  background-color: transparent;
   border-color: var(--primary-color);
+  background-color: transparent;
 }
