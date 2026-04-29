@@ -88,15 +88,10 @@ export const useBookmarkStore = create(
           if (folder === '전체') {
             return { selectedFolders: new Set(['전체']) };
           }
-          const next = new Set(s.selectedFolders);
-          next.delete('전체');
-          if (next.has(folder)) {
-            next.delete(folder);
-            if (next.size === 0) return { selectedFolders: new Set(['전체']) };
-          } else {
-            next.add(folder);
+          if (s.selectedFolders.has(folder)) {
+            return { selectedFolders: new Set(['전체']) };
           }
-          return { selectedFolders: next };
+          return { selectedFolders: new Set([folder]) };
         }),
 
       syncFromServer: (data) => {
