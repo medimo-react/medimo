@@ -9,17 +9,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
 }
 
 .searchBox {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.5rem;
   background: var(--background-color);
   border: none;
   border-radius: var(--radius-sm);
-  padding: 10px 16px;
+  padding: 0.625rem 1rem;
   width: 380px;
 }
 
@@ -42,14 +42,14 @@
 .topActions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.5rem;
 }
 
 .filterBtn {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 10px 14px;
+  gap: 0.375rem;
+  padding: 0.625rem 0.875rem;
   border-radius: var(--radius-sm);
   background: var(--background-color);
   font-size: var(--font-size-small);
@@ -59,7 +59,8 @@
 }
 
 .filterBtn:hover {
-  border-color: #9ca3af;
+  background: var(--primary-color);
+  color: #fff;
 }
 
 .filterBtnActive {
@@ -70,41 +71,41 @@
 .favBtn {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 10px 14px;
-  border-radius: 10px;
-  color: var(--primary-color);
+  gap: 0.375rem;
+  padding: 0.625rem 0.875rem;
+  border-radius: var(--radius-sm);
+  color: var(--sub-text-color);
   cursor: pointer;
   transition: border-color 0.15s, background 0.15s;
 }
 
 .favBtn:hover {
-  border-color: #9ca3af;
+  background: var(--primary-color);
+  color: var(--background-color);
 }
 
 .favBtnActive {
-  border-color: #f5a623;
-  color: #f5a623;
-  background: var(--background-color);
+  color: var(--background-color);
+  background: var(--primary-color);
 }
 
 /* 폴더 탭 */
 .folderTabs {
   display: flex;
-  gap: 8px;
-  margin-bottom: 20px;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
   justify-content: flex-end;
 }
 
 .folderTab {
   display: flex;
   align-items: center;
-  gap: 4px;
-  padding: 8px 16px;
-  border-radius: 20px;
+  gap: 0.25rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-lg);
   border: 1px solid var(--border-color);
   background: var(--background-color);
-  font-size: 14px;
+  font-size: var(--font-size-small);
   color: var(--sub-text-color);
   cursor: pointer;
   transition: all 0.15s;
@@ -126,14 +127,14 @@
 }
 
 .folderCount {
-  font-size: 14px;
+  font-size: var(--font-size-small);
   color: var(--sub-text-color);
 }
 
 /* 표 */
 .tableWrapper {
   background: var(--background-color);
-  border-radius: 14px;
+  border-radius: var(--radius-md);
   border: 1px solid var(--border-color);
   overflow: visible;
 }
@@ -142,25 +143,25 @@
   display: grid;
   grid-template-columns: 2.5fr 1fr 1.2fr 0.8fr 1fr;
   align-items: center;
-  padding: 14px 24px;
+  padding: 0.875rem 1.5rem;
   border-bottom: 1px solid var(--border-color);
   background: var(--background-color);
-  border-radius: 14px 14px 0 0;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
 }
 .tableHeader span {
-  font-size: 14px;
+  font-size: var(--font-size-small);
   color: var(--sub-text-color);
   font-weight: var(--font-weight-medium);
 }
 .empty {
-  padding: 10px;
+  padding: 0.625rem;
 }
 /* Row */
 .row {
   display: grid;
   grid-template-columns: 2.5fr 1fr 1.2fr 0.8fr 1fr 40px;
   align-items: center;
-  padding: 16px 24px;
+  padding: 1rem 1.5rem;
   border-bottom: 1px solid var(--border-color);
   transition: background 0.1s;
   position: relative;
@@ -168,7 +169,7 @@
 
 .row:last-child {
   border-bottom: none;
-  border-radius: 0 0 14px 14px;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
 }
 
 .row:hover {
@@ -178,7 +179,7 @@
 .colName {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 0.75rem;
   min-width: 0;
 }
 .colCategory,
@@ -192,11 +193,11 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: 0.25rem;
 }
 
 .colDate {
-  gap: 6px;
+  gap: 0.375rem;
 }
 
 /* Pill Icon */
@@ -214,14 +215,14 @@
 .nameInfo {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 0.125rem;
   min-width: 0;
 }
 
 .medicineName {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 0.375rem;
   font-size: var(--font-size-small);
   font-weight: var(--font-weight-semibold);
   color: var(--text-color);
@@ -236,29 +237,29 @@
 }
 
 .engName {
-  font-size: 12px;
+  font-size: var(--font-size-tiny);
   color: var(--sub-text-color);
 }
 
 /* Badges */
 .categoryBadge {
   display: inline-block;
-  padding: 4px 10px;
+  padding: 0.25rem 0.625rem;
   border-radius: var(--radius-lg);
   background: #cffafe;
   color: #0e7490;
-  font-size: 12px;
+  font-size: var(--font-size-tiny);
   font-weight: var(--font-weight-medium);
   white-space: nowrap;
 }
 
 .folderBadge {
   display: inline-block;
-  padding: 4px 10px;
-  border-radius: 20px;
+  padding: 0.25rem 0.625rem;
+  border-radius: var(--radius-lg);
   background: #ccfbf1;
   color: #0f766e;
-  font-size: 12px;
+  font-size: var(--font-size-tiny);
   font-weight: var(--font-weight-medium);
   white-space: nowrap;
 }
@@ -299,17 +300,16 @@
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 18px;
+  font-size: var(--font-size-body);
   color: var(--sub-text-color);
   line-height: 1;
-  padding: 4px 6px;
-  border-radius: 6px;
+  padding: 0.25rem 0.375rem;
+  border-radius: var(--radius-sm);
   transition: background 0.1s, color 0.1s;
   letter-spacing: 1px;
 }
 
 .menuBtn:hover {
-  background: #f3f4f6;
   color: #374151;
 }
 
@@ -330,8 +330,8 @@
 .dropdownItem {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 12px;
+  gap: 0.5rem;
+  padding: 0.625rem 0.75rem;
   background: none;
   border: none;
   border-radius: var(--radius-sm);
@@ -358,8 +358,8 @@
   display: flex;
   height: 30px;
   align-items: center;
-  gap: 6px;
-  padding: 8px 12p;
+  gap: 0.375rem;
+  padding: 0.5rem 0.75rem;
   background: none;
   border: none;
   border-radius: var(--radius-sm);
@@ -378,31 +378,14 @@
 .dropdownDivider {
   height: 1px;
   background: #f3f4f6;
-  margin: 2px 0;
-}
-
-.dropdownItemCurrent {
-  color: var(--primary-color);
-  font-weight: 500;
-}
-.dropdownItemCurrent:hover {
-  background: #EFF6FF;
-}
-
-.currentBadge {
-  margin-left: auto;
-  font-size: 10px;
-  color: var(--primary-color);
-  background: var(--background-color);
-  padding: 2px 6px;
-  border-radius: var(--radius-sm);
+  margin: 0.125rem 0;
 }
 
 .dropdownCheckItem {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
   border-radius: var(--font-size-small);
   font-size: var(--font-size-small);
   color: var(--sub-text-color);
@@ -427,8 +410,8 @@
   display: flex;
   justify-self: center;
   width: calc(100% -16px);
-  margin: 4px 8px;
-  padding: 8px;
+  margin: 0.25rem 0.5rem;
+  padding: 0.5rem;
   background: var(--primary-color);
   color: var(--background-color);
   border: none;
@@ -451,14 +434,14 @@
 .folderAddWrap {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 8px;
+  gap: 0.375rem;
+  padding: 0.375rem 0.5rem;
 }
 
 .folderAddInput {
   flex: 1;
   border: 1px solid var(--border-color);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   padding: 8px 10px;
   font-size: var(--font-size-small);
   color: var(--sub-text-color);
@@ -476,7 +459,7 @@
 }
 
 .folderAddConfirm {
-  padding: 8px 12px;
+  padding: 0.5rem 0.75rem;
   background: var(--primary-color);
   color: var(--background-color);
   border: none;
@@ -498,11 +481,11 @@
 
 @media (max-width: 1024px) {
   .page {
-    padding: 20px;
+    padding: 1.25rem;
   }
 
   .topBar {
-    gap: 10px;
+    gap: 0.625rem;
   }
 
   .searchBox {
@@ -524,18 +507,18 @@
 
 @media (max-width: 768px) {
   .page {
-    padding: 16px;
+    padding: 1rem;
   }
 
   .topBar {
     flex-direction: column;
     align-items: stretch;
-    gap: 12px;
+    gap: 0.75rem;
   }
 
   .topActions {
     width: 100%;
-    gap: 8px;
+    gap: 0.5rem;
   }
 
   .filterBtn,
@@ -549,7 +532,7 @@
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     white-space: nowrap;
-    padding-bottom: 4px;
+    padding-bottom: 0.25rem;
   }
 
   .folderTab {
