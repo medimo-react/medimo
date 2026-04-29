@@ -6,7 +6,7 @@ import Demo from './components/Demo'
 import Info from './pages/Info/Info'
 import Login from './pages/Login/Login'
 import Dashboard from "./pages/Dashboard/Dashboard.jsx";
-import AlSummary from "./pages/AISummary/AlSummary.jsx";
+import AiSummary from "./pages/AiSummary/AiSummary.jsx";
 import About from "./pages/About/About";
 
 function App() {
@@ -21,7 +21,6 @@ function App() {
         <Route path="/alert" element={ <Info />} />
         <Route path="/demo" element={<Demo />} />
         <Route path="/ai-summary" element={<AlSummary />} />
-        <Route path="/about" element={<About />} />
       </Route>
     </Routes>
   )
