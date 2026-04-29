@@ -14,12 +14,11 @@ import styles from "./Navbar.module.css";
 const NAV_ITEMS = [
   { id: "prescription", label: "처방전 분석", path: "/dashboard", icon: <LuScanLine /> },
   {
-    id: "medications",
+    id: "medicine",
     label: "내 약 목록",
-    path: "/medications",
+    path: "/medicine",
     icon: <FaPills />,
   },
-  { id: "bookmark", label: "북마크", path: "/bookmark", icon: <BsBookmark /> },
   { id: "alert", label: "알림", path: "/alert", icon: <HiOutlineBellAlert /> },
   { id: "history", label: "분석 기록", path: "/history", icon: <LuHistory /> },
   {
