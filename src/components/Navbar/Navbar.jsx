@@ -12,7 +12,7 @@ import { FiMenu, FiX } from "react-icons/fi";
 import styles from "./Navbar.module.css";
 
 const NAV_ITEMS = [
-  { id: "prescription", label: "처방전 분석", path: "/", icon: <LuScanLine /> },
+  { id: "prescription", label: "처방전 분석", path: "/dashboard", icon: <LuScanLine /> },
   {
     id: "medications",
     label: "내 약 목록",
@@ -70,11 +70,14 @@ export default function Navbar() {
 
       <nav className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
         <div className={styles.logo}>
-          <div className={styles.logoText}>
-            <span className={styles.logoTitle}>
-              <img src="/logo.png" alt="로고" />
-            </span>
-          </div>
+          <button
+            type="button"
+            className={styles.logoButton}
+            onClick={() => handleNavigate("/dashboard")}
+            aria-label="대시보드로 이동"
+          >
+            <img src="/logo.png" alt="로고" />
+          </button>
         </div>
 
         <ul className={styles.navList}>

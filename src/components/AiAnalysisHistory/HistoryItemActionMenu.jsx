@@ -1,4 +1,4 @@
-import {DotsHorizontalIcon} from "@radix-ui/react-icons";
+import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import styles from "./HistoryItemActionMenu.module.css";
 import * as Popover from "@radix-ui/react-popover";
 
@@ -7,7 +7,7 @@ const HistoryItemActionMenu = () => {
       <div className={styles.button}>
         <Popover.Root>
           <Popover.Trigger asChild>
-            <DotsHorizontalIcon/>
+            <HiOutlineDotsHorizontal />
           </Popover.Trigger>
           <Popover.Portal>
             <Popover.Content side="bottom" align="center" className={styles.popover_content}>

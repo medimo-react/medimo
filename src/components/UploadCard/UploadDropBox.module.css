@@ -10,6 +10,11 @@
   text-align: center;
   cursor: pointer;
 
+  &.active {
+    border-color: var(--primary);
+    background-color: rgba(99, 103, 255, 0.1);
+  }
+
   .icon {
     display: flex;
     width: 2.25rem;
