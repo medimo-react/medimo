@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Container from "../../components/Container/Container";
 import Card from "../../components/Card/Card";
 import styles from "./Guide.module.css";
 
@@ -309,7 +310,7 @@ function Guide() {
         <span className={styles.heroGlow} />
         <span className={styles.heroGlowSmall} />
 
-        <div className={styles.container}>
+        <Container className={styles.sectionContainer}>
           <div className={styles.heroInner}>
             <div className={styles.heroText}>
               <span className={styles.heroBadge}>
@@ -393,12 +394,12 @@ function Guide() {
               </Card>
             </div>
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* How */}
       <section id="how" className={styles.how}>
-        <div className={styles.container}>
+        <Container className={styles.sectionContainer}>
           <SectionHeader
             center
             badge="사용 방법"
@@ -422,21 +423,21 @@ function Guide() {
               </div>
             ))}
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* Features */}
       <section id="features" className={styles.features}>
-        <div className={styles.container}>
+        <Container className={styles.sectionContainer}>
           {features.map((feature) => (
             <FeatureBlock key={feature.badge} feature={feature} />
           ))}
-        </div>
+        </Container>
       </section>
 
       {/* Why */}
       <section id="why" className={styles.why}>
-        <div className={styles.container}>
+        <Container className={styles.sectionContainer}>
           <SectionHeader
             center
             badge="왜 메디모인가"
@@ -459,12 +460,12 @@ function Guide() {
               </Card>
             ))}
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* CTA */}
       <section id="cta" className={styles.cta}>
-        <div className={styles.container}>
+        <Container className={styles.sectionContainer}>
           <SectionHeader
             center
             badge="지금 바로 시작"
@@ -486,7 +487,7 @@ function Guide() {
               자세히 알아보기
             </a>
           </div>
-        </div>
+        </Container>
       </section>
     </div>
   );
