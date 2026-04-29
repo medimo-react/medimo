@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.css';
 import { HiOutlineMail, HiOutlineLockClosed, HiOutlineEye, HiOutlineEyeOff, HiArrowRight } from 'react-icons/hi';
 import { FcGoogle } from 'react-icons/fc';
@@ -6,6 +7,8 @@ import { FaGithub } from 'react-icons/fa';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+
+  const navigate = useNavigate();
 
   return (
     <div className={styles.pageWrapper}>
@@ -100,7 +103,12 @@ const Login = () => {
             </div>
 
             <footer className={styles.formFooter}>
-              계정이 없으신가요? <a href="#" className={styles.textLink}>회원가입</a>
+              계정이 없으신가요? 
+              <span className={styles.textLink}
+              onClick={() => navigate('/signup')}
+              style={{ cursor: 'pointer', color: 'var(--primary-color)', fontWeight: 'bold', marginLeft: '5px' }}
+              >
+              회원가입</span>
             </footer>
           </div>
         </div>
