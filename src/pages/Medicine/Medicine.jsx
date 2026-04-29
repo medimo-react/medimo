@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from 'react';
-import styles from './Bookmark.module.css';
+import styles from './Medicine.module.css';
 import { FaStar, FaRegStar, FaExclamationTriangle, FaPills, FaClock, FaFolder, FaTrash, FaSearch } from 'react-icons/fa';
 import Input from '../../components/Input/Input';
 import { useBookmarkStore } from '../../store/bookmarkStore';
