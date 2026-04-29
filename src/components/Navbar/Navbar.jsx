@@ -105,9 +105,9 @@ export default function Navbar() {
           <button
             type="button"
             className={`${styles.helpButton} ${
-              pathname === "/guide" ? styles.active : ""
+              pathname === "/about" ? styles.active : ""
             }`}
-            onClick={() => handleNavigate("/guide")}
+            onClick={() => handleNavigate("/about")}
           >
             <span className={styles.navIcon}>
               <AiOutlineQuestionCircle />
