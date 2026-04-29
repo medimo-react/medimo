@@ -12,7 +12,12 @@ import { FiMenu, FiX } from "react-icons/fi";
 import styles from "./Navbar.module.css";
 
 const NAV_ITEMS = [
-  { id: "prescription", label: "처방전 분석", path: "/dashboard", icon: <LuScanLine /> },
+  {
+    id: "prescription",
+    label: "처방전 분석",
+    path: "/dashboard",
+    icon: <LuScanLine />,
+  },
   {
     id: "medications",
     label: "내 약 목록",
@@ -98,7 +103,13 @@ export default function Navbar() {
         </ul>
 
         <div className={styles.bottom}>
-          <button type="button" className={styles.helpButton}>
+          <button
+            type="button"
+            className={`${styles.helpButton} ${
+              pathname === "/guide" ? styles.active : ""
+            }`}
+            onClick={() => handleNavigate("/guide")}
+          >
             <span className={styles.navIcon}>
               <AiOutlineQuestionCircle />
             </span>
