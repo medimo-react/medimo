@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Container from "../../components/Container/Container";
 import Card from "../../components/Card/Card";
-import styles from "./Guide.module.css";
+import styles from "./About.module.css";
 
 const cx = (...classes) => classes.filter(Boolean).join(" ");
 
@@ -288,9 +288,9 @@ function FeatureBlock({ feature }) {
   );
 }
 
-function Guide() {
+function About() {
   return (
-    <div className={styles.guide}>
+    <div className={styles.about}>
       {/* Header */}
       <header className={styles.nav}>
         <nav className={styles.navLinks}>
@@ -493,4 +493,4 @@ function Guide() {
   );
 }
 
-export default Guide;
+export default About;
