@@ -7,7 +7,7 @@ import Info from './pages/Info/Info'
 import Login from './pages/Login/Login'
 import Dashboard from "./pages/Dashboard/Dashboard.jsx";
 import AiSummary from "./pages/AiSummary/AiSummary.jsx";
-import About from "./pages/About/About";
+import About from "./pages/About/About.jsx";
 
 function App() {
   return (
@@ -21,6 +21,7 @@ function App() {
         <Route path="/alert" element={ <Info />} />
         <Route path="/demo" element={<Demo />} />
         <Route path="/ai-summary" element={<AiSummary />} />
+        <Route path="/about" element={<About />} />
       </Route>
     </Routes>
   )
