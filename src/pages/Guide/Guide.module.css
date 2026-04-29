@@ -16,11 +16,8 @@
 /* ==============================
   Common Layout
 ================================ */
-.container {
-  width: 100%;
-  max-width: var(--layout-max-width);
-  margin: 0 auto;
-  padding-inline: var(--layout-padding-pc);
+.sectionContainer {
+  position: relative;
 }
 
 .sectionBadge {
@@ -283,7 +280,6 @@
   margin-top: 3.25rem;
   padding-top: 2.25rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  flex-direction: column;
 }
 
 .heroStats strong {
@@ -570,10 +566,6 @@
   direction: ltr;
 }
 
-.featureVisual {
-  width: 100%;
-}
-
 .visualLabel {
   display: flex;
   align-items: center;
@@ -798,7 +790,6 @@
   Responsive
 ================================ */
 @media (max-width: 1024px) {
-  .container,
   .nav {
     padding-inline: var(--layout-padding-tablet);
   }
@@ -855,7 +846,6 @@
 }
 
 @media (max-width: 480px) {
-  .container,
   .nav {
     padding-inline: var(--layout-padding-mobile);
   }
@@ -878,9 +868,5 @@
 
   .drugTags {
     display: none;
-  }
-
-  .featureVisual {
-    padding: 1.25rem;
   }
 }
