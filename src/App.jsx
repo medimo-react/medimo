@@ -5,7 +5,7 @@ import AppLayout from './layout/AppLayout'
 import Demo from './components/Demo'
 import Info from './pages/Info/Info'
 import Dashboard from "./pages/Dashboard/Dashboard.jsx";
-import AlSummary from "./pages/AISummary/AlSummary.jsx";
+import AiSummary from "./pages/AiSummary/AiSummary.jsx";
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
          <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/alert" element={ <Info />} />
         <Route path="/demo" element={<Demo />} />
-        <Route path="/ai-summary" element={<AlSummary />} />
+        <Route path="/ai-summary" element={<AiSummary />} />
       </Route>
     </Routes>
   )
