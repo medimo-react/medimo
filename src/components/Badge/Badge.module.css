@@ -7,6 +7,8 @@
   align-self: center;
   border: 1px solid transparent;
   border-radius: var(--radius-sm);
+  background-color: var(--badge-bg);
+  color: var(--badge-text);
   font-weight: var(--font-weight-semibold);
   line-height: 1;
   white-space: nowrap;
@@ -33,63 +35,74 @@
 
 /* variant */
 .primary {
-  color: var(--primary-color);
-  background-color: #efefff;
+  --badge-text: var(--primary-color);
+  --badge-bg: #efefff;
+  --badge-border: var(--primary-color);
 }
 
 .secondary {
-  color: var(--secondary-color);
-  background-color: #e0e7ff;
+  --badge-text: var(--secondary-color);
+  --badge-bg: #e0e7ff;
+  --badge-border: var(--secondary-color);
 }
 
 .gray {
-  color: var(--sub-text-color);
-  background-color: #f3f4f6;
+  --badge-text: var(--sub-text-color);
+  --badge-bg: #f3f4f6;
+  --badge-border: var(--border-color);
 }
 
 .success {
-  color: #065f46;
-  background-color: #d1fae5;
+  --badge-text: #065f46;
+  --badge-bg: #d1fae5;
+  --badge-border: #065f46;
 }
 
 .warning {
-  color: #92400e;
-  background-color: #fef3c7;
+  --badge-text: #92400e;
+  --badge-bg: #fef3c7;
+  --badge-border: #92400e;
 }
 
 .danger {
-  color: #b91c1c;
-  background-color: #fee2e2;
+  --badge-text: #b91c1c;
+  --badge-bg: #fee2e2;
+  --badge-border: #b91c1c;
 }
 
 .pink {
-  color: #9d174d;
-  background-color: #fce7f3;
+  --badge-text: #9d174d;
+  --badge-bg: #fce7f3;
+  --badge-border: #9d174d;
 }
 
 .teal {
-  color: #0f766e;
-  background-color: #ccfbf1;
+  --badge-text: #0f766e;
+  --badge-bg: #ccfbf1;
+  --badge-border: #0f766e;
 }
 
 .orange {
-  color: #c2410c;
-  background-color: #fed7aa;
+  --badge-text: #c2410c;
+  --badge-bg: #fed7aa;
+  --badge-border: #c2410c;
 }
 
 .indigo {
-  color: #3730a3;
-  background-color: #e0e7ff;
+  --badge-text: #3730a3;
+  --badge-bg: #e0e7ff;
+  --badge-border: #3730a3;
 }
 
 .greenLight {
-  color: #166534;
-  background-color: #f0fdf4;
+  --badge-text: #166534;
+  --badge-bg: #f0fdf4;
+  --badge-border: #166534;
 }
 
 /* outline */
 .outline {
-  color: var(--primary-color);
-  border-color: var(--primary-color);
+  border-color: var(--badge-border);
   background-color: transparent;
+  color: var(--badge-text);
 }
