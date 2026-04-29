@@ -880,40 +880,55 @@ https://react-icons.github.io/react-icons/
             alignContent: "flex-start",
           }}
         >
+          {/* size */}
           <div
             style={{
               display: "flex",
               gap: "12px",
+              alignItems: "center",
+              flexWrap: "wrap",
             }}
           >
             <Badge size="lg" variant="primary">
               큰 뱃지
             </Badge>
+
             <Badge>기본</Badge>
+
             <Badge size="sm" variant="primary">
               작은 뱃지
             </Badge>
           </div>
 
+          {/* outline + size */}
           <div
             style={{
               display: "flex",
               gap: "12px",
+              alignItems: "center",
+              flexWrap: "wrap",
             }}
           >
-            <Badge size="lg" variant="outline">
-              큰 Outline
+            <Badge size="lg" variant="primary" outline>
+              큰 뱃지
             </Badge>
-            <Badge variant="outline">Outline</Badge>
-            <Badge size="sm" variant="outline">
-              작은 Outline
+
+            <Badge variant="primary" outline>
+              뱃지
+            </Badge>
+
+            <Badge size="sm" variant="primary" outline>
+              작은 뱃지
             </Badge>
           </div>
 
+          {/* filled color */}
           <div
             style={{
               display: "flex",
               gap: "12px",
+              alignItems: "center",
+              flexWrap: "wrap",
             }}
           >
             <Badge variant="primary">Primary-color</Badge>
@@ -927,6 +942,52 @@ https://react-icons.github.io/react-icons/
             <Badge variant="indigo">인디고</Badge>
             <Badge variant="greenLight">연두</Badge>
           </div>
+
+          {/* outline color */}
+          <div
+            style={{
+              display: "flex",
+              gap: "12px",
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            <Badge variant="success" outline>
+              완료 Outline
+            </Badge>
+
+            <Badge variant="danger" outline>
+              오류 Outline
+            </Badge>
+
+            <Badge variant="warning" outline>
+              주의 Outline
+            </Badge>
+
+            <Badge variant="secondary" outline>
+              보라 Outline
+            </Badge>
+
+            <Badge variant="pink" outline>
+              핑크 Outline
+            </Badge>
+
+            <Badge variant="teal" outline>
+              청록 Outline
+            </Badge>
+
+            <Badge variant="orange" outline>
+              주황 Outline
+            </Badge>
+
+            <Badge variant="indigo" outline>
+              인디고 Outline
+            </Badge>
+
+            <Badge variant="greenLight" outline>
+              연두 Outline
+            </Badge>
+          </div>
         </div>
 
         <CodeToggle>
@@ -937,8 +998,10 @@ CSS Module: src/components/Badge/Badge.module.css
 // 불러오기
 import Badge from "./Badge/Badge";
 
-// 사용 방법
-<Badge>기본</Badge>
+// 기본 사용
+<Badge>
+  기본
+</Badge>
 
 <Badge variant="primary">
   기본
@@ -984,10 +1047,6 @@ import Badge from "./Badge/Badge";
   연두
 </Badge>
 
-<Badge variant="outline">
-  Outline
-</Badge>
-
 // size
 <Badge size="sm">
   작은 뱃지
@@ -1001,17 +1060,34 @@ import Badge from "./Badge/Badge";
   큰 뱃지
 </Badge>
 
-// outline size
-<Badge variant="outline" size="sm">
-  작은 Outline
+// outline
+<Badge variant="primary" outline>
+  Primary Outline
 </Badge>
 
-<Badge variant="outline" size="md">
-  기본 Outline
+<Badge variant="success" outline>
+  완료 Outline
 </Badge>
 
-<Badge variant="outline" size="lg">
-  큰 Outline
+<Badge variant="danger" outline>
+  오류 Outline
+</Badge>
+
+<Badge variant="warning" outline>
+  주의 Outline
+</Badge>
+
+// outline + size
+<Badge variant="primary" size="sm" outline>
+  작은 Primary Outline
+</Badge>
+
+<Badge variant="primary" size="md" outline>
+  기본 Primary Outline
+</Badge>
+
+<Badge variant="primary" size="lg" outline>
+  큰 Primary Outline
 </Badge>`}
         </CodeToggle>
       </section>
@@ -1209,7 +1285,7 @@ import Card from "./Card/Card";
             maxWidth: "360px",
             display: "grid",
             gap: "12px",
-            margin: "36px 0"
+            margin: "36px 0",
           }}
         >
           <Input placeholder="약 이름을 입력하세요" />
@@ -1345,7 +1421,7 @@ import Checkbox from "./Checkbox/Checkbox";
             display: "flex",
             gap: "16px",
             flexWrap: "wrap",
-            margin: "36px 0" 
+            margin: "36px 0",
           }}
         >
           <Radio name="type" label="일반" value="normal" />
@@ -1383,7 +1459,7 @@ import Radio from "./Radio/Radio";
             gap: "12px",
             flexWrap: "wrap",
             alignItems: "center",
-            margin: "36px 0" 
+            margin: "36px 0",
           }}
         >
           <Modal
