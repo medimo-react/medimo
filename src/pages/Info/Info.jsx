@@ -490,7 +490,7 @@ export default function Info() {
               <div className={`${styles.metric} ${styles.metricDone}`}>복용 완료 {doneCount}</div>
               <div className={`${styles.metric} ${styles.metricWait}`}>대기 중 {waitCount}</div>
               <div className={`${styles.metric} ${styles.metricFuture}`}>예정 {futureCount}</div>
-              <div className={`${styles.metric} ${styles.metricMiss}`}>미복용 {missCount}</div>
+             <div className={`${styles.metric} ${styles.metricMiss}`}>미복용 {missCount}</div>
             </div>
           </article>
 
