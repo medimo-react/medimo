@@ -7,8 +7,20 @@ import { FaGithub } from 'react-icons/fa';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
+
+  const handleLogin = (e) => {
+    e.preventDefault(); 
+
+    if (email && password) {
+      navigate('/'); // 3. 메인 경로('/')로 이동
+    } else {
+      alert('이메일과 비밀번호를 모두 입력해주세요.');
+    }
+  };
 
   return (
     <div className={styles.pageWrapper}>
@@ -49,7 +61,7 @@ const Login = () => {
               <p>계정에 로그인하여 서비스를 이용하세요</p>
             </header>
 
-            <form className={styles.loginForm}>
+            <form className={styles.loginForm} onSubmit={handleLogin}>
               <div className={styles.inputGroup}>
                 <label className={styles.label}>이메일</label>
                 <div className={styles.inputWrapper}>
@@ -58,6 +70,8 @@ const Login = () => {
                     type="email" 
                     placeholder="name@example.com" 
                     className={styles.inputField}
+                    value={email}
+                    onChange={(e)=> setEmail(e.target.value)}
                   />
                 </div>
               </div>
@@ -73,6 +87,8 @@ const Login = () => {
                     type={showPassword ? "text" : "password"} 
                     placeholder="비밀번호 입력" 
                     className={styles.inputField}
+                    value={password}
+                    onChange={(e)=> setPassword(e.target.value)}
                   />
                   <button 
                     type="button" 
@@ -105,7 +121,7 @@ const Login = () => {
             <footer className={styles.formFooter}>
               계정이 없으신가요? 
               <span className={styles.textLink}
-              onClick={() => navigate('/signup')}
+              onClick={() => navigate('/signup1')}
               style={{ cursor: 'pointer', color: 'var(--primary-color)', fontWeight: 'bold', marginLeft: '5px' }}
               >
               회원가입</span>
