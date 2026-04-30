@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { getBookmarks, updateBookmark, deleteBookmark } from '../api/bookmarks';
+import { getBookmarks, addBookmark, updateBookmark, deleteBookmark } from '../api/bookmarks';
 import { mapBookmarks } from '../lib/bookmarkMappers';
 
 const STORE_KEY = 'medimo-bookmark-store';
@@ -104,6 +104,14 @@ export const useBookmarkStore = create(
           set((s) => ({
             medicines: s.medicines.map((m) => (m.id === updated.id ? updated : m)),
           }));
+        }
+      },
+
+      addMedicine: async (medicineId) => {
+        const data = await addBookmark(medicineId);
+        if (data) {
+          const mapped = mapBookmarks([data])[0];
+          set((s) => ({ medicines: [...s.medicines, mapped] }));
         }
       },
 
