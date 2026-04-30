@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { LuScanLine, LuHistory } from "react-icons/lu";
 import { FaPills } from "react-icons/fa";
-import { BsBookmark } from "react-icons/bs";
 import { IoSettingsOutline } from "react-icons/io5";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { HiOutlineBellAlert } from "react-icons/hi2";

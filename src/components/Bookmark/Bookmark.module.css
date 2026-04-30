@@ -1,0 +1,10 @@
+.bookmarkBtn {
+  background: transparent;
+}
+
+.on {
+  color: var(--primary-color);
+}
+.off {
+  color: var(--primary-color);
+}
