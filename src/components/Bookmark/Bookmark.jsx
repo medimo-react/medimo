@@ -1,5 +1,6 @@
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { useBookmarkStore } from "../../store/bookmarkStore";
+import styles from './Bookmark.module.css';
 
 export default function Bookmark({ medicineId }) {
   const medicines = useBookmarkStore((s) => s.medicines);
@@ -17,8 +18,8 @@ export default function Bookmark({ medicineId }) {
   };
 
   return (
-    <button onClick={handleClick} aria-label={bookmarked ? "북마크 제거" : "북마크 추가"}>
-      {bookmarked ? <BsBookmarkFill /> : <BsBookmark />}
+    <button className={styles.bookmarkBtn} onClick={handleClick} aria-label={bookmarked ? "북마크 제거" : "북마크 추가"}>
+      {bookmarked ? <BsBookmarkFill className={styles.on} /> : <BsBookmark className={styles.off} />}
     </button>
   );
 }
