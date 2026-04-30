@@ -4,7 +4,7 @@ import Card from "../Card/Card.jsx";
 import UploadDropBox from "./UploadDropBox.jsx";
 import UploadActionBtn from "./UploadActionBtn.jsx";
 import styles from "./UploadCard.module.css";
-import { scanImageOcr } from "../../api/ocr.js";
+import { ocrScan } from "../../api/scan.js";
 import {useOcrStore} from "../../store/ocrStore.js";
 
 const UploadCard = () => {
@@ -39,7 +39,7 @@ const UploadCard = () => {
     setOcrError("");
     setIsScanning(true);
     try {
-      const text = await scanImageOcr(capturedFile);
+      const text = await ocrScan(capturedFile);
       setOcrText(text);
       navigate("/ai-summary");
     } catch (err) {
