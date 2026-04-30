@@ -8,7 +8,7 @@ import Login from './pages/Login/Login'
 import Signup1 from './pages/Login/Signup1.jsx'
 import Signup2 from './pages/Login/Signup2.jsx'
 import Dashboard from "./pages/Dashboard/Dashboard.jsx";
-import AiSummary from "./pages/AiSummary/AiSummary.jsx";
+import AiSummary from "./pages/AISummary/AISummary.jsx";
 import About from "./pages/About/About.jsx";
 
 function App() {
