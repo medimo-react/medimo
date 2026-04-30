@@ -1,5 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
-import { Button, Container, Dialog, Select } from '@radix-ui/themes';
+import { Dialog } from '@radix-ui/themes';
+import Button from '../../components/Button/Button'
+import Container from '../../components/Container/Container'
+import Select from '../../components/Select/Select'
+
 import { useInfoStore } from '../../store/infoStore';
 import styles from './Info.module.css';
 
@@ -486,7 +490,7 @@ export default function Info() {
               <div className={`${styles.metric} ${styles.metricDone}`}>복용 완료 {doneCount}</div>
               <div className={`${styles.metric} ${styles.metricWait}`}>대기 중 {waitCount}</div>
               <div className={`${styles.metric} ${styles.metricFuture}`}>예정 {futureCount}</div>
-              <div className={`${styles.metric} ${styles.metricMiss}`}>미복용 {missCount}</div>
+             <div className={`${styles.metric} ${styles.metricMiss}`}>미복용 {missCount}</div>
             </div>
           </article>
 

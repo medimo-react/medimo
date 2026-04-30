@@ -5,14 +5,18 @@ import AppLayout from './layout/AppLayout'
 import Demo from './components/Demo'
 import Info from './pages/Info/Info'
 import Login from './pages/Login/Login'
+import Signup1 from './pages/Login/Signup1.jsx'
+import Signup2 from './pages/Login/Signup2.jsx'
 import Dashboard from "./pages/Dashboard/Dashboard.jsx";
-import AlSummary from "./pages/AISummary/AlSummary.jsx";
-import Guide from "./pages/Guide/Guide";
+import AiSummary from "./pages/AiSummary/AiSummary.jsx";
+import About from "./pages/About/About.jsx";
 
 function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
+      <Route path="/signup1" element={<Signup1 />} />
+      <Route path="/signup2" element={<Signup2 />} />
 
       <Route element={<AppLayout />}>
         <Route path="/" element={null} />
@@ -20,8 +24,8 @@ function App() {
          <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/alert" element={ <Info />} />
         <Route path="/demo" element={<Demo />} />
-        <Route path="/ai-summary" element={<AlSummary />} />
-        <Route path="/guide" element={<Guide />} />
+        <Route path="/ai-summary" element={<AiSummary />} />
+        <Route path="/about" element={<About />} />
       </Route>
     </Routes>
   )

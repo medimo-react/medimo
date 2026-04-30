@@ -27,6 +27,49 @@ import {
   FiStar,
 } from "react-icons/fi";
 
+const codeBoxStyle = {
+  marginTop: "12px",
+  padding: "18px",
+  borderRadius: "var(--radius-md)",
+  backgroundColor: "#1f2937",
+  color: "#f9fafb",
+  fontSize: "var(--font-size-small)",
+  fontWeight: "var(--font-weight-regular)",
+  lineHeight: "var(--line-height-body)",
+  whiteSpace: "pre-wrap",
+  overflowX: "auto",
+};
+
+const codeToggleWrapStyle = {
+  marginTop: "20px",
+};
+
+const codeToggleButtonStyle = {
+  padding: "18px 88px",
+  backgroundColor: "var(--text-color)",
+  color: "var(--background-color)",
+};
+
+const CodeToggle = ({ children, title = "코드 보기" }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div style={codeToggleWrapStyle}>
+      <Button
+        type="button"
+        variant="outline"
+        size="small"
+        style={codeToggleButtonStyle}
+        onClick={() => setIsOpen((prev) => !prev)}
+      >
+        {isOpen ? "코드 닫기" : title}
+      </Button>
+
+      {isOpen && <pre style={codeBoxStyle}>{children}</pre>}
+    </div>
+  );
+};
+
 const Demo = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -103,19 +146,6 @@ const Demo = () => {
     fontSize: "var(--font-size-small)",
     fontWeight: "var(--font-weight-regular)",
     lineHeight: "var(--line-height-small)",
-  };
-
-  const codeBoxStyle = {
-    marginTop: "20px",
-    padding: "18px",
-    borderRadius: "var(--radius-md)",
-    backgroundColor: "#1f2937",
-    color: "#f9fafb",
-    fontSize: "var(--font-size-small)",
-    fontWeight: "var(--font-weight-regular)",
-    lineHeight: "var(--line-height-body)",
-    whiteSpace: "pre-wrap",
-    overflowX: "auto",
   };
 
   const guideBoxStyle = {
@@ -233,7 +263,13 @@ const Demo = () => {
         추가사항 및 수정사항 있으시면 말씀 주세요
       </strong>
 
-      <section style={{ marginTop: "32px" }}>
+      <section
+        style={{
+          marginTop: "32px",
+          paddingBottom: "32px",
+          borderBottom: "1px solid var(--border-color)",
+        }}
+      >
         <h2 style={sectionTitleStyle}>Container</h2>
 
         <div
@@ -344,7 +380,7 @@ const Demo = () => {
           </Container>
         </div>
 
-        <pre style={codeBoxStyle}>
+        <CodeToggle>
           {`// Container 컴포넌트 경로
 JSX: src/components/Container/Container.jsx
 CSS Module: src/components/Container/Container.module.css
@@ -372,22 +408,26 @@ import Container from "./Container/Container";
     </Card>
   </Container>
 </main>`}
-        </pre>
+        </CodeToggle>
       </section>
 
-      <section style={{ marginTop: "32px" }}>
+      <section
+        style={{
+          marginTop: "32px",
+          paddingBottom: "32px",
+          borderBottom: "1px solid var(--border-color)",
+        }}
+      >
         <h2 style={sectionTitleStyle}>PageHeader</h2>
 
         <div style={{ marginTop: "16px" }}>
           <Card>
-            <PageHeader
-              title="페이지 제목"
-            />
+            <PageHeader title="페이지 제목" />
             <p style={cardTextStyle}>페이지의 가장 필수적인 부분입니다.</p>
           </Card>
         </div>
 
-        <pre style={codeBoxStyle}>
+        <CodeToggle>
           {`// PageHeader 컴포넌트 경로
 JSX: src/components/PageHeader/PageHeader.jsx
 CSS Module: src/components/PageHeader/PageHeader.module.css
@@ -402,10 +442,16 @@ import PageHeader from "./PageHeader/PageHeader";
     title="페이지 제목"
   />
 </Container>`}
-        </pre>
+        </CodeToggle>
       </section>
 
-      <section style={{ marginTop: "32px" }}>
+      <section
+        style={{
+          marginTop: "32px",
+          paddingBottom: "32px",
+          borderBottom: "1px solid var(--border-color)",
+        }}
+      >
         <h2 style={sectionTitleStyle}>Color</h2>
 
         <div
@@ -441,7 +487,7 @@ import PageHeader from "./PageHeader/PageHeader";
           ))}
         </div>
 
-        <pre style={codeBoxStyle}>
+        <CodeToggle>
           {`// Color 변수 경로
 CSS: src/components/common.css
 
@@ -449,10 +495,16 @@ CSS: src/components/common.css
 color: "var(--text-color)"
 backgroundColor: "var(--primary-color)"
 border: "1px solid var(--border-color)"`}
-        </pre>
+        </CodeToggle>
       </section>
 
-      <section style={{ marginTop: "32px" }}>
+      <section
+        style={{
+          marginTop: "32px",
+          paddingBottom: "32px",
+          borderBottom: "1px solid var(--border-color)",
+        }}
+      >
         <h2 style={sectionTitleStyle}>Typography</h2>
 
         <div
@@ -568,7 +620,7 @@ border: "1px solid var(--border-color)"`}
           </Card>
         </div>
 
-        <pre style={codeBoxStyle}>
+        <CodeToggle>
           {`// Typography 변수 경로
 CSS: src/styles/global.css
 
@@ -604,10 +656,16 @@ CSS: src/styles/global.css
   font-weight: var(--font-weight-regular);
   color: var(--sub-text-color);
 }`}
-        </pre>
+        </CodeToggle>
       </section>
 
-      <section style={{ marginTop: "32px" }}>
+      <section
+        style={{
+          marginTop: "32px",
+          paddingBottom: "32px",
+          borderBottom: "1px solid var(--border-color)",
+        }}
+      >
         <h2 style={sectionTitleStyle}>Radius</h2>
 
         <div
@@ -643,7 +701,7 @@ CSS: src/styles/global.css
           ))}
         </div>
 
-        <pre style={codeBoxStyle}>
+        <CodeToggle>
           {`// Radius 변수 경로
 CSS: src/styles/global.css
 
@@ -665,10 +723,16 @@ CSS: src/styles/global.css
 .badge {
   border-radius: var(--radius-max);
 }`}
-        </pre>
+        </CodeToggle>
       </section>
 
-      <section style={{ marginTop: "32px" }}>
+      <section
+        style={{
+          marginTop: "32px",
+          paddingBottom: "32px",
+          borderBottom: "1px solid var(--border-color)",
+        }}
+      >
         <h2 style={sectionTitleStyle}>Icons</h2>
 
         <Card style={{ marginTop: "16px" }}>
@@ -756,7 +820,7 @@ CSS: src/styles/global.css
           </div>
         </Card>
 
-        <pre style={codeBoxStyle}>
+        <CodeToggle>
           {`// React Icons 설치
 npm install react-icons
 
@@ -794,33 +858,139 @@ https://react-icons.github.io/react-icons/
   <FiCheck />
   완료
 </Badge>`}
-        </pre>
+        </CodeToggle>
       </section>
 
-      <section style={{ marginTop: "32px" }}>
+      <section
+        style={{
+          marginTop: "32px",
+          paddingBottom: "32px",
+          borderBottom: "1px solid var(--border-color)",
+        }}
+      >
         <h2 style={{ ...sectionTitleStyle, marginBottom: "20px" }}>Badge</h2>
 
         <div
           style={{
             display: "flex",
-            gap: "12px",
+            gap: "18px",
             flexWrap: "wrap",
-            alignItems: "center",
+            alignItems: "flex-start",
+            flexDirection: "column",
+            alignContent: "flex-start",
           }}
         >
-          <Badge>기본</Badge>
-          <Badge variant="success">완료</Badge>
-          <Badge variant="danger">오류</Badge>
-          <Badge variant="warning">주의</Badge>
-          <Badge variant="secondary">보라</Badge>
-          <Badge variant="pink">핑크</Badge>
-          <Badge variant="teal">청록</Badge>
-          <Badge variant="orange">주황</Badge>
-          <Badge variant="indigo">인디고</Badge>
-          <Badge variant="greenLight">연두</Badge>
+          {/* size */}
+          <div
+            style={{
+              display: "flex",
+              gap: "12px",
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            <Badge size="lg" variant="primary">
+              큰 뱃지
+            </Badge>
+
+            <Badge>기본</Badge>
+
+            <Badge size="sm" variant="primary">
+              작은 뱃지
+            </Badge>
+          </div>
+
+          {/* outline + size */}
+          <div
+            style={{
+              display: "flex",
+              gap: "12px",
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            <Badge size="lg" variant="primary" outline>
+              큰 뱃지
+            </Badge>
+
+            <Badge variant="primary" outline>
+              뱃지
+            </Badge>
+
+            <Badge size="sm" variant="primary" outline>
+              작은 뱃지
+            </Badge>
+          </div>
+
+          {/* filled color */}
+          <div
+            style={{
+              display: "flex",
+              gap: "12px",
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            <Badge variant="primary">Primary-color</Badge>
+            <Badge variant="success">완료</Badge>
+            <Badge variant="danger">오류</Badge>
+            <Badge variant="warning">주의</Badge>
+            <Badge variant="secondary">보라</Badge>
+            <Badge variant="pink">핑크</Badge>
+            <Badge variant="teal">청록</Badge>
+            <Badge variant="orange">주황</Badge>
+            <Badge variant="indigo">인디고</Badge>
+            <Badge variant="greenLight">연두</Badge>
+          </div>
+
+          {/* outline color */}
+          <div
+            style={{
+              display: "flex",
+              gap: "12px",
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            <Badge variant="success" outline>
+              완료 Outline
+            </Badge>
+
+            <Badge variant="danger" outline>
+              오류 Outline
+            </Badge>
+
+            <Badge variant="warning" outline>
+              주의 Outline
+            </Badge>
+
+            <Badge variant="secondary" outline>
+              보라 Outline
+            </Badge>
+
+            <Badge variant="pink" outline>
+              핑크 Outline
+            </Badge>
+
+            <Badge variant="teal" outline>
+              청록 Outline
+            </Badge>
+
+            <Badge variant="orange" outline>
+              주황 Outline
+            </Badge>
+
+            <Badge variant="indigo" outline>
+              인디고 Outline
+            </Badge>
+
+            <Badge variant="greenLight" outline>
+              연두 Outline
+            </Badge>
+          </div>
         </div>
 
-        <pre style={codeBoxStyle}>
+        <CodeToggle>
           {`// Badge 컴포넌트 경로
 JSX: src/components/Badge/Badge.jsx
 CSS Module: src/components/Badge/Badge.module.css
@@ -828,8 +998,10 @@ CSS Module: src/components/Badge/Badge.module.css
 // 불러오기
 import Badge from "./Badge/Badge";
 
-// 사용 방법
-<Badge>기본</Badge>
+// 기본 사용
+<Badge>
+  기본
+</Badge>
 
 <Badge variant="primary">
   기본
@@ -875,10 +1047,6 @@ import Badge from "./Badge/Badge";
   연두
 </Badge>
 
-<Badge variant="outline">
-  Outline
-</Badge>
-
 // size
 <Badge size="sm">
   작은 뱃지
@@ -890,11 +1058,47 @@ import Badge from "./Badge/Badge";
 
 <Badge size="lg">
   큰 뱃지
+</Badge>
+
+// outline
+<Badge variant="primary" outline>
+  Primary Outline
+</Badge>
+
+<Badge variant="success" outline>
+  완료 Outline
+</Badge>
+
+<Badge variant="danger" outline>
+  오류 Outline
+</Badge>
+
+<Badge variant="warning" outline>
+  주의 Outline
+</Badge>
+
+// outline + size
+<Badge variant="primary" size="sm" outline>
+  작은 Primary Outline
+</Badge>
+
+<Badge variant="primary" size="md" outline>
+  기본 Primary Outline
+</Badge>
+
+<Badge variant="primary" size="lg" outline>
+  큰 Primary Outline
 </Badge>`}
-        </pre>
+        </CodeToggle>
       </section>
 
-      <section style={{ marginTop: "32px" }}>
+      <section
+        style={{
+          marginTop: "32px",
+          paddingBottom: "32px",
+          borderBottom: "1px solid var(--border-color)",
+        }}
+      >
         <h2 style={sectionTitleStyle}>Button</h2>
 
         <h3 style={subTitleStyle}>Button Variant</h3>
@@ -964,7 +1168,7 @@ import Badge from "./Badge/Badge";
           </p>
         </div>
 
-        <pre style={codeBoxStyle}>
+        <CodeToggle>
           {`// Button 컴포넌트 경로
 JSX: src/components/Button/Button.jsx
 CSS Module: src/components/Button/Button.module.css
@@ -990,10 +1194,16 @@ import Button from "./Button/Button";
 <Button disabled>
   비활성화
 </Button>`}
-        </pre>
+        </CodeToggle>
       </section>
 
-      <section style={{ marginTop: "32px" }}>
+      <section
+        style={{
+          marginTop: "32px",
+          paddingBottom: "32px",
+          borderBottom: "1px solid var(--border-color)",
+        }}
+      >
         <h2 style={sectionTitleStyle}>Card</h2>
 
         <h3 style={subTitleStyle}>Card Variant</h3>
@@ -1034,7 +1244,7 @@ import Button from "./Button/Button";
           </Card>
         </div>
 
-        <pre style={codeBoxStyle}>
+        <CodeToggle>
           {`// Card 컴포넌트 경로
 JSX: src/components/Card/Card.jsx
 CSS Module: src/components/Card/Card.module.css
@@ -1058,10 +1268,16 @@ import Card from "./Card/Card";
 <Card radius="lg">
   큰 radius 카드
 </Card>`}
-        </pre>
+        </CodeToggle>
       </section>
 
-      <section style={{ marginTop: "32px" }}>
+      <section
+        style={{
+          marginTop: "32px",
+          paddingBottom: "32px",
+          borderBottom: "1px solid var(--border-color)",
+        }}
+      >
         <h2 style={sectionTitleStyle}>Input</h2>
 
         <div
@@ -1069,14 +1285,14 @@ import Card from "./Card/Card";
             maxWidth: "360px",
             display: "grid",
             gap: "12px",
-            marginTop: "16px",
+            margin: "36px 0",
           }}
         >
           <Input placeholder="약 이름을 입력하세요" />
           <Input type="email" placeholder="이메일을 입력하세요" />
         </div>
 
-        <pre style={codeBoxStyle}>
+        <CodeToggle>
           {`// Input 컴포넌트 경로
 JSX: src/components/Input/Input.jsx
 CSS Module: src/components/Input/Input.module.css
@@ -1096,17 +1312,23 @@ import Input from "./Input/Input";
   type="password"
   placeholder="비밀번호를 입력하세요"
 />`}
-        </pre>
+        </CodeToggle>
       </section>
 
-      <section style={{ marginTop: "32px" }}>
+      <section
+        style={{
+          marginTop: "32px",
+          paddingBottom: "32px",
+          borderBottom: "1px solid var(--border-color)",
+        }}
+      >
         <h2 style={sectionTitleStyle}>Textarea</h2>
 
-        <div style={{ maxWidth: "480px", marginTop: "16px" }}>
+        <div style={{ maxWidth: "480px", margin: "36px 0" }}>
           <Textarea placeholder="내용을 입력하세요" />
         </div>
 
-        <pre style={codeBoxStyle}>
+        <CodeToggle>
           {`// Textarea 컴포넌트 경로
 JSX: src/layout/Textarea/Textarea.jsx
 CSS Module: src/layout/Textarea/Textarea.module.css
@@ -1116,13 +1338,19 @@ import Textarea from "./Textarea/Textarea";
 
 // 사용 방법
 <Textarea placeholder="내용을 입력하세요" />`}
-        </pre>
+        </CodeToggle>
       </section>
 
-      <section style={{ marginTop: "32px" }}>
+      <section
+        style={{
+          marginTop: "32px",
+          paddingBottom: "32px",
+          borderBottom: "1px solid var(--border-color)",
+        }}
+      >
         <h2 style={sectionTitleStyle}>Select</h2>
 
-        <div style={{ maxWidth: "360px", marginTop: "16px" }}>
+        <div style={{ maxWidth: "360px", margin: "36px 0" }}>
           <Select
             placeholder="상태를 선택하세요"
             options={[
@@ -1133,7 +1361,7 @@ import Textarea from "./Textarea/Textarea";
           />
         </div>
 
-        <pre style={codeBoxStyle}>
+        <CodeToggle>
           {`// Select 컴포넌트 경로
 JSX: src/layout/Select/Select.jsx
 CSS Module: src/layout/Select/Select.module.css
@@ -1150,17 +1378,23 @@ import Select from "./Select/Select";
     { label: "완료", value: "done" },
   ]}
 />`}
-        </pre>
+        </CodeToggle>
       </section>
 
-      <section style={{ marginTop: "32px" }}>
+      <section
+        style={{
+          marginTop: "32px",
+          paddingBottom: "32px",
+          borderBottom: "1px solid var(--border-color)",
+        }}
+      >
         <h2 style={sectionTitleStyle}>Checkbox</h2>
 
-        <div style={{ marginTop: "16px" }}>
+        <div style={{ margin: "36px 0" }}>
           <Checkbox label="약관에 동의합니다" />
         </div>
 
-        <pre style={codeBoxStyle}>
+        <CodeToggle>
           {`// Checkbox 컴포넌트 경로
 JSX: src/layout/Checkbox/Checkbox.jsx
 CSS Module: src/layout/Checkbox/Checkbox.module.css
@@ -1170,10 +1404,16 @@ import Checkbox from "./Checkbox/Checkbox";
 
 // 사용 방법
 <Checkbox label="약관에 동의합니다" />`}
-        </pre>
+        </CodeToggle>
       </section>
 
-      <section style={{ marginTop: "32px" }}>
+      <section
+        style={{
+          marginTop: "32px",
+          paddingBottom: "32px",
+          borderBottom: "1px solid var(--border-color)",
+        }}
+      >
         <h2 style={sectionTitleStyle}>Radio</h2>
 
         <div
@@ -1181,7 +1421,7 @@ import Checkbox from "./Checkbox/Checkbox";
             display: "flex",
             gap: "16px",
             flexWrap: "wrap",
-            marginTop: "16px",
+            margin: "36px 0",
           }}
         >
           <Radio name="type" label="일반" value="normal" />
@@ -1189,7 +1429,7 @@ import Checkbox from "./Checkbox/Checkbox";
           <Radio name="type" label="긴급" value="urgent" />
         </div>
 
-        <pre style={codeBoxStyle}>
+        <CodeToggle>
           {`// Radio 컴포넌트 경로
 JSX: src/layout/Radio/Radio.jsx
 CSS Module: src/layout/Radio/Radio.module.css
@@ -1201,10 +1441,16 @@ import Radio from "./Radio/Radio";
 <Radio name="type" label="일반" value="normal" />
 <Radio name="type" label="중요" value="important" />
 <Radio name="type" label="긴급" value="urgent" />`}
-        </pre>
+        </CodeToggle>
       </section>
 
-      <section style={{ marginTop: "32px" }}>
+      <section
+        style={{
+          marginTop: "32px",
+          paddingBottom: "32px",
+          borderBottom: "1px solid var(--border-color)",
+        }}
+      >
         <h2 style={sectionTitleStyle}>Modal</h2>
 
         <div
@@ -1213,7 +1459,7 @@ import Radio from "./Radio/Radio";
             gap: "12px",
             flexWrap: "wrap",
             alignItems: "center",
-            marginTop: "16px",
+            margin: "36px 0",
           }}
         >
           <Modal
@@ -1228,7 +1474,7 @@ import Radio from "./Radio/Radio";
           </Modal>
         </div>
 
-        <pre style={codeBoxStyle}>
+        <CodeToggle>
           {`// Modal 컴포넌트 경로
 JSX: src/components/Modal/Modal.jsx
 CSS Module: src/components/Modal/Modal.module.css
@@ -1255,13 +1501,19 @@ import Modal from "./Modal/Modal";
   cancelText="닫기"
   confirmText="저장"
 />`}
-        </pre>
+        </CodeToggle>
       </section>
 
-      <section style={{ marginTop: "32px" }}>
+      <section
+        style={{
+          marginTop: "32px",
+          paddingBottom: "32px",
+          borderBottom: "1px solid var(--border-color)",
+        }}
+      >
         <h2 style={sectionTitleStyle}>Form</h2>
 
-        <Card>
+        <Card style={{ margin: "36px 0" }}>
           <Form onSubmit={handleSubmit}>
             <div style={{ display: "grid", gap: "16px" }}>
               <div>
@@ -1317,7 +1569,7 @@ import Modal from "./Modal/Modal";
           </Form>
         </Card>
 
-        <pre style={codeBoxStyle}>
+        <CodeToggle>
           {`// Form 컴포넌트 경로
 JSX: src/components/Form/Form.jsx
 CSS Module: src/components/Form/Form.module.css
@@ -1343,13 +1595,19 @@ const handleSubmit = (e) => {
     저장
   </Button>
 </Form>`}
-        </pre>
+        </CodeToggle>
       </section>
 
-      <section style={{ marginTop: "32px" }}>
+      <section
+        style={{
+          marginTop: "32px",
+          paddingBottom: "32px",
+          borderBottom: "1px solid var(--border-color)",
+        }}
+      >
         <h2 style={sectionTitleStyle}>Tabs</h2>
 
-        <div style={{ marginTop: "16px" }}>
+        <div style={{ margin: "36px 0" }}>
           <Tabs
             tabs={[
               {
@@ -1392,7 +1650,7 @@ const handleSubmit = (e) => {
           />
         </div>
 
-        <pre style={codeBoxStyle}>
+        <CodeToggle>
           {`// Tabs 컴포넌트 경로
 JSX: src/components/Tabs/Tabs.jsx
 CSS Module: src/components/Tabs/Tabs.module.css
@@ -1426,13 +1684,13 @@ import Tabs from "./Tabs/Tabs";
   defaultValue="progress"
   tabs={tabs}
 />`}
-        </pre>
+        </CodeToggle>
       </section>
 
       <section style={{ marginTop: "32px" }}>
         <h2 style={sectionTitleStyle}>Pagination</h2>
 
-        <div style={{ marginTop: "16px" }}>
+        <div style={{ margin: "36px" }}>
           <Pagination
             currentPage={currentPage}
             totalPages={5}
@@ -1440,7 +1698,7 @@ import Tabs from "./Tabs/Tabs";
           />
         </div>
 
-        <pre style={codeBoxStyle}>
+        <CodeToggle>
           {`// Pagination 컴포넌트 경로
 JSX: src/components/Pagination/Pagination.jsx
 CSS Module: src/components/Pagination/Pagination.module.css
@@ -1461,7 +1719,7 @@ const [currentPage, setCurrentPage] = useState(1);
 currentPage: 현재 페이지
 totalPages: 전체 페이지 수
 onPageChange: 페이지 변경 함수`}
-        </pre>
+        </CodeToggle>
       </section>
     </Container>
   );

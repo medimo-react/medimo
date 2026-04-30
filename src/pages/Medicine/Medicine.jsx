@@ -3,8 +3,8 @@ import styles from './Medicine.module.css';
 import { FaStar, FaRegStar, FaExclamationTriangle, FaPills, FaClock, FaFolder, FaTrash, FaSearch } from 'react-icons/fa';
 import Input from '../../components/Input/Input';
 import { useBookmarkStore } from '../../store/bookmarkStore';
-import { Button } from '@radix-ui/themes/dist/cjs/index.js';
-import { Container } from '@radix-ui/themes';
+import Button from '../../components/Button/Button'
+import Container from '../../components/Container/Container'
 
 const FOLDER_COLORS = [
   { bg: '#DBEAFE', text: '#1D4ED8' },

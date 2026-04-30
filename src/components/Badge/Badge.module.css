@@ -3,18 +3,22 @@
   align-items: center;
   justify-content: center;
   width: fit-content;
+  flex-shrink: 0;
+  align-self: center;
   border: 1px solid transparent;
   border-radius: var(--radius-sm);
+  background-color: var(--badge-bg);
+  color: var(--badge-text);
   font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-small);
+  line-height: 1;
   white-space: nowrap;
 }
 
 /* size */
 .sm {
-  min-height: 1.5rem;
+  min-height: 1.25rem;
   padding: 0 0.5rem;
-  font-size: var(--font-size-small);
+  font-size: var(--font-size-tiny);
 }
 
 .md {
@@ -24,69 +28,81 @@
 }
 
 .lg {
-  min-height: 2rem;
-  padding: 0 0.75rem;
+  min-height: 2.25rem;
+  padding: 0 0.875rem;
   font-size: var(--font-size-body);
 }
 
 /* variant */
 .primary {
-  color: #1D4ED8;
-  background-color: #DBEAFE;
-}
-
-.success {
-  color: #065F46;
-  background-color: #D1FAE5;
-}
-
-.danger {
-  color: #B91C1C;
-  background-color: #FEE2E2;
-}
-
-.warning {
-  color: #92400E;
-  background-color: #FEF3C7;
+  --badge-text: var(--primary-color);
+  --badge-bg: #efefff;
+  --badge-border: var(--primary-color);
 }
 
 .secondary {
-  color: #5B21B6;
-  background-color: #EDE9FE;
-}
-
-.pink {
-  color: #9D174D;
-  background-color: #FCE7F3;
-}
-
-.teal {
-  color: #0F766E;
-  background-color: #CCFBF1;
-}
-
-.orange {
-  color: #C2410C;
-  background-color: #FED7AA;
-}
-
-.indigo {
-  color: #3730A3;
-  background-color: #E0E7FF;
-}
-
-.greenLight {
-  color: #166534;
-  background-color: #F0FDF4;
+  --badge-text: var(--secondary-color);
+  --badge-bg: #e0e7ff;
+  --badge-border: var(--secondary-color);
 }
 
 .gray {
-  color: var(--sub-text-color);
-  background-color: #f3f4f6;
+  --badge-text: var(--sub-text-color);
+  --badge-bg: #f3f4f6;
+  --badge-border: var(--border-color);
 }
 
+.success {
+  --badge-text: #065f46;
+  --badge-bg: #d1fae5;
+  --badge-border: #065f46;
+}
+
+.warning {
+  --badge-text: #92400e;
+  --badge-bg: #fef3c7;
+  --badge-border: #92400e;
+}
+
+.danger {
+  --badge-text: #b91c1c;
+  --badge-bg: #fee2e2;
+  --badge-border: #b91c1c;
+}
+
+.pink {
+  --badge-text: #9d174d;
+  --badge-bg: #fce7f3;
+  --badge-border: #9d174d;
+}
+
+.teal {
+  --badge-text: #0f766e;
+  --badge-bg: #ccfbf1;
+  --badge-border: #0f766e;
+}
+
+.orange {
+  --badge-text: #c2410c;
+  --badge-bg: #fed7aa;
+  --badge-border: #c2410c;
+}
+
+.indigo {
+  --badge-text: #3730a3;
+  --badge-bg: #e0e7ff;
+  --badge-border: #3730a3;
+}
+
+.greenLight {
+  --badge-text: #166534;
+  --badge-bg: #f0fdf4;
+  --badge-border: #166534;
+}
+
+/* outline */
 .outline {
-  color: var(--primary-color);
+  border-color: var(--badge-border);
   background-color: transparent;
-  border-color: var(--primary-color);
+  color: var(--badge-text);
 }
