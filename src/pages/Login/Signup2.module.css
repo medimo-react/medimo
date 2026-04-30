@@ -1,0 +1,388 @@
+.pageWrapper {
+  min-height: 100vh;
+  display: flex;
+  background-color: var(--background-color);
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* --- 왼쪽 히어로 섹션 --- */
+.heroSection {
+  flex: 1;
+  background-color: var(--primary-color);
+  padding: 4rem var(--layout-padding-pc);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #FFFFFF; 
+}
+
+/* 1024px 이상 데스크탑 */
+@media (max-width: 1024px) {
+  .heroSection {
+    padding: 3rem var(--layout-padding-tablet);
+  }
+  .mainTitle {
+    font-size: var(--font-size-title-md); 
+  }
+  .formCard {
+    max-width: 380px; 
+    padding: 2.5rem 2rem;
+  }
+}
+/* 768px 이하 */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column; 
+  }
+
+  .heroSection {
+    flex: none;
+    padding: 2.5rem var(--layout-padding-mobile);
+    min-height: auto; 
+  }
+
+  .logoArea {
+    margin-bottom: 2rem;
+  }
+
+  .heroFooter {
+    display: none; 
+  }
+
+  .formSection {
+    padding: 2rem var(--layout-padding-mobile);
+    background-color: var(--background-color);
+  }
+
+  .formCard {
+    max-width: 100%;
+    box-shadow: none; 
+    padding: 1rem 0;
+  }
+}
+
+/* 480px 이하 */
+@media (max-width: 480px) {
+  .heroSection {
+    padding: 2rem var(--layout-padding-mobile);
+  }
+
+  .mainTitle {
+    font-size: var(--font-size-title-sm); 
+  }
+
+  .subTitle {
+    font-size: var(--font-size-tiny); 
+  }
+
+  .socialGroup {
+    flex-direction: column; 
+    gap: 0.75rem;
+  }
+}
+
+.logoArea {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 5rem;
+}
+
+.logoSymbol {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-max);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.logoText {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-title-sm);
+  letter-spacing: -0.02em;
+}
+
+.mainTitle {
+  font-size: var(--font-size-title-lg);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-title);
+  margin-bottom: 1.5rem;
+}
+
+.subTitle {
+  color: var(--secondary-color);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  filter: brightness(1.4); 
+}
+
+.heroFooter {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.userAvatars {
+  display: flex;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-max);
+  background: var(--secondary-color);
+  border: 2px solid var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-tiny);
+  font-weight: var(--font-weight-bold);
+  margin-left: -12px;
+}
+
+.avatar:first-child { margin-left: 0; }
+
+.userCount {
+  font-size: var(--font-size-small);
+  opacity: 0.9;
+}
+
+/* --- 오른쪽 폼 섹션 --- */
+.formSection {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--layout-padding-pc);
+  background-color: #F9FAFB;
+}
+
+.formCard {
+  width: 100%;
+  max-width: 440px; 
+  height: 580px;    
+  background: var(--background-color);
+  padding: 3.5rem 2.5rem; 
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+}
+
+.formHeader {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.formHeader h2 {
+  font-size: var(--font-size-title-md);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-color);
+}
+
+.formHeader p {
+  color: var(--sub-text-color);
+  font-size: var(--font-size-small);
+  margin-top: 0.5rem;
+}
+
+.inputGroup {
+  margin-bottom: 0.8rem; 
+}
+
+.inputField {
+  width: 100%;
+  padding: 0.65rem 1rem 0.65rem 2.75rem; 
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: 0.95rem; 
+  transition: all 0.2s ease;
+}
+.labelWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.label {
+  display: block;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 1rem;
+  color: var(--sub-text-color);
+  font-size: 1.2rem;
+}
+
+.inputField:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(99, 103, 255, 0.1);
+}
+
+.eyeButton {
+  position: absolute;
+  right: 1rem;
+  color: var(--sub-text-color);
+  display: flex;
+  align-items: center;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--primary-color);
+  color: #FFFFFF;
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-body);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: opacity 0.2s;
+  margin-top: 2rem;
+}
+
+.submitButton:hover {
+  opacity: 0.9;
+}
+
+
+.formFooter {
+  margin-top: 1.5rem; 
+  text-align: center;
+  font-size: var(--font-size-small);
+}
+
+.textLink {
+  color: var(--primary-color);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-small);
+}
+
+.stepIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.step {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  color: var(--sub-text-color);
+  background: white;
+}
+
+.step.active {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+}
+
+.stepLine {
+  width: 30px;
+  height: 1px;
+  background-color: var(--border-color);
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.prevButton {
+  flex: 1;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  background-color: white;
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.prevButton:hover {
+  background-color: #F9FAFB;
+}
+
+.buttonGroup .submitButton {
+  flex: 2;
+}
+
+.inputField::-ms-reveal,
+.inputField::-ms-clear {
+  display: none;
+}
+
+.inputField::-webkit-contacts-auto-fill-button,
+.inputField::-webkit-credentials-auto-fill-button {
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}
+
+input[type="password"]::-ms-reveal {
+  display: none;
+}
+
+.errorMessage {
+  color: #ff4d4f;       
+  font-size: 0.75rem;   
+  margin-top: 0.4rem;
+  margin-left: 0.2rem;
+  font-weight: 500;
+  text-align: left;
+}
+
+.inputField.inputError {
+  border-color: #ff4d4f;
+  background-color: #fff2f0; 
+}
+
+.inputField.inputError:focus {
+  border-color: #ff4d4f;
+  box-shadow: 0 0 0 3px rgba(255, 77, 79, 0.1);
+}
+
+.logoArea {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4rem; 
+}
+
+.logoImage {
+  height: 55px;    
+  width: auto;     
+  object-fit: contain;
+}

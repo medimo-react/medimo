@@ -5,6 +5,8 @@ import AppLayout from './layout/AppLayout'
 import Demo from './components/Demo'
 import Info from './pages/Info/Info'
 import Login from './pages/Login/Login'
+import Signup1 from './pages/Login/Signup1.jsx'
+import Signup2 from './pages/Login/Signup2.jsx'
 import Dashboard from "./pages/Dashboard/Dashboard.jsx";
 import AlSummary from "./pages/AISummary/AlSummary.jsx";
 
@@ -12,6 +14,8 @@ function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
+      <Route path="/signup1" element={<Signup1 />} />
+      <Route path="/signup2" element={<Signup2 />} />
 
       <Route element={<AppLayout />}>
         <Route path="/" element={null} />
