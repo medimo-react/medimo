@@ -8,8 +8,8 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 20px;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
 }
 
 .pageTitle {
@@ -19,50 +19,50 @@
 }
 
 .pageSubTitle {
-  margin: 6px 0 0;
+  margin: 0.375rem 0 0;
   color: var(--sub-text-color);
   font-size: 14px;
 }
 
 .headerActions {
   display: flex;
-  gap: 8px;
+  gap: 0.5rem;
 }
 
 .outlineBtn,
 .primaryBtn,
 .outlineBtnSmall {
   border-radius: 10px;
-  padding: 10px 14px;
-  font-size: 14px;
+  padding: 0.625rem 0.875rem;
+  font-size: var(--font-size-small);
   cursor: pointer;
-  background: #fff;
+  background: var(--background-color);
 }
 
 
 .outlineBtnSmall {
-  padding: 8px 12px;
+  padding: 0.5rem 0.75rem;
   font-size: 13px;
 }
 
 .grid {
   display: grid;
   grid-template-columns: minmax(0, 1.9fr) minmax(280px, 1fr);
-  gap: 16px;
+  gap: 1rem;
 }
 
 .leftCol,
 .rightCol {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 1rem;
 }
 
 .card {
   background: var(--background-color);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  padding: 16px;
+  padding: 1rem;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
 }
 
@@ -70,39 +70,39 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
 }
 
 .cardHeader h2 {
   margin: 0;
   font-size: var(--font-size-title-sm);
-  color: #0f172a;
+  color: var(--text-color);
 }
 
 .dateChip {
-  padding: 4px 10px;
+  padding: 0.25rem 0.625rem;
   border-radius: var(--radius-max);
   background: #dff5fb;
   color: var(--sub-text-color);
-  font-size: 12px;
+  font-size: var(--font-size-tiny);
 }
 
 .list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0.625rem;
 }
 
 .scheduleItem,
 .alarmItem {
   display: grid;
   align-items: center;
-  gap: 10px;
+  gap: 0.625rem;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 12px;
-  background: #fff;
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+  background: var(--background-color);
 }
 
 .scheduleItem {
@@ -116,7 +116,7 @@
 .dot {
   width: 10px;
   height: 10px;
-  border-radius: 50%;
+  border-radius: var(--radius-max);
 }
 
 .dotDone {
@@ -129,7 +129,7 @@
 
 .time {
   min-width: 52px;
-  font-size: 18px;
+  font-size: 1.125rem;
   color: #0f172a;
 }
 
@@ -139,10 +139,10 @@
 }
 
 .medicine {
-  margin: 0 0 4px;
-  font-size: 15px;
+  margin: 0 0 0.25rem;
+  font-size: var(--font-size-body);
   color: #0f172a;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
 }
 
 .detail {
@@ -152,9 +152,9 @@
 }
 
 .status {
-  border-radius: 999px;
-  padding: 6px 10px;
-  font-size: 12px;
+  border-radius: var(--radius-max);
+  padding: 0.375rem 0.625rem;
+  font-size: var(--font-size-tiny);
   white-space: nowrap;
 }
 
@@ -177,8 +177,8 @@
   border: none;
   width: 44px;
   height: 24px;
-  border-radius: 999px;
-  padding: 2px;
+  border-radius: var(--radius-max);
+  padding: 0.125rem;
   background: var(--sub-text-color);
   cursor: pointer;
   display: flex;
@@ -198,7 +198,7 @@
 }
 
 .sideTitle {
-  margin: 0 0 12px;
+  margin: 0 0 0.75rem;
   font-size: var(--font-size-title-sm);
   color: #0f172a;
 }
@@ -206,14 +206,14 @@
 .rateCircle {
   width: 150px;
   height: 150px;
-  margin: 0 auto 14px;
-  border-radius: 50%;
+  margin: 0 auto 0.875rem;
+  border-radius: var(--radius-max);
   background: conic-gradient(var(--primary-color) var(--rate), var(--border-color) 0%);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 32px;
-  font-weight: 700;
+  font-size: var(--font-size-title-lg);
+  font-weight: var(--font-weight-bold);
   color: #0f172a;
   position: relative;
   transition: background 0.4s ease, box-shadow 0.4s ease;
@@ -223,7 +223,7 @@
   content: '';
   position: absolute;
   inset: 12px;
-  border-radius: 50%;
+  border-radius: var(--radius-max);
   background: var(--background-color);
 }
 
@@ -244,14 +244,14 @@
 .metrics {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  gap: 0.5rem;
 }
 
 .metric {
-  border-radius: 10px;
-  padding: 10px;
+  border-radius: var(--radius-sm);
+  padding: 0.625rem;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
 }
 
 .metricDone {
@@ -282,8 +282,8 @@
 }
 
 .quickSetting h4 {
-  margin: 0 0 10px;
-  font-size: 18px;
+  margin: 0 0 0.625rem;
+  font-size: var(--font-size-body);
   color: #0f172a;
 }
 
@@ -292,9 +292,9 @@
   text-align: left;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
-  padding: 10px 12px;
-  margin-top: 8px;
-  background: #fff;
+  padding: 0.625rem 0.75rem;
+  margin-top: 0.5rem;
+  background: var(--background-color);
   cursor: pointer;
   transition: background 0.15s, border-color 0.15s, color 0.15s;
 }
@@ -310,7 +310,7 @@
 .doneBtn {
   width: 28px;
   height: 28px;
-  border-radius: 50%;
+  border-radius: var(--radius-max);
   border: 1.5px solid #cbd5e1;
   background: #fff;
   cursor: pointer;
@@ -325,17 +325,17 @@
 .doneBtnDone {
   background: #10b981;
   border-color: #10b981;
-  color: #fff;
+  color: var(--background-color);
 }
 
 .deleteBtn {
   width: 26px;
   height: 26px;
-  border-radius: 50%;
+  border-radius: var(--radius-max);
   border: none;
   background: transparent;
   cursor: pointer;
-  font-size: 18px;
+  font-size: var(--font-size-body);
   color: #cbd5e1;
   display: flex;
   align-items: center;
@@ -358,56 +358,56 @@
 
 /* Modal */
 .modalContent {
-  border-radius: 16px !important;
-  padding: 28px !important;
+  border-radius: var(--radius-md) !important;
+  padding: 1.75rem!important;
   max-width: 440px !important;
   width: 100% !important;
 }
 
 .calendarModal {
-  border-radius: 16px !important;
-  padding: 28px !important;
+  border-radius: var(--radius-md) !important;
+  padding: 1.75rem !important;
   max-width: 380px !important;
   width: 100% !important;
 }
 
 .modalTitle {
-  font-size: 18px !important;
-  font-weight: 700 !important;
+  font-size: var(--font-size-body) !important;
+  font-weight: var(--font-weight-bold) !important;
   color: #0f172a !important;
-  margin-bottom: 4px !important;
+  margin-bottom: 0.25rem !important;
 }
 
 .modalDesc {
   font-size: 13px !important;
   color: #64748b !important;
-  margin-bottom: 20px !important;
+  margin-bottom: 1.25rem !important;
 }
 
 .formGroup {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  margin-bottom: 14px;
+  gap: 0.375rem;
+  margin-bottom: 0.875rem;
 }
 
 .formRow {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 0.75rem;
 }
 
 .label {
   font-size: 13px;
-  font-weight: 600;
+  font-weight: var(--font-weight-medium);
   color: #374151;
 }
 
 .input {
   border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  padding: 10px 12px;
-  font-size: 14px;
+  border-radius: var(--radius-sm);
+  padding: 0.625rem 0.75rem;
+  font-size: var(--font-size-small);
   background: #f8fafc;
   color: #0f172a;
   outline: none;
@@ -421,70 +421,70 @@
 .modalFooter {
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
-  margin-top: 20px;
+  gap: 0.625rem;
+  margin-top: 1.25rem;
 }
 
 .cancelBtn {
-  padding: 10px 20px;
-  border-radius: 10px;
+  padding: 0.625rem 1.25rem;
+  border-radius: var(--radius-sm);
   border: 1px solid #e2e8f0;
   background: #fff;
-  font-size: 14px;
+  font-size: var(--font-size-small);
   cursor: pointer;
   color: #64748b;
 }
 
 .confirmBtn {
-  padding: 10px 20px;
-  border-radius: 10px;
+  padding: 0.625rem 1.25rem;
+  border-radius: var(--radius-sm);
   border: none;
   background: var(--primary-color);
-  color: #fff;
-  font-size: 14px;
-  font-weight: 600;
+  color: var(--background-color);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
   cursor: pointer;
 }
 
 /* Reminder email modal */
 .emailResult {
-  padding: 20px 0;
+  padding: 1.25rem 0;
   text-align: center;
 }
 
 .emailSuccess {
   color: #10b981;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   font-size: 15px;
   margin: 0;
 }
 
 .emailError {
   color: #ef4444;
-  font-size: 14px;
+  font-size: var(--font-size-small);
   margin: 0;
 }
 
 .reminderList {
-  margin-bottom: 4px;
+  margin-bottom: 0.25rem;
 }
 
 .reminderListTitle {
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--font-size-tiny);
+  font-weight: var(--font-weight-semibold);
   color: #64748b;
-  margin: 0 0 8px;
+  margin: 0 0 0.5rem;
 }
 
 .reminderListItem {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding: 12px;
+  gap: 0.25rem;
+  padding: 0.75rem;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  border-radius: var(--radius-sm);
   background: #fff;
-  margin-top: 6px;
+  margin-top: 0.375rem;
 }
 
 .confirmBtn:disabled {
@@ -497,13 +497,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
 }
 
 .calNavBtn {
   width: 32px;
   height: 32px;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   border: 1px solid #e2e8f0;
   background: #fff;
   cursor: pointer;
@@ -515,30 +515,30 @@
 }
 
 .calMonthLabel {
-  font-size: 16px;
-  font-weight: 700;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
   color: #0f172a;
 }
 
 .calGrid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 4px;
+  gap: 0.25rem;
 }
 
 .calDayName {
   text-align: center;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--font-size-tiny);
+  font-weight:var(--font-weight-semibold);
   color: #94a3b8;
-  padding: 4px 0 8px;
+  padding: 0.25rem 0 0.5rem;
 }
 
 .calCell {
   text-align: center;
-  padding: 8px 4px;
+  padding: 0.5rem 0.25rem;
   font-size: 13px;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   color: #0f172a;
   position: relative;
 }
@@ -550,7 +550,7 @@
 .calCellToday {
   background: var(--primary-color);
   color: #fff;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
 .calCellClickable {
@@ -570,20 +570,20 @@
   display: block;
   width: 5px;
   height: 5px;
-  border-radius: 50%;
+  border-radius: var(--radius-max);
   background: var(--primary-color);
-  margin: 2px auto 0;
+  margin: 0.125rem auto 0;
 }
 
 .calCellToday .calDot {
-  background: #fff;
+  background: var(--background-color);
 }
 
 .calDayDetail {
-  margin-top: 12px;
+  margin-top: 0.75rem;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 0.875rem;
   background: #f8fafc;
 }
 
@@ -591,12 +591,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
 }
 
 .calDayDetailTitle {
   font-size: 13px;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   color: #0f172a;
 }
 
@@ -611,7 +611,7 @@
 }
 
 .calDayDetailClose:hover {
-  color: #475569;
+  color: #4d50a1;
 }
 
 .calDayDetailList {
@@ -620,13 +620,13 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 0.375rem;
 }
 
 .calDayDetailItem {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.5rem;
   font-size: 13px;
   color: #0f172a;
 }
@@ -635,7 +635,7 @@
   content: '';
   width: 6px;
   height: 6px;
-  border-radius: 50%;
+  border-radius: var(--radius-max);
   background: #10b981;
   flex-shrink: 0;
 }
@@ -650,17 +650,17 @@
 .calLegend {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 12px;
+  gap: 0.375rem;
+  font-size: var(--font-size-tiny);
   color: #64748b;
-  margin-top: 14px;
+  margin-top: 0.875rem;
 }
 
 .calLegendDot {
   display: inline-block;
   width: 8px;
   height: 8px;
-  border-radius: 50%;
+  border-radius: var(--radius-max);
   background: var(--primary-color);
 }
 
@@ -677,12 +677,12 @@
 
 @media (max-width: 768px) {
   .page {
-    padding: 16px;
+    padding: 1rem;
   }
 
   .pageTitle {
-    margin-top: 50px;
-    font-size: 24px;
+    margin-top: 3.125rem;
+    font-size: var(--font-size-title-md);
   }
 
   .headerActions {
@@ -744,33 +744,33 @@
 
 @media (max-width: 360px) {
   .page {
-    padding: 10px 8px;
+    padding: 0.625rem 0.5rem;
   }
 
   .pageTitle {
-    font-size: 20px;
+    font-size: var(--font-size-title-sm);
   }
 
   .pageSubTitle {
-    font-size: 12px;
+    font-size: var(--font-size-tiny);
   }
 
   .cardHeader {
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 0.5rem;
   }
 
   .cardHeader h2 {
-    font-size: 16px;
+    font-size: var(--font-size-body);
   }
 
   .outlineBtnSmall {
-    font-size: 12px;
-    padding: 6px 10px;
+    font-size: var(--font-size-tiny);
+    padding: 0.375rem 0.625rem;
   }
 
   .card {
-    padding: 12px;
+    padding: 0.75rem;
   }
 
   .time {
@@ -787,7 +787,7 @@
     grid-template-areas:
       "info info info"
       "label toggle del";
-    gap: 6px;
+    gap: 0.375rem;
   }
 
   .alarmInfo {
@@ -808,16 +808,16 @@
   }
 
   .modalContent {
-    padding: 16px !important;
+    padding: 1rem !important;
   }
 
   .calendarModal {
-    padding: 16px !important;
+    padding: 1rem !important;
   }
 
   .calCell {
     font-size: 11px;
-    padding: 6px 2px;
+    padding: 0.375rem 0.125rem;
   }
 
   .calDayName {

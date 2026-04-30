@@ -1,17 +1,8 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-const INITIAL_SCHEDULES = [
-  { id: 1, time: '07:00', name: '메트포르민 정 500mg', detail: '1정 · 식후 30분', state: '복용 완료', done: true, alarmId: 1 },
-  { id: 3, time: '12:00', name: '타이레놀 정 500mg', detail: '1정 · 식후 복용', state: '복용 대기', done: false, alarmId: 3 },
-];
-
-const INITIAL_ALARMS = [
-  { id: 1, name: '메트포르민 정 500mg', rule: '07:00, 18:00 · 1정씩 · 매일', times: ['07:00', '18:00'], active: true, dose: '1정씩' },
-  { id: 2, name: '암로디핀 정 5mg', rule: '08:00 · 1정씩 · 매일', times: ['08:00'], active: false, dose: '1정씩' },
-  { id: 3, name: '타이레놀 정 500mg', rule: '12:00 · 1정씩 · 필요 시', times: ['12:00'], active: true, dose: '1정씩' },
-  { id: 4, name: '오메프라졸 캡슐 20mg', rule: '13:00 · 1캡슐 · 매일', times: ['13:00'], active: false, dose: '1캡슐' },
-];
+const INITIAL_SCHEDULES = [];
+const INITIAL_ALARMS = [];
 
 export const useInfoStore = create(
   persist(
@@ -19,10 +10,7 @@ export const useInfoStore = create(
       schedules: INITIAL_SCHEDULES,
       alarms: INITIAL_ALARMS,
       soundEnabled: true,
-      doneHistory: {
-        '2026-04-26': ['메트포르민 정 500mg'],
-        '2026-04-27': ['메트포르민 정 500mg', '타이레놀 정 500mg'],
-      },
+      doneHistory: {},
 
       toggleSound: () => set((s) => ({ soundEnabled: !s.soundEnabled })),
 
@@ -134,6 +122,7 @@ export const useInfoStore = create(
     }),
     {
       name: 'medimo-info-store',
+      version: 1,
       partialize: (state) => ({ schedules: state.schedules, alarms: state.alarms, soundEnabled: state.soundEnabled, doneHistory: state.doneHistory }),
     }
   )
