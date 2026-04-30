@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
-import { Button } from '../../components/Button/Button'
-import { Container } from '../../components/Container/Container'
-import { Dialog } from '../../components/Dialog/Dialog'
-import { Select } from '../../components/Select/Select'
+import { Dialog } from '@radix-ui/themes';
+import Button from '../../components/Button/Button'
+import Container from '../../components/Container/Container'
+import Select from '../../components/Select/Select'
+
 import { useInfoStore } from '../../store/infoStore';
 import styles from './Info.module.css';
 
