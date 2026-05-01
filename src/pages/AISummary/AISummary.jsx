@@ -16,6 +16,7 @@ import {
 } from "react-icons/fi";
 
 import styles from "./AISummary.module.css";
+import {useOcrStore} from "../../store/ocrStore.js";
 
 /* ==============================
   Mock Data
@@ -257,6 +258,11 @@ const CautionCard = ({ cautions }) => (
 ================================ */
 const AISummary = () => {
   const medicines = mockAnalysis.medicines;
+
+  // scan 후 텍스트 추출 데이터
+  const {ocrText } = useOcrStore()
+  console.log(ocrText)
+
   const [selectedId, setSelectedId] = useState(medicines[0].id);
 
   const selectedMedicine = medicines.find(

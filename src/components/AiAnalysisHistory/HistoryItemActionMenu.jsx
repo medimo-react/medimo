@@ -12,7 +12,7 @@ const HistoryItemActionMenu = () => {
           <Popover.Portal>
             <Popover.Content side="bottom" align="center" className={styles.popover_content}>
               <div><button>이름 변경</button></div>
-              <div><button>내역 고정</button></div>
+              <div><button>내역 상단 고정</button></div>
               <div><button>삭제</button></div>
             </Popover.Content>
           </Popover.Portal>

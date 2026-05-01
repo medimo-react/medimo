@@ -14,6 +14,7 @@ function PageHeader({
     <header className={pageHeaderClassName}>
       <div className={styles.textBox}>
         <h1 className={styles.title}>{title}</h1>
+        {description && <p className={styles.description}>{description}</p>}
       </div>
 
       {action && (
