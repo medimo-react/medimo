@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useOcrStore } from "../../store/ocrStore.js";
 
 import Container from "../../components/Container/Container";
 import PageHeader from "../../components/PageHeader/PageHeader";
@@ -18,14 +19,17 @@ import {
 } from "react-icons/fi";
 
 import styles from "./AISummary.module.css";
-import {useOcrStore} from "../../store/ocrStore.js";
+// import { useOcrStore } from "../../store/ocrStore.js";
 
 /* ==============================
   Utils
 ================================ */
-const getFallbackText = (value, fallback = "정보 없음") => {
-  if (!value) return fallback;
-  return value;
+const hasValue = (value) => {
+  if (Array.isArray(value)) {
+    return value.filter(Boolean).length > 0;
+  }
+
+  return value !== undefined && value !== null && String(value).trim() !== "";
 };
 
 const toTextList = (value) => {
@@ -39,14 +43,6 @@ const toTextList = (value) => {
     .split(/\n|(?<=\.)\s+/)
     .map((item) => item.trim())
     .filter(Boolean);
-};
-
-const formatPermitDate = (date) => {
-  if (!date || String(date).length !== 8) return date || "정보 없음";
-
-  const value = String(date);
-
-  return `${value.slice(0, 4)}.${value.slice(4, 6)}.${value.slice(6, 8)}`;
 };
 
 /**
@@ -68,7 +64,13 @@ const formatPermitDate = (date) => {
 /* ==============================
   Common Component
 ================================ */
-const CardHeader = ({ icon, title, description, count, iconClassName = "" }) => (
+const CardHeader = ({
+  icon,
+  title,
+  description,
+  count,
+  iconClassName = "",
+}) => (
   <div className={styles.cardHeader}>
     <span className={`${styles.iconBox} ${iconClassName}`}>{icon}</span>
 
@@ -89,7 +91,7 @@ const TextList = ({ items }) => {
   const list = toTextList(items);
 
   if (list.length === 0) {
-    return <p className={styles.bodyText}>정보 없음</p>;
+    return null;
   }
 
   return (
@@ -160,15 +162,12 @@ const MedicineSummary = ({ medicine }) => {
     <Card>
       <div className={styles.medicineHeader}>
         <div className={styles.largeInitial}>{medicine.name.slice(0, 1)}</div>
-
         <div className={styles.medicineInfo}>
           <h2 className={styles.medicineName}>{medicine.name}</h2>
 
-          <p className={styles.ingredient}>
-            {isPermit
-              ? getFallbackText(medicine.ingredient, "성분 정보 없음")
-              : getFallbackText(medicine.ingredient, "성분 정보 없음")}
-          </p>
+          {hasValue(medicine.ingredient) && (
+            <p className={styles.ingredient}>{medicine.ingredient}</p>
+          )}
 
           <div className={styles.badgeGroup}>
             <Badge variant="gray">OCR 분석 결과</Badge>
@@ -183,6 +182,28 @@ const MedicineSummary = ({ medicine }) => {
   );
 };
 
+const MedicineImageCard = ({ medicine }) => {
+  if (!medicine.image) return null;
+
+  return (
+    <Card>
+      <CardHeader
+        icon={<FiInfo />}
+        title="의약품 이미지"
+        description="식약처 의약품 정보 기준 이미지입니다."
+      />
+
+      <div className={styles.imageCardBody}>
+        <img
+          src={medicine.image}
+          alt={`${medicine.name} 이미지`}
+          className={styles.medicineImage}
+        />
+      </div>
+    </Card>
+  );
+};
+
 /* ==============================
   Detail Cards
 ================================ */
@@ -191,55 +212,49 @@ const EasyDrugDetailCards = ({ medicine }) => {
     {
       title: "효능 및 효과",
       icon: <FiInfo />,
-      content: (
-        <p className={styles.bodyText}>
-          {getFallbackText(medicine.effect)}
-        </p>
-      ),
+      value: medicine.effect,
+      content: <p className={styles.bodyText}>{medicine.effect}</p>,
     },
     {
       title: "복용 안내",
       icon: <FiClock />,
-      content: (
-        <p className={styles.bodyText}>
-          {getFallbackText(medicine.usage)}
-        </p>
-      ),
+      value: medicine.usage,
+      content: <p className={styles.bodyText}>{medicine.usage}</p>,
     },
     {
       title: "보관 방법",
       icon: <FiArchive />,
-      content: (
-        <p className={styles.bodyText}>
-          {getFallbackText(medicine.storageMethod)}
-        </p>
-      ),
+      value: medicine.storageMethod,
+      content: <p className={styles.bodyText}>{medicine.storageMethod}</p>,
     },
     {
       title: "유효기간",
       icon: <FiCalendar />,
-      content: (
-        <p className={styles.bodyText}>
-          {getFallbackText(medicine.validTerm)}
-        </p>
-      ),
+      value: medicine.validTerm,
+      content: <p className={styles.bodyText}>{medicine.validTerm}</p>,
     },
     {
       title: "주요 부작용",
       icon: <FiAlertTriangle />,
       iconClassName: styles.warningIcon,
+      value: toTextList(medicine.sideEffect),
       content: <TextList items={medicine.sideEffect} />,
     },
     {
       title: "주의사항",
       icon: <FiZap />,
+      value: toTextList(medicine.caution),
       content: <TextList items={medicine.caution} />,
     },
   ];
 
+  const visibleCards = detailCards.filter((card) => hasValue(card.value));
+
+  if (visibleCards.length === 0) return null;
+
   return (
     <div className={styles.infoGrid}>
-      {detailCards.map((card) => (
+      {visibleCards.map((card) => (
         <Card key={card.title}>
           <CardHeader
             icon={card.icon}
@@ -259,70 +274,62 @@ const PermitDetailCards = ({ medicine }) => {
     {
       title: "제품 분류",
       icon: <FiInfo />,
+      value: medicine.productType || medicine.effect,
       content: (
         <p className={styles.bodyText}>
-          {getFallbackText(medicine.productType || medicine.effect)}
+          {medicine.productType || medicine.effect}
         </p>
       ),
     },
     {
       title: "제조사",
       icon: <FiArchive />,
-      content: (
-        <p className={styles.bodyText}>
-          {getFallbackText(medicine.company)}
-        </p>
-      ),
+      value: medicine.company,
+      content: <p className={styles.bodyText}>{medicine.company}</p>,
     },
     {
       title: "주성분",
       icon: <FiZap />,
-      content: (
-        <p className={styles.bodyText}>
-          {getFallbackText(medicine.ingredient)}
-        </p>
-      ),
-    },
-    {
-      title: "허가일자",
-      icon: <FiCalendar />,
-      content: (
-        <p className={styles.bodyText}>
-          {formatPermitDate(medicine.permitDate)}
-        </p>
-      ),
+      value: medicine.ingredient,
+      content: <p className={styles.bodyText}>{medicine.ingredient}</p>,
     },
     {
       title: "전문/일반 구분",
       icon: <FiShield />,
-      content: (
-        <p className={styles.bodyText}>
-          {getFallbackText(medicine.className)}
-        </p>
-      ),
+      value: medicine.className,
+      content: <p className={styles.bodyText}>{medicine.className}</p>,
     },
     {
       title: "상태 및 보험코드",
       icon: <FiAlertTriangle />,
+      value: [medicine.status, medicine.ediCode].filter(Boolean),
       content: (
         <>
-          <div className={styles.infoBox}>
-            <span>상태</span>
-            <strong>{getFallbackText(medicine.status)}</strong>
-          </div>
+          {hasValue(medicine.status) && (
+            <div className={styles.infoBox}>
+              <span>상태</span>
+              <strong>{medicine.status}</strong>
+            </div>
+          )}
 
-          <div className={styles.infoBox}>
-            <span>보험코드</span>
-            <strong>{getFallbackText(medicine.ediCode)}</strong>
-          </div>
+          {hasValue(medicine.ediCode) && (
+            <div className={styles.infoBox}>
+              <span>보험코드</span>
+              <strong>{medicine.ediCode}</strong>
+            </div>
+          )}
         </>
       ),
     },
   ];
 
+  const visibleCards = detailCards.filter((card) => hasValue(card.value));
+
+  if (visibleCards.length === 0) return null;
+
   return (
     <div className={styles.infoGrid}>
-      {detailCards.map((card) => (
+      {visibleCards.map((card) => (
         <Card key={card.title}>
           <CardHeader icon={card.icon} title={card.title} />
           {card.content}
@@ -358,59 +365,55 @@ const MedicineDetailCards = ({ medicine }) => {
 const normalizeMedicines = (analysisData) => {
   const medicineResults = analysisData?.medicineResults || [];
 
-  return medicineResults.map(({ keyword, medicines, durList }, index) => {
-    const medicine = medicines?.[0];
+  return medicineResults.map(
+    ({ keyword, medicines, durList, summary }, index) => {
+      const medicine = medicines?.[0];
 
-    if (!medicine) {
+      if (!medicine) {
+        return {
+          id: `${keyword}-${index}`,
+          keyword,
+          name: keyword,
+          source: "notFound",
+          durList: durList || [],
+        };
+      }
+
       return {
-        id: `${keyword}-${index}`,
+        id: medicine._id || `${medicine.name}-${index}`,
         keyword,
-        name: keyword,
-        source: "notFound",
+        name: medicine.name || keyword,
+        source: medicine.source || "unknown",
+
+        effect: medicine.effect || "",
+        usage: medicine.usage || "",
+        caution: medicine.caution || "",
+        sideEffect: medicine.sideEffect || "",
+        image: medicine.image || "",
+
+        company: medicine.company || "",
+        ingredient: medicine.ingredient || "",
+        storageMethod: medicine.storageMethod || "",
+        validTerm: medicine.validTerm || "",
+        permitDate: medicine.permitDate || "",
+        className: medicine.className || "",
+        productType: medicine.productType || medicine.effect || "",
+        status: medicine.status || "",
+        ediCode: medicine.ediCode || "",
+
         durList: durList || [],
+
+        summary: summary || "",
       };
-    }
-
-    return {
-      id: medicine._id || `${medicine.name}-${index}`,
-      keyword,
-      name: medicine.name || keyword,
-      source: medicine.source || "unknown",
-
-      effect: medicine.effect || "",
-      usage: medicine.usage || "",
-      caution: medicine.caution || "",
-      sideEffect: medicine.sideEffect || "",
-      image: medicine.image || "",
-
-      company: medicine.company || "",
-      ingredient: medicine.ingredient || "",
-      storageMethod: medicine.storageMethod || "",
-      validTerm: medicine.validTerm || "",
-      permitDate: medicine.permitDate || "",
-      className: medicine.className || "",
-      productType: medicine.productType || medicine.effect || "",
-      status: medicine.status || "",
-      ediCode: medicine.ediCode || "",
-
-      durList: durList || [],
-    };
-  });
+    },
+  );
 };
 
 const DurWarningCard = ({ medicine }) => {
   const durList = medicine.durList || [];
 
   if (durList.length === 0) {
-    return (
-      <Card>
-        <CardHeader icon={<FiShield />} title="함께 복용 주의 성분" />
-
-        <p className={styles.bodyText}>
-          현재 확인된 병용금기 정보가 없습니다.
-        </p>
-      </Card>
-    );
+    return null;
   }
 
   return (
@@ -497,22 +500,36 @@ const CautionCard = ({ medicine }) => {
   );
 };
 
+const OneLineSummaryCard = ({ medicine }) => {
+  if (!medicine.summary) return null;
+
+  return (
+    <Card>
+      <CardHeader
+        icon={<FiInfo />}
+        title="복용 전 AI 핵심 요약"
+        description="Gemini와 함께 조회된 의약품 정보와 병용금기 정보를 바탕으로 정리했습니다."
+      />
+
+      <p className={styles.bodyText}>{medicine.summary}</p>
+    </Card>
+  );
+};
+
 /* ==============================
   Page
 ================================ */
 const AISummary = () => {
-  const location = useLocation();
-  const analysisData = location.state;
+  const analysisData = useOcrStore((s) => s.ocrText);
 
   const medicines = useMemo(
     () => normalizeMedicines(analysisData),
-    [analysisData]
+    [analysisData],
   );
 
-
   // scan 후 텍스트 추출 데이터
-  const {ocrText } = useOcrStore()
-  console.log(ocrText)
+  // const { ocrText } = useOcrStore();
+  // console.log(ocrText);
 
   const [selectedId, setSelectedId] = useState(null);
 
@@ -543,6 +560,8 @@ const AISummary = () => {
         description="처방전에서 추출된 약 정보를 바탕으로 효능, 복용법, 주의사항을 확인합니다."
       />
 
+      <OneLineSummaryCard medicine={selectedMedicine} />
+
       <div className={styles.layout}>
         <MedicineList
           medicines={medicines}
@@ -552,6 +571,7 @@ const AISummary = () => {
 
         <main className={styles.detailPanel}>
           <MedicineSummary medicine={selectedMedicine} />
+          <MedicineImageCard medicine={selectedMedicine} />
           <MedicineDetailCards medicine={selectedMedicine} />
           <DurWarningCard medicine={selectedMedicine} />
           <CautionCard medicine={selectedMedicine} />
