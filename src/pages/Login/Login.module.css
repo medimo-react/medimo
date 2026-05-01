@@ -325,15 +325,3 @@
   font-weight: var(--font-weight-semibold);
   font-size: var(--font-size-small);
 }
-
-.logoArea {
-  display: flex;
-  align-items: center;
-  margin-bottom: 4rem; 
-}
-
-.logoImage {
-  height: 55px;    
-  width: auto;     
-  object-fit: contain;
-}

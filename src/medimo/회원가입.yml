@@ -5,14 +5,7 @@ info:
 
 http:
   method: GET
-  url: http://localhost:5000/api/login
-  body:
-    type: json
-    data: |-
-      {
-        "email": "{{email}}",
-        "password": "{{password}}"
-      }
+  url: ""
   auth: inherit
 
 settings:

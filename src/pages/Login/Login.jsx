@@ -20,12 +20,21 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    if (email && password) {
-      localStorage.setItem('userEmail',email);
-      
-      navigate('/dashboard'); // 3. 메인 경로('/')로 이동
-    } else {
-      alert('이메일과 비밀번호를 모두 입력해주세요.');
+    if (!email || !password) {
+      setError('이메일과 비밀번호를 모두 입력해주세요.');
+      return;
+    }
+
+    setLoading(true);
+    setError('');
+    try {
+      const data = await loginApi(email, password);
+      setUser({ email, name: data.name ?? '', token: data.token });
+      navigate('/');
+    } catch (err) {
+      setError(err.response?.data?.message ?? '로그인에 실패했습니다. 다시 시도해주세요.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -36,7 +45,8 @@ const Login = () => {
         <div className={styles.heroSection}>
           <div className={styles.heroContent}>
             <div className={styles.logoArea}>
-              <img src="/logo2 1.png" alt = "MEDIMO Logo" className={styles.logoImage}/>
+              <div className={styles.logoSymbol}>💊</div>
+              <span className={styles.logoText}>MEDIMO</span>
             </div>
             
             <h1 className={styles.mainTitle}>
