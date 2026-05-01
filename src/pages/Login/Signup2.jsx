@@ -1,22 +1,26 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styles from './Signup2.module.css'; 
-import { 
-  HiOutlineUser, 
-  HiOutlinePhone, 
-  HiOutlineLockClosed, 
-  HiOutlineEye, 
-  HiOutlineEyeOff 
+import { useNavigate, useLocation } from 'react-router-dom';
+import styles from './Signup2.module.css';
+import {
+  HiOutlineUser,
+  HiOutlinePhone,
+  HiOutlineLockClosed,
+  HiOutlineEye,
+  HiOutlineEyeOff
 } from 'react-icons/hi';
-import { FcGoogle } from 'react-icons/fc';
-import { FaGithub } from 'react-icons/fa';
+import { signupApi } from '../../api/auth';
 
 const Signup2 = () => {
+  const location = useLocation();
+  const email = location.state?.email ?? '';
+
   const [phone, setPhone] = useState('');
   const [phoneError, setPhoneError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  
+  const [submitError, setSubmitError] = useState('');
+  const [loading, setLoading] = useState(false);
+
   const [formData, setFormData] = useState({
     name: '',
     password: '',
@@ -28,7 +32,7 @@ const Signup2 = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
     if (name === 'password' || name === 'confirmPassword') {
-      setPasswordError(''); 
+      setPasswordError('');
     }
   };
 
@@ -55,22 +59,29 @@ const Signup2 = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // 필수 입력값이 비어있는지 확인
     if (!formData.name || !phone || !formData.password || !formData.confirmPassword) {
-      alert("모든 정보를 입력해주세요.");
+      setSubmitError('모든 정보를 입력해주세요.');
       return;
     }
 
-    // 비밀번호 일치 여부 확인
     if (formData.password !== formData.confirmPassword) {
       setPasswordError('비밀번호가 일치하지 않습니다.');
       return;
     }
-    alert("회원가입 완료되었습니다!\n가입하신 이메일과 비밀번호로 로그인해주세요");
-    navigate('/login');
+
+    setLoading(true);
+    setSubmitError('');
+    try {
+      await signupApi({ email, name: formData.name, phone, password: formData.password });
+      navigate('/login', { state: { signupSuccess: true } });
+    } catch (err) {
+      setSubmitError(err.response?.data?.message ?? '회원가입에 실패했습니다. 다시 시도해주세요.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -187,12 +198,14 @@ const Signup2 = () => {
                 {passwordError && <p className={styles.errorMessage}>{passwordError}</p>}
               </div>
 
+              {submitError && <p className={styles.errorMessage}>{submitError}</p>}
+
               <div className={styles.buttonGroup}>
                 <button type="button" className={styles.prevButton} onClick={() => navigate(-1)}>
                   이전
                 </button>
-                <button type="submit" className={styles.submitButton} style={{ marginTop: 0 }}>
-                  가입 완료
+                <button type="submit" className={styles.submitButton} style={{ marginTop: 0 }} disabled={loading}>
+                  {loading ? '처리 중...' : '가입 완료'}
                 </button>
               </div>
             </form>

@@ -6,9 +6,17 @@ export const useUserStore = create(
     (set) => ({
       email: '',
       name: '',
+      token: null,
+      isLoggedIn: false,
 
-      setUser: ({ email, name }) => set({ email, name }),
-      clearUser: () => set({ email: '', name: '' }),
+      setUser: ({ email, name, token }) => {
+        localStorage.setItem('token', token);
+        set({ email, name, token, isLoggedIn: true });
+      },
+      clearUser: () => {
+        localStorage.removeItem('token');
+        set({ email: '', name: '', token: null, isLoggedIn: false });
+      },
     }),
     {
       name: 'medimo-user-store',
