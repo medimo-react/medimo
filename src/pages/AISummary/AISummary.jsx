@@ -1,5 +1,4 @@
 import { useMemo, useState } from "react";
-import { useLocation } from "react-router-dom";
 import { useOcrStore } from "../../store/ocrStore.js";
 
 import Container from "../../components/Container/Container";
