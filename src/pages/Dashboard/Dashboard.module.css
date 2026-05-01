@@ -64,6 +64,14 @@
   gap: 1rem;
 }
 
+.alertEmpty {
+  margin: 1rem 0 0;
+  color: var(--sub-text-color);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-small);
+}
+
 .alertList {
   display: flex;
   flex-direction: column;

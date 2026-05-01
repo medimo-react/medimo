@@ -38,9 +38,9 @@ function formatDateChip() {
 const EMPTY_SCHEDULE_FORM = { name: '', detail: '', time: '' };
 const EMPTY_ALARM_FORM = { name: '', times: '', dose: '1정', repeat: '매일' };
 
-export default function Info() {
+export default function Info({ alarms }) {
   const {
-    schedules, alarms, doneHistory,
+    schedules, doneHistory,
     toggleScheduleDone, toggleAlarm,
     addSchedule, addAlarm,
     deleteAlarm, deleteSchedule,
