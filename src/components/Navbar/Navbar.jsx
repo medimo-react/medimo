@@ -25,12 +25,6 @@ const NAV_ITEMS = [
   },
   { id: "alert", label: "알림", path: "/alert", icon: <HiOutlineBellAlert /> },
   { id: "history", label: "AI 분석 기록", path: "/history", icon: <LuHistory /> },
-  {
-    id: "settings",
-    label: "설정",
-    path: "/settings",
-    icon: <IoSettingsOutline />,
-  },
 ];
 
 const user = {
