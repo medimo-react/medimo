@@ -13,7 +13,7 @@ import styles from "./Navbar.module.css";
 const NAV_ITEMS = [
   {
     id: "prescription",
-    label: "처방전 분석",
+    label: "AI 처방전 분석",
     path: "/dashboard",
     icon: <LuScanLine />,
   },
