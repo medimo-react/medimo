@@ -23,7 +23,7 @@ const Signup1 = () => {
       return;
     }
     setError('');
-    navigate('/signup2');
+    navigate('/signup2', { state: { email } });
   };
 
   return (
