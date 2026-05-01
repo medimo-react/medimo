@@ -137,7 +137,7 @@ export default function Navbar() {
             )}
           </div>
 
-          <button type="button" className={styles.userProfile} onClick={() => handleNavigate("/profile")}>
+          <button type="button" className={styles.userProfile} onClick={() => handleNavigate("/Mypage")}>
             <div className={styles.userAvatar}>{displayUser.initial}</div>
 
             <div className={styles.userInfo}>
