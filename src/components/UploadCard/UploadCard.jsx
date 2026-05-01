@@ -9,8 +9,6 @@ import styles from "./UploadCard.module.css";
 
 import { scanAndFetchMedicines } from "../../api/scanMedicine.js";
 import { useOcrStore } from "../../store/ocrStore.js";
-import { ocrScan } from "../../api/scan.js";
-import {useOcrStore} from "../../store/ocrStore.js";
 
 const UploadCard = () => {
   const [file, setFile] = useState(null);
@@ -71,19 +69,7 @@ const UploadCard = () => {
   };
 
   const handleCameraCapture = async (capturedFile) => {
-    setFile(capturedFile);
-    setOcrError("");
-    setIsScanning(true);
-    try {
-      const text = await ocrScan(capturedFile);
-      setOcrText(text);
-      navigate("/ai-summary");
-    } catch (err) {
-      setOcrError("OCR 스캔에 실패했습니다. 다시 시도해 주세요.");
-      console.error(err);
-    } finally {
-      setIsScanning(false);
-    }
+    await scanFile(capturedFile);
   };
 
   return (
