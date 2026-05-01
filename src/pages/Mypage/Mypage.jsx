@@ -8,7 +8,7 @@ import { useUserStore } from "../../store/userStore.js";
 import Modal from "../../components/Modal/Modal.jsx";
 import { useNavigate } from "react-router-dom";
 
-import styles from "./MyPage.module.css";
+import styles from "./Mypage.module.css";
 
 const MyPage = () => {
 
