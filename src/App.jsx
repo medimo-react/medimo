@@ -15,12 +15,12 @@ import History from "./pages/History/History.jsx";
 function App() {
   return (
     <Routes>
+      <Route path="/" element={<Login />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup1" element={<Signup1 />} />
       <Route path="/signup2" element={<Signup2 />} />
 
       <Route element={<AppLayout />}>
-        <Route path="/" element={null} />
         <Route path="/medicine" element={<Medicine />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/alert" element={ <Info />} />

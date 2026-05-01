@@ -18,7 +18,7 @@ const Login = () => {
     if (email && password) {
       localStorage.setItem('userEmail',email);
       
-      navigate('/'); // 3. 메인 경로('/')로 이동
+      navigate('/dashboard'); // 3. 메인 경로('/')로 이동
     } else {
       alert('이메일과 비밀번호를 모두 입력해주세요.');
     }

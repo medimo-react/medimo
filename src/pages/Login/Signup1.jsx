@@ -102,7 +102,7 @@ const Signup1 = () => {
 
            <footer className={styles.formFooter}>
               이미 계정이 있으신가요? 
-              <span className={styles.textLink} onClick={() => navigate('/login')}> 로그인</span>
+              <span className={styles.textLink} onClick={() => navigate('/')}> 로그인</span>
             </footer>
           </div>
         </div>
