@@ -4,21 +4,37 @@ import styles from './Login.module.css';
 import { HiOutlineMail, HiOutlineLockClosed, HiOutlineEye, HiOutlineEyeOff, HiArrowRight } from 'react-icons/hi';
 import { FcGoogle } from 'react-icons/fc';
 import { FaGithub } from 'react-icons/fa';
+import { loginApi } from '../../api/auth';
+import { useUserStore } from '../../store/userStore';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+  const setUser = useUserStore((s) => s.setUser);
 
-  const handleLogin = (e) => {
-    e.preventDefault(); 
+  const handleLogin = async (e) => {
+    e.preventDefault();
 
-    if (email && password) {
-      navigate('/'); // 3. 메인 경로('/')로 이동
-    } else {
-      alert('이메일과 비밀번호를 모두 입력해주세요.');
+    if (!email || !password) {
+      setError('이메일과 비밀번호를 모두 입력해주세요.');
+      return;
+    }
+
+    setLoading(true);
+    setError('');
+    try {
+      const data = await loginApi(email, password);
+      setUser({ email, name: data.name ?? '', token: data.token });
+      navigate('/');
+    } catch (err) {
+      setError(err.response?.data?.message ?? '로그인에 실패했습니다. 다시 시도해주세요.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -100,8 +116,10 @@ const Login = () => {
                 </div>
               </div>
 
-              <button type="submit" className={styles.submitButton}>
-                로그인 <HiArrowRight />
+              {error && <p className={styles.errorMessage}>{error}</p>}
+
+              <button type="submit" className={styles.submitButton} disabled={loading}>
+                {loading ? '로그인 중...' : <> 로그인 <HiArrowRight /> </>}
               </button>
             </form>
 
