@@ -1,14 +1,6 @@
 import axios from "axios";
 
-const API_BASE = import.meta.env.VITE_API_BASE || "http://127.0.0.1:5000";
-
-const getErrorInfo = (error) => ({
-  message: error.message,
-  status: error.response?.status,
-  data: error.response?.data,
-  url: error.config?.url,
-  params: error.config?.params,
-});
+const API_BASE = import.meta.env.VITE_API_BASE;
 
 export const scanMedicineImage = async (file) => {
   if (!file) {
@@ -18,9 +10,7 @@ export const scanMedicineImage = async (file) => {
   const formData = new FormData();
   formData.append("image", file);
 
-  const response = await axios.post(`${API_BASE}/api/scan`, formData, {
-    timeout: 60000,
-  });
+  const response = await axios.post(`${API_BASE}/scan`, formData);
 
   return response.data;
 };
@@ -28,32 +18,42 @@ export const scanMedicineImage = async (file) => {
 export const fetchMedicineByName = async (name) => {
   if (!name) return [];
 
-  try {
-    const response = await axios.get(`${API_BASE}/api/medicine`, {
-      params: { q: name },
-      timeout: 30000,
-    });
+  const response = await axios.get(`${API_BASE}/medicine`, {
+    params: { q: name },
+  });
 
-    return response.data;
-  } catch (error) {
-    console.error(`[의약품 조회 실패] ${name}`, getErrorInfo(error));
-    return [];
-  }
+  return response.data;
 };
 
 export const fetchDurByProductName = async (name) => {
   if (!name) return [];
 
+  const response = await axios.get(`${API_BASE}/dur/product`, {
+    params: { name },
+  });
+
+  return response.data;
+};
+
+export const fetchMedicineSummary = async ({ medicine, durList }) => {
+  if (!medicine) return "";
+
   try {
-    const response = await axios.get(`${API_BASE}/api/dur/product`, {
-      params: { name },
-      timeout: 30000,
+    const response = await axios.post(`${API_BASE}/summary/medicine`, {
+      medicine,
+      durList,
     });
 
-    return response.data;
+    return response.data.summary || "";
   } catch (error) {
-    console.error(`[DUR 조회 실패] ${name}`, getErrorInfo(error));
-    return [];
+    console.error("[요약 조회 실패]", {
+      message: error.message,
+      status: error.response?.status,
+      data: error.response?.data,
+      url: error.config?.url,
+    });
+
+    return "";
   }
 };
 
@@ -89,25 +89,4 @@ export const scanAndFetchMedicines = async (file) => {
     candidates,
     medicineResults,
   };
-};
-
-export const fetchMedicineSummary = async ({ medicine, durList }) => {
-  if (!medicine) return "";
-
-  try {
-    const response = await axios.post(`${API_BASE}/api/summary/medicine`, {
-      medicine,
-      durList,
-    });
-
-    return response.data.summary || "";
-  } catch (error) {
-    console.error("[요약 조회 실패]", {
-      message: error.message,
-      status: error.response?.status,
-      data: error.response?.data,
-    });
-
-    return "";
-  }
 };
