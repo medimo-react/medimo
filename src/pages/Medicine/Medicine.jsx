@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react';
 import styles from './Medicine.module.css';
-import { FaStar, FaRegStar, FaExclamationTriangle, FaPills, FaClock, FaFolder, FaTrash, FaSearch } from 'react-icons/fa';
+import { FaExclamationTriangle, FaPills, FaClock, FaFolder, FaTrash, FaSearch } from 'react-icons/fa';
 import Input from '../../components/Input/Input';
 import { useBookmarkStore } from '../../store/bookmarkStore';
 import Button from '../../components/Button/Button'
@@ -24,11 +24,6 @@ const getFolderColor = (name) => {
   return FOLDER_COLORS[hash % FOLDER_COLORS.length];
 };
 
-const StarIcon = ({ filled }) =>
-  filled
-    ? <FaStar size={16} color="#F5A623" />
-    : <FaRegStar size={16} color="#9CA3AF" />;
-
 const WarningIcon = () => <FaExclamationTriangle size={16} color="#F59E0B" />;
 
 const PillIcon = () => <FaPills size={20} color="#60A5FA" />;
@@ -44,7 +39,6 @@ export default function Bookmark() {
   const loading = useBookmarkStore((s) => s.loading);
   const search = useBookmarkStore((s) => s.search);
   const selectedFolders = useBookmarkStore((s) => s.selectedFolders);
-  const filterMode = useBookmarkStore((s) => s.filterMode);
   const openMenuId = useBookmarkStore((s) => s.openMenuId);
   const folderMoveId = useBookmarkStore((s) => s.folderMoveId);
   const folderMoveSelection = useBookmarkStore((s) => s.folderMoveSelection);
@@ -55,7 +49,6 @@ export default function Bookmark() {
   const fetchBookmarks = useBookmarkStore((s) => s.fetchBookmarks);
   const closeMenu = useBookmarkStore((s) => s.closeMenu);
   const setSearch = useBookmarkStore((s) => s.setSearch);
-  const setFilterMode = useBookmarkStore((s) => s.setFilterMode);
   const toggleRowMenu = useBookmarkStore((s) => s.toggleRowMenu);
   const setFolderMoveSelection = useBookmarkStore((s) => s.setFolderMoveSelection);
   const setNewFolderName = useBookmarkStore((s) => s.setNewFolderName);
@@ -64,7 +57,6 @@ export default function Bookmark() {
   const openFolderAdd = useBookmarkStore((s) => s.openFolderAdd);
   const backFromFolderAdd = useBookmarkStore((s) => s.backFromFolderAdd);
   const selectFolderTab = useBookmarkStore((s) => s.selectFolderTab);
-  const toggleStar = useBookmarkStore((s) => s.toggleStar);
   const deleteMedicine = useBookmarkStore((s) => s.deleteMedicine);
   const applyFolderMove = useBookmarkStore((s) => s.applyFolderMove);
   const addToNewFolder = useBookmarkStore((s) => s.addToNewFolder);
@@ -95,10 +87,9 @@ export default function Bookmark() {
           m.name.toLowerCase().includes(search.toLowerCase()) ||
           m.engName.toLowerCase().includes(search.toLowerCase());
         const matchFolder = selectedFolders.has('전체') || m.folders.some((f) => selectedFolders.has(f));
-        const matchFilter = filterMode === '전체' || m.starred;
-        return matchSearch && matchFolder && matchFilter;
+        return matchSearch && matchFolder;
       }),
-    [medicines, search, selectedFolders, filterMode]
+    [medicines, search, selectedFolders]
   );
 
   if (loading) return <div className={styles.page}>불러오는 중...</div>;
@@ -127,23 +118,6 @@ export default function Bookmark() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
-        </div>
-        <div className={styles.topActions}>
-          <Button
-            variant='outline'
-            className={`${styles.filterBtn} ${filterMode === '전체' ? styles.filterBtnActive : ''}`}
-            onClick={() => setFilterMode('전체')}
-          >
-            전체
-          </Button>
-          <Button
-            variant='outline'
-            className={`${styles.favBtn} ${filterMode === '즐겨찾기' ? styles.favBtnActive : ''}`}
-            onClick={() => setFilterMode('즐겨찾기')}
-          >
-            <StarIcon filled={filterMode === '즐겨찾기'} />
-            즐겨찾기
-          </Button>
         </div>
       </div>
 
@@ -181,7 +155,6 @@ export default function Bookmark() {
                 <div className={styles.nameInfo}>
                   <span className={styles.medicineName}>
                     {medicine.name}
-                    {medicine.starred && <span className={styles.starInline}><StarIcon filled /></span>}
                     {medicine.warning && <span className={styles.warningInline}><WarningIcon /></span>}
                   </span>
                   <span className={styles.engName}>{medicine.engName}</span>
@@ -290,10 +263,6 @@ export default function Bookmark() {
                       </>
                     ) : (
                       <>
-                        <Button type="button" className={styles.dropdownItem} onClick={() => toggleStar(medicine)}>
-                          <StarIcon filled={medicine.starred} />
-                          {medicine.starred ? '즐겨찾기 해제' : '즐겨찾기 추가'}
-                        </Button>
                         <Button
                           type="button"
                           className={styles.dropdownItem}

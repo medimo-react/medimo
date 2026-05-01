@@ -43,15 +43,12 @@ export const useBookmarkStore = create(
       loading: true,
       search: '',
       selectedFolders: new Set(['전체']),
-      filterMode: '전체',
       customFolders: [],
       ...menuInitial(),
 
       closeMenu: () => set(menuInitial()),
 
       setSearch: (search) => set({ search }),
-
-      setFilterMode: (filterMode) => set({ filterMode }),
 
       toggleRowMenu: (medicineId) =>
         set((s) => ({
@@ -125,18 +122,6 @@ export const useBookmarkStore = create(
         } finally {
           set({ loading: false });
         }
-      },
-
-      toggleStar: async (medicine) => {
-        const nextStarred = !medicine.starred;
-        get().closeMenu();
-        set((s) => ({
-          medicines: s.medicines.map((m) =>
-            m.id === medicine.id ? { ...m, starred: nextStarred } : m
-          ),
-        }));
-        const data = await updateBookmark(medicine.id, { starred: nextStarred });
-        get().syncFromServer(data);
       },
 
       deleteMedicine: async (medicine) => {
