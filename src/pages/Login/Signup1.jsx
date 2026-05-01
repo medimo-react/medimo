@@ -34,9 +34,7 @@ const Signup1 = () => {
         <div className={styles.heroSection}>
           <div className={styles.heroContent}>
             <div className={styles.logoArea}>
-              {/* <div className={styles.logoSymbol}>💊</div>
-              <span className={styles.logoText}>MEDIMO</span> */}
-              <img src="/logo.png" alt = "MEDIMO Logo" className={styles.logoImage}/>
+              <img src="/logo2 1.png" alt = "MEDIMO Logo" className={styles.logoImage}/>
             </div>
             
             <h1 className={styles.mainTitle}>
@@ -104,7 +102,7 @@ const Signup1 = () => {
 
            <footer className={styles.formFooter}>
               이미 계정이 있으신가요? 
-              <span className={styles.textLink} onClick={() => navigate('/login')}> 로그인</span>
+              <span className={styles.textLink} onClick={() => navigate('/')}> 로그인</span>
             </footer>
           </div>
         </div>
