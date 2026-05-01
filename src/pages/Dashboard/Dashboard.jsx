@@ -6,27 +6,17 @@ import Card from "../../components/Card/Card.jsx";
 import Badge from "../../components/Badge/Badge.jsx";
 import Button from "../../components/Button/Button.jsx";
 
-import AiAnalysisHistorySection from "../../components/AiAnalysisHistory/AiAnalysisHistorySection.jsx";
 import UploadCard from "../../components/UploadCard/UploadCard.jsx";
 
 import styles from "./Dashboard.module.css";
 
-const medicineStatus = [
-  {
-    label: "오늘 복약",
-    value: "0 / 3",
-    desc: "아직 완료된 복약 기록이 없습니다.",
-    badge: "대기",
-    variant: "warning",
-  },
-  {
-    label: "분석 기록",
-    value: "3건",
-    desc: "최근 처방전 분석 내역입니다.",
-    badge: "최근",
-    variant: "primary",
-  },
-];
+const todayMedicineStatus = {
+  label: "오늘 복약",
+  value: "0 / 3",
+  desc: "아직 완료된 복약 기록이 없습니다.",
+  badge: "대기",
+  variant: "warning",
+};
 
 const recentAnalysis = {
   title: "감기약 처방전",
@@ -58,34 +48,13 @@ const Dashboard = () => {
       {/* 페이지 제목 */}
       <PageHeader title="대시보드" />
 
-      <div className={styles.dashboard}>
-        {/* 상단 영역 */}
-        <section className={styles.topGrid}>
+      <div className={styles.dashboardGrid}>
+        {/* 왼쪽 영역 */}
+        <section className={styles.leftColumn}>
           {/* 처방전 업로드 */}
-          <div className={styles.uploadArea}>
-            <UploadCard />
-          </div>
+          <UploadCard />
 
-          {/* 오늘 상태 요약 */}
-          <div className={styles.summaryArea}>
-            {medicineStatus.map((item) => (
-              <Card key={item.label} radius="sm" className={styles.summaryCard}>
-                <div className={styles.summaryHeader}>
-                  <span className={styles.summaryLabel}>{item.label}</span>
-                  <Badge variant={item.variant} size="sm">
-                    {item.badge}
-                  </Badge>
-                </div>
-
-                <strong className={styles.summaryValue}>{item.value}</strong>
-                <p className={styles.summaryDesc}>{item.desc}</p>
-              </Card>
-            ))}
-          </div>
-        </section>
-
-        {/* 최근 분석 결과 요약 */}
-        <section>
+          {/* 최근 분석 결과 요약 */}
           <Card radius="sm" className={styles.recentCard}>
             <div className={styles.recentHeader}>
               <div>
@@ -130,12 +99,27 @@ const Dashboard = () => {
           </Card>
         </section>
 
-        {/* 하단 영역 */}
-        <section className={styles.bottomGrid}>
-          {/* AI 분석 내역 */}
-          <AiAnalysisHistorySection />
+        {/* 오른쪽 영역 */}
+        <aside className={styles.rightColumn}>
+          {/* 오늘 복약 */}
+          <Card radius="sm" className={styles.summaryCard}>
+            <div className={styles.summaryHeader}>
+              <span className={styles.summaryLabel}>
+                {todayMedicineStatus.label}
+              </span>
+              <Badge variant={todayMedicineStatus.variant} size="sm">
+                {todayMedicineStatus.badge}
+              </Badge>
+            </div>
 
-          {/* 다가오는 알림 */}
+            <strong className={styles.summaryValue}>
+              {todayMedicineStatus.value}
+            </strong>
+
+            <p className={styles.summaryDesc}>{todayMedicineStatus.desc}</p>
+          </Card>
+
+          {/* 다가오는 복약 알림 */}
           <Card radius="sm">
             <div className={styles.cardHeader}>
               <p className={styles.cardTitle}>다가오는 복약 알림</p>
@@ -157,7 +141,7 @@ const Dashboard = () => {
               ))}
             </div>
           </Card>
-        </section>
+        </aside>
       </div>
     </Container>
   );
