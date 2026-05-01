@@ -14,7 +14,7 @@ import History from "./pages/History/History.jsx";
 import { useInfoStore } from './store/infoStore.js'
 
 function App() {
-  const { schedules } = useInfoStore()
+  const { schedules, alarms } = useInfoStore()
   const doneCount = schedules.filter((s) => s.done).length;
   const rate = schedules.length > 0 ? Math.round((doneCount / schedules.length) * 100) : 0;
   return (
@@ -26,8 +26,8 @@ function App() {
 
       <Route element={<AppLayout />}>
         <Route path="/medicine" element={<Medicine />} />
-        <Route path="/dashboard" element={<Dashboard rate={rate} />} />
-        <Route path="/alert" element={ <Info />} />
+        <Route path="/dashboard" element={<Dashboard rate={rate} alarms={alarms} />} />
+        <Route path="/alert" element={<Info rate={rate} alarms={alarms} />} />
         <Route path="/history" element={ <History />} />
         <Route path="/demo" element={<Demo />} />
         <Route path="/ai-summary" element={<AiSummary />} />
