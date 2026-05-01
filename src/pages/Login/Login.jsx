@@ -16,6 +16,8 @@ const Login = () => {
     e.preventDefault(); 
 
     if (email && password) {
+      localStorage.setItem('userEmail',email);
+      
       navigate('/'); // 3. 메인 경로('/')로 이동
     } else {
       alert('이메일과 비밀번호를 모두 입력해주세요.');
@@ -29,8 +31,7 @@ const Login = () => {
         <div className={styles.heroSection}>
           <div className={styles.heroContent}>
             <div className={styles.logoArea}>
-              <div className={styles.logoSymbol}>💊</div>
-              <span className={styles.logoText}>MEDIMO</span>
+              <img src="/logo2 1.png" alt = "MEDIMO Logo" className={styles.logoImage}/>
             </div>
             
             <h1 className={styles.mainTitle}>

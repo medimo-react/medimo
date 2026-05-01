@@ -34,9 +34,7 @@ const Signup1 = () => {
         <div className={styles.heroSection}>
           <div className={styles.heroContent}>
             <div className={styles.logoArea}>
-              {/* <div className={styles.logoSymbol}>💊</div>
-              <span className={styles.logoText}>MEDIMO</span> */}
-              <img src="/logo.png" alt = "MEDIMO Logo" className={styles.logoImage}/>
+              <img src="/logo2 1.png" alt = "MEDIMO Logo" className={styles.logoImage}/>
             </div>
             
             <h1 className={styles.mainTitle}>

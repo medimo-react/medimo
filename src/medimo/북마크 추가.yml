@@ -1,7 +1,7 @@
 info:
   name: 북마크 추가
   type: http
-  seq: 5
+  seq: 3
 
 http:
   method: POST
