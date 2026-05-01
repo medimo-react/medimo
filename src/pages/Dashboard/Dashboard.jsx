@@ -6,17 +6,10 @@ import Card from "../../components/Card/Card.jsx";
 import Badge from "../../components/Badge/Badge.jsx";
 import Button from "../../components/Button/Button.jsx";
 
+import AiAnalysisHistorySection from "../../components/AiAnalysisHistory/AiAnalysisHistorySection.jsx";
 import UploadCard from "../../components/UploadCard/UploadCard.jsx";
 
 import styles from "./Dashboard.module.css";
-
-const todayMedicineStatus = {
-  label: "오늘 복약",
-  value: "0 / 3",
-  desc: "아직 완료된 복약 기록이 없습니다.",
-  badge: "대기",
-  variant: "warning",
-};
 
 const recentAnalysis = {
   title: "감기약 처방전",
@@ -27,34 +20,70 @@ const recentAnalysis = {
     "해열·진통제와 종합감기약이 포함되어 있으며, 성분 중복과 음주 후 복용에 주의가 필요합니다.",
 };
 
-const upcomingAlerts = [
-  {
-    time: "오후 1:00",
-    title: "점심 복약 알림",
-    desc: "타이레놀 외 2종 복용 예정",
-  },
-  {
-    time: "오후 7:00",
-    title: "저녁 복약 알림",
-    desc: "타이레놀 외 2종 복용 예정",
-  },
-];
+function formatTime(time) {
+  const [hh, mm] = time.split(":").map(Number);
+  const period = hh < 12 ? "오전" : "오후";
+  const h = hh === 0 ? 12 : hh > 12 ? hh - 12 : hh;
+  return `${period} ${h}:${String(mm).padStart(2, "0")}`;
+}
 
-const Dashboard = () => {
+function buildAlertItems(alarms) {
+  const timeMap = {};
+  alarms
+    .filter((a) => a.active)
+    .forEach((alarm) => {
+      (alarm.times ?? []).forEach((time) => {
+        if (!timeMap[time]) timeMap[time] = [];
+        timeMap[time].push(alarm.name);
+      });
+    });
+
+  return Object.entries(timeMap)
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([time, names]) => ({
+      time: formatTime(time),
+      title: "복약 알림",
+      desc:
+        names.length === 1
+          ? `${names[0]} 복용 예정`
+          : `${names[0]} 외 ${names.length - 1}종 복용 예정`,
+    }));
+}
+
+const Dashboard = ({ rate, alarms }) => {
   const navigate = useNavigate();
+  const alertItems = buildAlertItems(alarms);
 
   return (
     <Container>
       {/* 페이지 제목 */}
       <PageHeader title="대시보드" />
 
-      <div className={styles.dashboardGrid}>
-        {/* 왼쪽 영역 */}
-        <section className={styles.leftColumn}>
+      <div className={styles.dashboard}>
+        {/* 상단 영역 */}
+        <section className={styles.topGrid}>
           {/* 처방전 업로드 */}
-          <UploadCard />
+          <div className={styles.uploadArea}>
+            <UploadCard />
+          </div>
 
-          {/* 최근 분석 결과 요약 */}
+          {/* 오늘 상태 요약 */}
+          <div className={styles.summaryArea}>
+              <Card radius="sm" className={styles.summaryCard}>
+                <h3>오늘 복약</h3>
+                <div
+                  className={`${styles.rateCircle} ${rate === 100 ? styles.rateCircleFull : ''}`}
+                  style={{ '--rate': `${rate}%` }}
+                >
+                  <span className={styles.rate}>{rate}%</span>
+                </div>
+              </Card>
+            
+          </div>
+        </section>
+
+        {/* 최근 분석 결과 요약 */}
+        <section>
           <Card radius="sm" className={styles.recentCard}>
             <div className={styles.recentHeader}>
               <div>
@@ -99,49 +128,31 @@ const Dashboard = () => {
           </Card>
         </section>
 
-        {/* 오른쪽 영역 */}
-        <aside className={styles.rightColumn}>
-          {/* 오늘 복약 */}
-          <Card radius="sm" className={styles.summaryCard}>
-            <div className={styles.summaryHeader}>
-              <span className={styles.summaryLabel}>
-                {todayMedicineStatus.label}
-              </span>
-              <Badge variant={todayMedicineStatus.variant} size="sm">
-                {todayMedicineStatus.badge}
-              </Badge>
-            </div>
+        {/* 하단 영역 */}
+        <section className={styles.bottomGrid}>
+          {/* AI 분석 내역 */}
+          <AiAnalysisHistorySection />
 
-            <strong className={styles.summaryValue}>
-              {todayMedicineStatus.value}
-            </strong>
-
-            <p className={styles.summaryDesc}>{todayMedicineStatus.desc}</p>
-          </Card>
-
-          {/* 다가오는 복약 알림 */}
+          {/* 다가오는 알림 */}
           <Card radius="sm">
-            <div className={styles.cardHeader}>
-              <p className={styles.cardTitle}>다가오는 복약 알림</p>
-              <Badge variant="primary" size="sm">
-                예정
-              </Badge>
-            </div>
-
-            <div className={styles.alertList}>
-              {upcomingAlerts.map((alert) => (
-                <div key={alert.time} className={styles.alertItem}>
-                  <div className={styles.alertTime}>{alert.time}</div>
-
-                  <div className={styles.alertText}>
-                    <strong>{alert.title}</strong>
-                    <p>{alert.desc}</p>
+            <p className={styles.cardTitle}>다가오는 알림</p>
+            {alertItems.length === 0 ? (
+              <p className={styles.alertEmpty}>등록된 알림이 없습니다.</p>
+            ) : (
+              <div className={styles.alertList}>
+                {alertItems.map((alert) => (
+                  <div key={alert.time} className={styles.alertItem}>
+                    <div className={styles.alertTime}>{alert.time}</div>
+                    <div className={styles.alertText}>
+                      <strong>{alert.title}</strong>
+                      <p>{alert.desc}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </Card>
-        </aside>
+        </section>
       </div>
     </Container>
   );
