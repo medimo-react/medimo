@@ -24,7 +24,6 @@ const Login = () => {
       setError('이메일과 비밀번호를 모두 입력해주세요.');
       return;
     }
-
     setLoading(true);
     setError('');
     try {
