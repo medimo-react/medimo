@@ -183,7 +183,42 @@
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-small);
 }
+.rateCircle {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 0.875rem;
+  border-radius: var(--radius-max);
+  background: conic-gradient(var(--primary-color) var(--rate), var(--border-color) 0%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-title-lg);
+  font-weight: var(--font-weight-bold);
+  color: #0f172a;
+  position: relative;
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+}
 
+.rateCircle::before {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border-radius: var(--radius-max);
+  background: var(--background-color);
+}
+.rate {
+  position: relative;
+  z-index: 1;
+}
+
+.rateCircleFull {
+  background: conic-gradient(#22c55e var(--rate), #dcfce7 0%);
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.35);
+}
+
+.rateCircleFull span {
+  color: #16a34a;
+}
 @media (max-width: 1024px) {
   .topGrid,
   .bottomGrid {

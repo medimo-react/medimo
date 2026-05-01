@@ -14,7 +14,6 @@ import styles from "./Dashboard.module.css";
 const medicineStatus = [
   {
     label: "오늘 복약",
-    value: "0 / 3",
     desc: "아직 완료된 복약 기록이 없습니다.",
     badge: "대기",
     variant: "warning",
@@ -50,7 +49,7 @@ const upcomingAlerts = [
   },
 ];
 
-const Dashboard = () => {
+const Dashboard = ({ rate }) => {
   const navigate = useNavigate();
 
   return (
@@ -68,19 +67,16 @@ const Dashboard = () => {
 
           {/* 오늘 상태 요약 */}
           <div className={styles.summaryArea}>
-            {medicineStatus.map((item) => (
-              <Card key={item.label} radius="sm" className={styles.summaryCard}>
-                <div className={styles.summaryHeader}>
-                  <span className={styles.summaryLabel}>{item.label}</span>
-                  <Badge variant={item.variant} size="sm">
-                    {item.badge}
-                  </Badge>
+              <Card radius="sm" className={styles.summaryCard}>
+                <h3>오늘 복약</h3>
+                <div
+                  className={`${styles.rateCircle} ${rate === 100 ? styles.rateCircleFull : ''}`}
+                  style={{ '--rate': `${rate}%` }}
+                >
+                  <span className={styles.rate}>{rate}%</span>
                 </div>
-
-                <strong className={styles.summaryValue}>{item.value}</strong>
-                <p className={styles.summaryDesc}>{item.desc}</p>
               </Card>
-            ))}
+            
           </div>
         </section>
 
