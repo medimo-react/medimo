@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "http://medimo-env.eba-7hpcuhdc.ap-southeast-2.elasticbeanstalk.com/api/:path*"
+    }
+  ]
+}
