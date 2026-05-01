@@ -4,9 +4,24 @@ info:
   seq: 1
 
 http:
-  method: GET
-  url: ""
+  method: POST
+  url: Medimo-env.eba-7hpcuhdc.ap-southeast-2.elasticbeanstalk.com/api/auth/signup
+  body:
+    type: json
+    data: |-
+      {
+        "email": "harryleo@naver.com",
+        "password": "12345678",
+        "name": "김민혁"
+      }
   auth: inherit
+
+runtime:
+  variables:
+    - name: email
+      value: hello
+    - name: password
+      value: "1234"
 
 settings:
   encodeUrl: true
