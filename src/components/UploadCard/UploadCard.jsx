@@ -27,6 +27,7 @@ const UploadCard = () => {
     setFile(selectedFile);
     setOcrError("");
     setIsScanning(true);
+    
 
     try {
       const result = await scanAndFetchMedicines(selectedFile);
