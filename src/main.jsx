@@ -5,12 +5,15 @@ import { Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
 import "./index.css";
 import App from "./App.jsx";
+import { ModalProvider } from "./providers/ModalProvider.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Theme>
       <BrowserRouter>
-        <App />
+        <ModalProvider>
+          <App />
+        </ModalProvider>
       </BrowserRouter>
     </Theme>
   </StrictMode>,

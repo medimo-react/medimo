@@ -38,9 +38,9 @@ function formatDateChip() {
 const EMPTY_SCHEDULE_FORM = { name: '', detail: '', time: '' };
 const EMPTY_ALARM_FORM = { name: '', times: '', dose: '1정', repeat: '매일' };
 
-export default function Info() {
+export default function Info({ alarms }) {
   const {
-    schedules, alarms, doneHistory,
+    schedules, doneHistory,
     toggleScheduleDone, toggleAlarm,
     addSchedule, addAlarm,
     deleteAlarm, deleteSchedule,
@@ -285,19 +285,6 @@ export default function Info() {
                 value={alarmForm.dose}
                 onChange={(e) => setAlarmForm((f) => ({ ...f, dose: e.target.value }))}
               />
-            </div>
-            <div className={styles.formGroup}>
-              <label className={styles.label}>반복</label>
-              <select
-                className={styles.input}
-                value={alarmForm.repeat}
-                onChange={(e) => setAlarmForm((f) => ({ ...f, repeat: e.target.value }))}
-              >
-                <option>매일</option>
-                <option>필요 시</option>
-                <option>주 3회</option>
-                <option>주 5회</option>
-              </select>
             </div>
           </div>
           <div className={styles.modalFooter}>
