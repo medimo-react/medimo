@@ -74,7 +74,6 @@ const UploadCard = () => {
   return (
     <Card radius={"sm"}>
       <p className={styles.title}>처방전 업로드</p>
-
       <UploadDropBox
         isDrag={isDrag}
         setIsDrag={setIsDrag}
@@ -82,14 +81,11 @@ const UploadCard = () => {
         onDrop={handleDrop}
         file={file}
       />
-
       <UploadActionBtn
         file={file}
         onClick={handleRemove}
         onCameraCapture={handleCameraCapture}
       />
-      <UploadDropBox isDrag={isDrag} setIsDrag={setIsDrag} onChange={handleChange} onDrop={handleDrop} file={file} />
-      <UploadActionBtn file={file} onClick={handleRemove} onCameraCapture={handleCameraCapture} />
     </Card>
   );
 };
