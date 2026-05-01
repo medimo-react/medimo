@@ -103,7 +103,7 @@ const Dashboard = () => {
               <Button
                 type="button"
                 size="small"
-                onClick={() => navigate("/history")}
+                onClick={() => navigate("/ai-summary")}
               >
                 상세 보기
               </Button>
