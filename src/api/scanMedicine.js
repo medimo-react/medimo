@@ -69,11 +69,12 @@ export const scanAndFetchMedicines = async (file) => {
         fetchDurByProductName(name),
       ]);
 
-      const medicine = medicines?.[0];
+      // const medicine = medicines?.[0];
 
-      const summary = medicine
-        ? await fetchMedicineSummary({ medicine, durList })
-        : "";
+      // const summary = medicine
+      //   ? await fetchMedicineSummary({ medicine, durList })
+      //   : "";
+      const summary = "";
 
       return {
         keyword: name,

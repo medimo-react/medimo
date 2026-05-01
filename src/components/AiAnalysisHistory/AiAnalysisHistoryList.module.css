@@ -1,8 +1,77 @@
 .list {
   display: flex;
   flex-direction: column;
+  gap: 0.75rem;
+}
 
-  li {
-    padding:0.25rem 0;
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background-color: var(--background-color);
+  cursor: pointer;
+  text-align: left;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.item:hover {
+  border-color: var(--primary-color);
+  background-color: #f8f8ff;
+  transform: translateY(-1px);
+}
+
+.text {
+  min-width: 0;
+}
+
+.text strong {
+  display: block;
+  color: var(--text-color);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-small);
+}
+
+.text p {
+  margin: 0.25rem 0 0;
+  color: var(--sub-text-color);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-small);
+}
+
+.medicineNames {
+  display: block;
+  margin-top: 0.5rem;
+  overflow: hidden;
+  color: var(--sub-text-color);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.badges {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .item {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .badges {
+    flex-wrap: wrap;
   }
 }
