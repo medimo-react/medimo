@@ -6,8 +6,8 @@ const getToken = () => localStorage.getItem('token');
 const api = axios.create({ baseURL: API_BASE });
 
 api.interceptors.request.use(config => {
-  // config.headers.Authorization = `Bearer ${getToken()}`;
-  config.headers.Authorization = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OWU4Nzg0NGUwMzg4NmE0M2U2ZjEyZjgiLCJpYXQiOjE3Nzc0NTY4MTMsImV4cCI6MTc3ODA2MTYxM30.Bu32xSqqrato1sT-SvvoHvsMZ5uk3-5huCAne0swbfo'
+  const token = getToken();
+  if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
 
