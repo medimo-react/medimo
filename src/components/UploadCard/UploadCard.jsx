@@ -25,20 +25,24 @@ const UploadCard = () => {
     setFile(selectedFile);
     setOcrError("");
     setIsScanning(true);
-    
 
     try {
       const result = await scanAndFetchMedicines(selectedFile);
 
       console.log("분석 결과:", result);
 
-      setOcrText(result.rawText || "");
+      // OCR 원문만 저장하는 게 아니라 전체 분석 결과 저장
+      setOcrText(result);
 
-      navigate("/ai-summary", {
-        state: result,
-      });
+      navigate("/ai-summary");
     } catch (err) {
-      console.error("처방전 분석 실패:", err);
+      console.error("처방전 분석 실패 상세:", {
+        message: err.message,
+        status: err.response?.status,
+        data: err.response?.data,
+        url: err.config?.url,
+      });
+
       setOcrError("처방전 분석에 실패했습니다. 다시 시도해 주세요.");
     } finally {
       setIsScanning(false);
