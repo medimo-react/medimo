@@ -24,7 +24,7 @@ const NAV_ITEMS = [
     icon: <FaPills />,
   },
   { id: "alert", label: "알림", path: "/alert", icon: <HiOutlineBellAlert /> },
-  { id: "history", label: "분석 기록", path: "/history", icon: <LuHistory /> },
+  { id: "history", label: "AI 분석 기록", path: "/history", icon: <LuHistory /> },
   {
     id: "settings",
     label: "설정",

@@ -10,6 +10,7 @@ import Signup2 from './pages/Login/Signup2.jsx'
 import Dashboard from "./pages/Dashboard/Dashboard.jsx";
 import AiSummary from "./pages/AISummary/AISummary.jsx";
 import About from "./pages/About/About.jsx";
+import History from "./pages/History/History.jsx";
 
 function App() {
   return (
@@ -21,8 +22,9 @@ function App() {
       <Route element={<AppLayout />}>
         <Route path="/" element={null} />
         <Route path="/medicine" element={<Medicine />} />
-         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/alert" element={ <Info />} />
+        <Route path="/history" element={ <History />} />
         <Route path="/demo" element={<Demo />} />
         <Route path="/ai-summary" element={<AiSummary />} />
         <Route path="/about" element={<About />} />

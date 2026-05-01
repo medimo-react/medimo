@@ -12,7 +12,7 @@ const data = [
 const AiAnalysisHistorySection = () => {
   return (
       <Card radius={'sm'}>
-        <p className={styles.title}>AI 분석 내역</p>
+        <p className={styles.title}>AI 분석 기록</p>
         <AiAnalysisHistoryList data={data}/>
       </Card>
   )
