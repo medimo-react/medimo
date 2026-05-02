@@ -117,7 +117,21 @@ export const useBookmarkStore = create(
         try {
           const data = await getBookmarks();
           if (Array.isArray(data)) {
-            set({ medicines: mapBookmarks(data) });
+            const mapped = mapBookmarks(data);
+            set((s) => {
+              const serverFolders = [...new Set(mapped.flatMap((m) => m.folders))];
+              const newFolders = serverFolders.filter((f) => !s.customFolders.includes(f));
+              // 캐시가 있으면 로컬에 남아있는 ID만 서버 데이터에서 가져옴 (로컬 삭제 유지)
+              const cachedIds = new Set(s.medicines.map((m) => m.id));
+              const medicines =
+                s.medicines.length === 0
+                  ? mapped
+                  : mapped.filter((m) => cachedIds.has(m.id));
+              return {
+                medicines,
+                ...(newFolders.length > 0 && { customFolders: [...s.customFolders, ...newFolders] }),
+              };
+            });
           }
         } finally {
           set({ loading: false });
@@ -127,8 +141,7 @@ export const useBookmarkStore = create(
       deleteMedicine: async (medicine) => {
         get().closeMenu();
         set((s) => ({ medicines: s.medicines.filter((m) => m.id !== medicine.id) }));
-        const data = await deleteBookmark(medicine.id);
-        get().syncFromServer(data);
+        await deleteBookmark(medicine.id);
       },
 
       applyFolderMove: async (medicine) => {
@@ -146,18 +159,25 @@ export const useBookmarkStore = create(
       addToNewFolder: () => {
         const trimmed = get().newFolderName.trim();
         if (!trimmed) return;
-        const { medicines, customFolders } = get();
-        const known = new Set(['전체', ...customFolders, ...medicines.flatMap((m) => m.folders)]);
-        if (!known.has(trimmed)) {
+        const { customFolders } = get();
+        if (trimmed !== '전체' && !customFolders.includes(trimmed)) {
           set({ customFolders: [...customFolders, trimmed] });
         }
         get().closeMenu();
       },
+
+      deleteFolder: (folderName) =>
+        set((s) => ({
+          customFolders: s.customFolders.filter((f) => f !== folderName),
+          selectedFolders: s.selectedFolders.has(folderName)
+            ? new Set(['전체'])
+            : s.selectedFolders,
+        })),
     }),
     {
       name: STORE_KEY,
       storage: bookmarkStorage,
-      partialize: (state) => ({ customFolders: state.customFolders }),
+      partialize: (state) => ({ customFolders: state.customFolders, medicines: state.medicines }),
     }
   )
 );
