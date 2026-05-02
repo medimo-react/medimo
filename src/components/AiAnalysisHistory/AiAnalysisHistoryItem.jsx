@@ -1,6 +1,7 @@
 import styles from "./AiAnalysisHistoryItem.module.css";
 import HistoryItemActionMenu from "./HistoryItemActionMenu.jsx";
 import { useNavigate } from "react-router-dom";
+import { TiPin } from "react-icons/ti";
 
 const formatDate = (dateStr) => {
   const d = new Date(dateStr);
@@ -18,19 +19,22 @@ const AiAnalysisHistoryItem = ({ item }) => {
   const title = formatTitle(item.candidates);
 
   return (
-    <li className={styles.item}>
+    <li className={`${styles.item} ${item.isPinned ? styles.pinned : ''}`}>
       <button
         type="button"
         className={styles.content}
         onClick={() => navigate(`/ai-summary/${item._id}`)}
       >
-        <span className={styles.title}>{title}</span>
+        <span className={styles.title}>
+          {item.isPinned && <TiPin className={styles.pin_icon} />}
+          <span className={styles.title_text}>{title}</span>
+        </span>
         <span className={styles.meta}>
           <span>{formatDate(item.createdAt)}</span>
           <span>약품 {item.medicineCount}개</span>
         </span>
       </button>
-      <HistoryItemActionMenu />
+      <HistoryItemActionMenu recordId={item._id} />
     </li>
   );
 };

@@ -3,3 +3,23 @@
   font-size:var(--font-size-title-sm);
   font-weight:var(--font-weight-bold);
 }
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.header .title {
+  margin-bottom: 0;
+}
+
+.more_button {
+  font-size: 0.8rem;
+  color: #888;
+  cursor: pointer;
+}
+
+.more_button:hover {
+  color: #555;
+}

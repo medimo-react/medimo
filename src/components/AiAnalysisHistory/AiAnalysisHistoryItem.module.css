@@ -2,7 +2,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
+  transition: background-color 0.2s;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.item:last-child {
+  border-bottom:0;
 }
 
 .content {
@@ -15,10 +20,23 @@
 }
 
 .title {
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  overflow: hidden;
+}
+
+.title_text {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-weight: 500;
+}
+
+.pin_icon {
+  color: #7c5cbf;
+  flex-shrink: 0;
+  font-size: 1.3rem;
 }
 
 .meta {

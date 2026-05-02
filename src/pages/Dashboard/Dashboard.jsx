@@ -131,7 +131,7 @@ const Dashboard = ({ rate, alarms }) => {
         {/* 하단 영역 */}
         <section className={styles.bottomGrid}>
           {/* AI 분석 내역 */}
-          <AiAnalysisHistorySection />
+          <AiAnalysisHistorySection showMore={true} />
 
           {/* 다가오는 알림 */}
           <Card radius="sm">
