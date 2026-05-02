@@ -23,7 +23,7 @@ const UploadActionBtn = ({ onClick, file, onCameraCapture, isScanning }) => {
         onChange={handleCameraChange}
       />
       {file && <Button variant="outline" onClick={onClick}>삭제</Button>}
-      <Button onClick={() => cameraInputRef.current?.click()} disabled={isScanning}>
+      <Button variant="primary" type="button" onClick={() => cameraInputRef.current?.click()} disabled={isScanning}>
         <MdOutlinePhotoCamera /> {isScanning ? "스캔 중..." : "카메라"}
       </Button>
     </div>
