@@ -1,10 +1,33 @@
 .bookmarkBtn {
+  width: 30px;
+  height: 30px;
   background: transparent;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.bookmarkBtn svg {
+  width: 24px;
+  height: 24px;
+}
+
+.bookmarkBtn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
 }
 
 .on {
   color: var(--primary-color);
 }
+
 .off {
   color: var(--primary-color);
 }
