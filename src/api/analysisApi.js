@@ -34,3 +34,10 @@ export const deleteAnalysisRecord = async (id) => {
   });
   return response.data;
 };
+
+export const renameAnalysisRecord = async ({id, title}) => {
+  const response = await axios.patch(`${API_BASE}/analysis/${id}/title`, {title} ,{
+    headers: authHeader(),
+  });
+  return response.data;
+}
