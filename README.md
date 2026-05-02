@@ -38,12 +38,11 @@
 
 |                          프로필                           |  이름  |      역할      | 담당 페이지                                                                                                                                          |                  GitHub                  |
 | :-------------------------------------------------------: | :----: | :------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------: |
-|  <img src="https://github.com/YUNA9627.png" width="80">   | 배유나 | 팀장, PM, 발표 | 버튼 클릭시 조건별 알림 메시지<br /> 에러/로딩 처리<br /> AI약 요약<br />gemini백엔드 만듦<br /> 웹사이트 설명페이지                                 | [GitHub](https://github.com/minggichae)  |
-|  <img src="https://github.com/kkhhjjoo.png" width="80">   | 김현주 |    팀원, PL    | 식약처 API연결<br /> Google Vision API연결<br /> nodejs 서버 만듦<br /> 알림메시지 및 페이지<br /> 북마크 페이지<br />북마크 컴포넌트, 네비게이션 바 |   [GitHub](https://github.com/holyhw)    |
+|  <img src="https://github.com/YUNA9627.png" width="80">   | 배유나 | 팀장, PM, 발표 | 버튼 클릭시 조건별 알림 메시지<br /> 에러/로딩 처리<br /> AI약 요약<br />gemini백엔드 만듦<br /> 웹사이트 설명페이지                                 | [GitHub](https://github.com/YUNA9627)  |
+|  <img src="https://github.com/kkhhjjoo.png" width="80">   | 김현주 |    팀원, PL    | 식약처 API연결<br /> Google Vision API연결<br /> nodejs 서버 만듦<br /> 알림메시지 및 페이지<br /> 북마크 페이지<br />북마크 컴포넌트, 네비게이션 바 |   [GitHub](https://github.com/kkhhjjoo)    |
 |   <img src="https://github.com/yujsoo.png" width="80">    | 유지수 |      팀원      | 카메라 기능연<br /> 갤러리 연결<br />ai 채팅 내용 북마크 및 북마크 컴포넌트<br /> AI 분석 내용 목록                                                  |   [GitHub](https://github.com/yujsoo)    |
 | <img src="https://github.com/leopard0315.png" width="80"> | 김민혁 |      팀원      | 로그인/회원가입<br /> OCR추출 정보 json파일 변환<br /> 주요질문 템플릿화 <br /> 설정                                                                 | [GitHub](https://github.com/leopard0315) |
 
-## ⚙️ 기술 스택
 
 ## ⚙️ 기술 스택
 
@@ -130,7 +129,6 @@
 | 31 |   |   |   |   |   |   |
 
 ## 📁 프로젝트 폴더 구조
-## 📁 폴더 구조
 
 ```bash
 src
