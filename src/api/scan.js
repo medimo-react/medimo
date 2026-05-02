@@ -8,7 +8,7 @@ export const ocrScan = async (file) => {
   const formData = new FormData();
   formData.append('image', file);
 
-  const response = await api.post('/api/scan', formData, {
+  const response = await api.post('/scan', formData, {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
 
