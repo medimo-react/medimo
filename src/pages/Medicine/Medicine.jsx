@@ -1,18 +1,12 @@
-import { useEffect, useMemo, useState } from "react";
-import styles from "./Medicine.module.css";
-import {
-  FaExclamationTriangle,
-  FaPills,
-  FaClock,
-  FaFolder,
-  FaTrash,
-  FaSearch,
-} from "react-icons/fa";
-import Input from "../../components/Input/Input";
-import { useBookmarkStore } from "../../store/bookmarkStore";
-import Button from "../../components/Button/Button";
-import Container from "../../components/Container/Container";
-import Pagination from "../../components/Pagination/Pagination";
+import { useEffect, useMemo, useState } from 'react';
+import styles from './Medicine.module.css';
+import { FaExclamationTriangle, FaPills, FaClock, FaFolder, FaTrash, FaSearch } from 'react-icons/fa';
+import Input from '../../components/Input/Input';
+import { useBookmarkStore } from '../../store/bookmarkStore';
+import Button from '../../components/Button/Button'
+import Container from '../../components/Container/Container'
+import Pagination from '../../components/Pagination/Pagination';
+import { ClipLoader } from "react-spinners";
 
 const FOLDER_COLORS = [
   { bg: "#DBEAFE", text: "#1D4ED8" },
@@ -92,6 +86,7 @@ export default function Bookmark() {
   const openFolderAdd = useBookmarkStore((s) => s.openFolderAdd);
   const backFromFolderAdd = useBookmarkStore((s) => s.backFromFolderAdd);
   const selectFolderTab = useBookmarkStore((s) => s.selectFolderTab);
+  const deleteFolder = useBookmarkStore((s) => s.deleteFolder);
   const deleteMedicine = useBookmarkStore((s) => s.deleteMedicine);
   const applyFolderMove = useBookmarkStore((s) => s.applyFolderMove);
   const addToNewFolder = useBookmarkStore((s) => s.addToNewFolder);
@@ -99,6 +94,8 @@ export default function Bookmark() {
   useEffect(() => {
     fetchBookmarks();
   }, [fetchBookmarks]);
+
+  
 
   const folders = useMemo(
     () => [
@@ -136,7 +133,16 @@ export default function Bookmark() {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  if (loading) return <div className={styles.page}>불러오는 중...</div>;
+  if (loading) return <Container>
+    <div className={styles.center}>
+      <ClipLoader
+          loading={loading}
+          size={150}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+      />
+    </div>
+  </Container>;
 
   return (
     <Container>
@@ -165,18 +171,28 @@ export default function Bookmark() {
           </div>
         </div>
 
-        <div className={styles.folderTabs}>
-          {folders.map((folder) => (
-            <button
-              key={folder}
-              className={`${styles.folderTab} ${selectedFolders.has(folder) ? styles.folderTabActive : ""}`}
-              onClick={() => selectFolderTab(folder)}
-            >
-              {folder}{" "}
-              <span className={styles.folderCount}>{folderCounts[folder]}</span>
-            </button>
-          ))}
-        </div>
+      <div className={styles.folderTabs}>
+        {folders.map((folder) => (
+          <button
+            key={folder}
+            className={`${styles.folderTab} ${selectedFolders.has(folder) ? styles.folderTabActive : ''}`}
+            onClick={() => selectFolderTab(folder)}
+          >
+            {folder} <span className={styles.folderCount}>{folderCounts[folder]}</span>
+            {folder !== '전체' && (
+              <span
+                className={styles.folderTabDelete}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  deleteFolder(folder);
+                }}
+              >
+                ×
+              </span>
+            )}
+          </button>
+        ))}
+      </div>
 
         <div className={styles.tableWrapper}>
           <div className={styles.tableHeader}>

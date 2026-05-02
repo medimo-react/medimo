@@ -4,7 +4,12 @@
   min-height: 100dvh;
   font-family: var(--font-body);
 }
-
+.center {
+  display: flex;
+  height: 100dvh;
+  align-items: center;
+  justify-content: center;
+}
 .topBar {
   display: flex;
   align-items: center;
@@ -129,6 +134,29 @@
 .folderCount {
   font-size: var(--font-size-small);
   color: var(--sub-text-color);
+}
+
+.folderTabDelete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  font-size: 14px;
+  line-height: 1;
+  margin-left: 2px;
+  opacity: 0.6;
+  transition: opacity 0.15s, background 0.15s;
+}
+
+.folderTabDelete:hover {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.folderTabActive .folderTabDelete:hover {
+  background: rgba(255, 255, 255, 0.25);
 }
 
 /* 표 */

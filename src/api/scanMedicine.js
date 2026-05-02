@@ -105,6 +105,7 @@ export const scanMedicineImage = async (file) => {
   formData.append("image", file);
 
   const response = await axios.post(`${API_BASE}/scan`, formData, {
+  const response = await axios.post(`${API_BASE}/scan`, formData, {
     timeout: 60000,
   });
 
@@ -115,6 +116,7 @@ export const fetchMedicineByName = async (name) => {
   if (!name) return [];
 
   try {
+    const response = await axios.get(`${API_BASE}/medicine`, {
     const response = await axios.get(`${API_BASE}/medicine`, {
       params: { q: name },
       timeout: 30000,
@@ -133,6 +135,7 @@ export const fetchDurByProductName = async (name) => {
   if (!name) return [];
 
   try {
+    const response = await axios.get(`${API_BASE}/dur/product`, {
     const response = await axios.get(`${API_BASE}/dur/product`, {
       params: { name },
       timeout: 30000,
@@ -213,6 +216,27 @@ const medicineResultsWithSummary = medicineResults.map((item) => ({
   return {
     rawText,
     candidates,
-    medicineResults: medicineResultsWithSummary,
+    medicineResults,
   };
+};
+
+export const fetchMedicineSummary = async ({ medicine, durList }) => {
+  if (!medicine) return "";
+
+  try {
+    const response = await axios.post(`${API_BASE}/summary/medicine`, {
+      medicine,
+      durList,
+    });
+
+    return response.data.summary || "";
+  } catch (error) {
+    console.error("[요약 조회 실패]", {
+      message: error.message,
+      status: error.response?.status,
+      data: error.response?.data,
+    });
+
+    return "";
+  }
 };

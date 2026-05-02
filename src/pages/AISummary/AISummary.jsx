@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
+import { useParams } from "react-router-dom";
+import { fetchAnalysisDetail } from "../../api/analysisApi.js";
+import { useEffect, useMemo, useState } from "react";
 import { useOcrStore } from "../../store/ocrStore.js";
 
 import Container from "../../components/Container/Container";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import Card from "../../components/Card/Card";
 import Badge from "../../components/Badge/Badge";
-
-import BookmarkButton from "../../components/Bookmark/Bookmark";
-import { useBookmarkStore } from "../../store/bookmarkStore";
 
 import {
   FiActivity,
@@ -33,13 +33,6 @@ const hasValue = (value) => {
 
   return value !== undefined && value !== null && String(value).trim() !== "";
 };
-
-const cleanDisplayName = (value = "") =>
-  String(value)
-    .replace(/\([^)]*\)/g, "")
-    .replace(/\[[^\]]*\]/g, "")
-    .replace(/\s+/g, " ")
-    .trim();
 
 const toTextList = (value) => {
   if (!value) return [];
@@ -171,7 +164,6 @@ const MedicineSummary = ({ medicine }) => {
     <Card>
       <div className={styles.medicineHeader}>
         <div className={styles.largeInitial}>{medicine.name.slice(0, 1)}</div>
-
         <div className={styles.medicineInfo}>
           <h2 className={styles.medicineName}>{medicine.name}</h2>
 
@@ -187,12 +179,6 @@ const MedicineSummary = ({ medicine }) => {
             {isNotFound && <Badge variant="gray">조회 결과 없음</Badge>}
           </div>
         </div>
-
-        {!isNotFound && (
-          <div className={styles.bookmarkArea}>
-            <BookmarkButton medicineId={medicine.id} />
-          </div>
-        )}
       </div>
     </Card>
   );
@@ -386,27 +372,19 @@ const normalizeMedicines = (analysisData) => {
       const medicine = medicines?.[0];
 
       if (!medicine) {
-        const displayName = cleanDisplayName(keyword);
-
         return {
           id: `${keyword}-${index}`,
           keyword,
-          name: displayName,
-          originalName: keyword,
+          name: keyword,
           source: "notFound",
           durList: durList || [],
-          summary: summary || "",
         };
       }
 
-      const originalName = medicine.name || keyword;
-      const displayName = cleanDisplayName(originalName);
-
       return {
-        id: medicine._id || `${originalName}-${index}`,
+        id: medicine._id || `${medicine.name}-${index}`,
         keyword,
-        name: displayName,
-        originalName,
+        name: medicine.name || keyword,
         source: medicine.source || "unknown",
 
         effect: medicine.effect || "",
@@ -426,6 +404,7 @@ const normalizeMedicines = (analysisData) => {
         ediCode: medicine.ediCode || "",
 
         durList: durList || [],
+
         summary: summary || "",
       };
     },
@@ -543,7 +522,17 @@ const OneLineSummaryCard = ({ medicine }) => {
   Page
 ================================ */
 const AISummary = () => {
-  const analysisData = useOcrStore((s) => s.ocrText);
+  const { id } = useParams();
+  const [analysisData, setAnalysisData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(true);
+    fetchAnalysisDetail(id)
+      .then(setAnalysisData)
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
+  }, [id]);
   const fetchBookmarks = useBookmarkStore((s) => s.fetchBookmarks);
 
   useEffect(() => {
@@ -555,14 +544,21 @@ const AISummary = () => {
     [analysisData],
   );
 
-  // scan 후 텍스트 추출 데이터
-  // const { ocrText } = useOcrStore();
-  // console.log(ocrText);
-
   const [selectedId, setSelectedId] = useState(null);
 
   const selectedMedicine =
     medicines.find((medicine) => medicine.id === selectedId) || medicines[0];
+
+  if (isLoading) {
+    return (
+      <Container>
+        <PageHeader title="AI 처방전 분석" description="분석 결과를 불러오는 중입니다." />
+        <Card>
+          <p className={styles.bodyText}>불러오는 중...</p>
+        </Card>
+      </Container>
+    );
+  }
 
   if (!analysisData || medicines.length === 0) {
     return (
@@ -571,7 +567,6 @@ const AISummary = () => {
           title="AI 처방전 분석"
           description="처방전 이미지를 먼저 업로드하고 분석을 진행해 주세요."
         />
-
         <Card>
           <p className={styles.bodyText}>
             분석 결과가 없습니다. 처방전 이미지를 먼저 업로드해 주세요.
