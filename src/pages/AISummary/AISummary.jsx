@@ -1,6 +1,6 @@
-import { useMemo, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { useOcrStore } from "../../store/ocrStore.js";
+import { useEffect, useMemo, useState } from "react";
+import { useParams } from "react-router-dom";
+import { fetchAnalysisDetail } from "../../api/analysisApi.js";
 
 import Container from "../../components/Container/Container";
 import PageHeader from "../../components/PageHeader/PageHeader";
@@ -520,21 +520,38 @@ const OneLineSummaryCard = ({ medicine }) => {
   Page
 ================================ */
 const AISummary = () => {
-  const analysisData = useOcrStore((s) => s.ocrText);
+  const { id } = useParams();
+  const [analysisData, setAnalysisData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(true);
+    fetchAnalysisDetail(id)
+      .then(setAnalysisData)
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
+  }, [id]);
 
   const medicines = useMemo(
     () => normalizeMedicines(analysisData),
     [analysisData],
   );
 
-  // scan 후 텍스트 추출 데이터
-  // const { ocrText } = useOcrStore();
-  // console.log(ocrText);
-
   const [selectedId, setSelectedId] = useState(null);
 
   const selectedMedicine =
     medicines.find((medicine) => medicine.id === selectedId) || medicines[0];
+
+  if (isLoading) {
+    return (
+      <Container>
+        <PageHeader title="AI 처방전 분석" description="분석 결과를 불러오는 중입니다." />
+        <Card>
+          <p className={styles.bodyText}>불러오는 중...</p>
+        </Card>
+      </Container>
+    );
+  }
 
   if (!analysisData || medicines.length === 0) {
     return (
@@ -543,7 +560,6 @@ const AISummary = () => {
           title="AI 처방전 분석"
           description="처방전 이미지를 먼저 업로드하고 분석을 진행해 주세요."
         />
-
         <Card>
           <p className={styles.bodyText}>
             분석 결과가 없습니다. 처방전 이미지를 먼저 업로드해 주세요.

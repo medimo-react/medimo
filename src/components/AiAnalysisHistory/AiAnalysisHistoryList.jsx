@@ -5,7 +5,7 @@ const AiAnalysisHistoryList = ({data}) => {
   return (
       <ul className={styles.list}>
         {data.map((item) => (
-            <AiAnalysisHistoryItem item={item} key={item.id}/>
+            <AiAnalysisHistoryItem item={item} key={item._id}/>
         ))}
       </ul>
   )
