@@ -369,6 +369,12 @@
   object-fit: contain;
 }
 
+.bookmarkArea {
+  margin-left: auto;
+  display: flex;
+  align-items: flex-start;
+}
+
 @media (max-width: 1200px) {
   .layout {
     grid-template-columns: 1fr;
