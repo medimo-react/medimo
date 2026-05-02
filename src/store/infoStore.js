@@ -11,8 +11,18 @@ export const useInfoStore = create(
       alarms: INITIAL_ALARMS,
       soundEnabled: true,
       doneHistory: {},
+      lastResetDate: null,
 
       toggleSound: () => set((s) => ({ soundEnabled: !s.soundEnabled })),
+
+      resetForNewDay: (today) =>
+        set((s) => {
+          if (s.lastResetDate === today) return s;
+          return {
+            lastResetDate: today,
+            schedules: s.schedules.map((item) => ({ ...item, done: false, state: '예정' })),
+          };
+        }),
 
       toggleScheduleDone: (id) =>
         set((s) => {
@@ -123,7 +133,7 @@ export const useInfoStore = create(
     {
       name: 'medimo-info-store',
       version: 1,
-      partialize: (state) => ({ schedules: state.schedules, alarms: state.alarms, soundEnabled: state.soundEnabled, doneHistory: state.doneHistory }),
+      partialize: (state) => ({ schedules: state.schedules, alarms: state.alarms, soundEnabled: state.soundEnabled, doneHistory: state.doneHistory, lastResetDate: state.lastResetDate }),
     }
   )
 );
