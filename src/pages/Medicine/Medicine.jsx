@@ -59,6 +59,7 @@ export default function Bookmark() {
   const openFolderAdd = useBookmarkStore((s) => s.openFolderAdd);
   const backFromFolderAdd = useBookmarkStore((s) => s.backFromFolderAdd);
   const selectFolderTab = useBookmarkStore((s) => s.selectFolderTab);
+  const deleteFolder = useBookmarkStore((s) => s.deleteFolder);
   const deleteMedicine = useBookmarkStore((s) => s.deleteMedicine);
   const applyFolderMove = useBookmarkStore((s) => s.applyFolderMove);
   const addToNewFolder = useBookmarkStore((s) => s.addToNewFolder);
@@ -70,8 +71,8 @@ export default function Bookmark() {
   
 
   const folders = useMemo(
-    () => ['전체', ...new Set([...customFolders, ...medicines.flatMap((m) => m.folders)])],
-    [customFolders, medicines]
+    () => ['전체', ...customFolders],
+    [customFolders]
   );
 
   const folderCounts = useMemo(
@@ -144,6 +145,17 @@ export default function Bookmark() {
             onClick={() => selectFolderTab(folder)}
           >
             {folder} <span className={styles.folderCount}>{folderCounts[folder]}</span>
+            {folder !== '전체' && (
+              <span
+                className={styles.folderTabDelete}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  deleteFolder(folder);
+                }}
+              >
+                ×
+              </span>
+            )}
           </button>
         ))}
       </div>

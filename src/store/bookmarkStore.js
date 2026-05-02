@@ -117,7 +117,15 @@ export const useBookmarkStore = create(
         try {
           const data = await getBookmarks();
           if (Array.isArray(data)) {
-            set({ medicines: mapBookmarks(data) });
+            const mapped = mapBookmarks(data);
+            set((s) => {
+              const serverFolders = [...new Set(mapped.flatMap((m) => m.folders))];
+              const newFolders = serverFolders.filter((f) => !s.customFolders.includes(f));
+              return {
+                medicines: mapped,
+                ...(newFolders.length > 0 && { customFolders: [...s.customFolders, ...newFolders] }),
+              };
+            });
           }
         } finally {
           set({ loading: false });
@@ -146,13 +154,20 @@ export const useBookmarkStore = create(
       addToNewFolder: () => {
         const trimmed = get().newFolderName.trim();
         if (!trimmed) return;
-        const { medicines, customFolders } = get();
-        const known = new Set(['전체', ...customFolders, ...medicines.flatMap((m) => m.folders)]);
-        if (!known.has(trimmed)) {
+        const { customFolders } = get();
+        if (trimmed !== '전체' && !customFolders.includes(trimmed)) {
           set({ customFolders: [...customFolders, trimmed] });
         }
         get().closeMenu();
       },
+
+      deleteFolder: (folderName) =>
+        set((s) => ({
+          customFolders: s.customFolders.filter((f) => f !== folderName),
+          selectedFolders: s.selectedFolders.has(folderName)
+            ? new Set(['전체'])
+            : s.selectedFolders,
+        })),
     }),
     {
       name: STORE_KEY,
