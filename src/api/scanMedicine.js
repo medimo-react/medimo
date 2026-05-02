@@ -15,7 +15,9 @@ const getShortMedicineName = (name = "") => {
 };
 
 const shortenText = (text = "", maxLength = 100) => {
-  const value = String(text || "").replace(/\s+/g, " ").trim();
+  const value = String(text || "")
+    .replace(/\s+/g, " ")
+    .trim();
 
   if (value.length <= maxLength) return value;
 
@@ -74,7 +76,7 @@ const createCompactCautionPayload = (medicineResults = []) => {
                 reason: shortenText(reason, 80),
               },
             ];
-          })
+          }),
         ).values(),
       ].slice(0, 2);
 
@@ -105,7 +107,6 @@ export const scanMedicineImage = async (file) => {
   formData.append("image", file);
 
   const response = await axios.post(`${API_BASE}/scan`, formData, {
-  const response = await axios.post(`${API_BASE}/scan`, formData, {
     timeout: 60000,
   });
 
@@ -116,7 +117,6 @@ export const fetchMedicineByName = async (name) => {
   if (!name) return [];
 
   try {
-    const response = await axios.get(`${API_BASE}/medicine`, {
     const response = await axios.get(`${API_BASE}/medicine`, {
       params: { q: name },
       timeout: 30000,
@@ -135,7 +135,6 @@ export const fetchDurByProductName = async (name) => {
   if (!name) return [];
 
   try {
-    const response = await axios.get(`${API_BASE}/dur/product`, {
     const response = await axios.get(`${API_BASE}/dur/product`, {
       params: { name },
       timeout: 30000,
@@ -163,7 +162,7 @@ export const fetchMedicineSummaries = async (medicineResults) => {
       { medicines },
       {
         timeout: 30000,
-      }
+      },
     );
 
     return response.data.summaries || [];
@@ -204,19 +203,19 @@ export const scanAndFetchMedicines = async (file) => {
   const summaries = await fetchMedicineSummaries(medicineResults);
 
   const summaryMap = new Map(
-    summaries.map((item) => [String(item.id), item.summary])
+    summaries.map((item) => [String(item.id), item.summary]),
   );
 
-const medicineResultsWithSummary = medicineResults.map((item) => ({
-  ...item,
-  summary:
-    summaryMap.get(String(item.id)) || createFallbackCautionSummary(item),
-}));
+  const medicineResultsWithSummary = medicineResults.map((item) => ({
+    ...item,
+    summary:
+      summaryMap.get(String(item.id)) || createFallbackCautionSummary(item),
+  }));
 
   return {
     rawText,
     candidates,
-    medicineResults,
+    medicineResults: medicineResultsWithSummary,
   };
 };
 
