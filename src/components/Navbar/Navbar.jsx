@@ -108,9 +108,10 @@ export default function Navbar() {
               </button>
             </li>
           ))}
+        </ul>
 
           {isLoggedIn && (
-            <li className={styles.logoutWrapper}>
+            <div className={styles.logoutWrapper}>
               <button
                 type="button"
                 className={styles.navItem} 
@@ -119,9 +120,8 @@ export default function Navbar() {
                 <span className={styles.navIcon}><HiOutlineLogout /></span>
                 <span className={styles.navLabel}>로그아웃</span>
               </button>
-            </li>
+            </div>
           )}
-        </ul>
 
         <div className={styles.bottom}>
           <button
