@@ -5,6 +5,10 @@
   margin-top: 1.5rem;
 }
 
+.fullGridCard {
+  grid-column: 1 / -1;
+}
+
 .sidePanel {
   min-width: 0;
 }
@@ -375,7 +379,7 @@
   align-items: flex-start;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1024px) {
   .layout {
     grid-template-columns: 1fr;
   }
