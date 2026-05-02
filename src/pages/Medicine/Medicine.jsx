@@ -1,10 +1,11 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import styles from './Medicine.module.css';
 import { FaExclamationTriangle, FaPills, FaClock, FaFolder, FaTrash, FaSearch } from 'react-icons/fa';
 import Input from '../../components/Input/Input';
 import { useBookmarkStore } from '../../store/bookmarkStore';
 import Button from '../../components/Button/Button'
 import Container from '../../components/Container/Container'
+import Pagination from '../../components/Pagination/Pagination';
 
 const FOLDER_COLORS = [
   { bg: '#DBEAFE', text: '#1D4ED8' },
@@ -91,6 +92,8 @@ export default function Bookmark() {
       }),
     [medicines, search, selectedFolders]
   );
+
+  const [currentPage, setCurrentPage] = useState(1);
 
   if (loading) return <div className={styles.page}>불러오는 중...</div>;
 
@@ -298,6 +301,11 @@ export default function Bookmark() {
         </div>
       </div>
       </div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={5}
+        onPageChange={setCurrentPage}
+      />
     </Container>  
   );
 }
