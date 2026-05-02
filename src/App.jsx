@@ -10,6 +10,7 @@ import Signup2 from './pages/Login/Signup2.jsx'
 import Dashboard from "./pages/Dashboard/Dashboard.jsx";
 import AiSummary from "./pages/AISummary/AISummary.jsx";
 import About from "./pages/About/About.jsx";
+import Mypage from "./pages/Mypage/Mypage.jsx";
 import History from "./pages/History/History.jsx";
 import { useInfoStore } from './store/infoStore.js'
 
@@ -32,6 +33,7 @@ function App() {
         <Route path="/demo" element={<Demo />} />
         <Route path="/ai-summary" element={<AiSummary />} />
         <Route path="/about" element={<About />} />
+        <Route path="/mypage" element={<Mypage />} />
       </Route>
     </Routes>
   )

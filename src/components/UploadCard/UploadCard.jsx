@@ -1,30 +1,26 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import Card from "../Card/Card.jsx";
 import UploadDropBox from "./UploadDropBox.jsx";
 import UploadActionBtn from "./UploadActionBtn.jsx";
-
 import styles from "./UploadCard.module.css";
-
 import { scanAndFetchMedicines } from "../../api/scanMedicine.js";
 import { useOcrStore } from "../../store/ocrStore.js";
+import { useModal } from "../../providers/useModal.js";
 
 const UploadCard = () => {
   const [file, setFile] = useState(null);
   const [isDrag, setIsDrag] = useState(false);
-  const [isScanning, setIsScanning] = useState(false);
-  const [ocrError, setOcrError] = useState("");
 
   const setOcrText = useOcrStore((s) => s.setOcrText);
   const navigate = useNavigate();
+  const { loading, alert } = useModal();
 
   const scanFile = async (selectedFile) => {
     if (!selectedFile) return;
 
     setFile(selectedFile);
-    setOcrError("");
-    setIsScanning(true);
+    const close = loading("AI가 처방전 정보를 분석하고 있어요!", { title: "처방전 분석 중" });
 
     try {
       const result = await scanAndFetchMedicines(selectedFile);
@@ -43,9 +39,9 @@ const UploadCard = () => {
         url: err.config?.url,
       });
 
-      setOcrError("처방전 분석에 실패했습니다. 다시 시도해 주세요.");
+      await alert("처방전 분석에 실패했습니다. 다시 시도해 주세요.");
     } finally {
-      setIsScanning(false);
+      close();
     }
   };
 
@@ -69,7 +65,6 @@ const UploadCard = () => {
 
   const handleRemove = () => {
     setFile(null);
-    setOcrError("");
   };
 
   const handleCameraCapture = async (capturedFile) => {
@@ -79,7 +74,6 @@ const UploadCard = () => {
   return (
     <Card radius={"sm"}>
       <p className={styles.title}>처방전 업로드</p>
-
       <UploadDropBox
         isDrag={isDrag}
         setIsDrag={setIsDrag}
@@ -87,19 +81,11 @@ const UploadCard = () => {
         onDrop={handleDrop}
         file={file}
       />
-
       <UploadActionBtn
         file={file}
         onClick={handleRemove}
         onCameraCapture={handleCameraCapture}
-        isScanning={isScanning}
       />
-
-      {isScanning && (
-        <p className={styles.ocr_status}>처방전을 분석하고 있습니다...</p>
-      )}
-
-      {ocrError && <p className={styles.ocr_error}>{ocrError}</p>}
     </Card>
   );
 };
