@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE = import.meta.env.VITE_API_BASE || "http://127.0.0.1:5000";
+const API_BASE = import.meta.env.VITE_API_BASE || "http://127.0.0.1:5000/api";
 
 const getErrorInfo = (error) => ({
   message: error.message,
@@ -18,7 +18,7 @@ export const scanMedicineImage = async (file) => {
   const formData = new FormData();
   formData.append("image", file);
 
-  const response = await axios.post(`${API_BASE}/api/scan`, formData, {
+  const response = await axios.post(`${API_BASE}/scan`, formData, {
     timeout: 60000,
   });
 
@@ -29,7 +29,7 @@ export const fetchMedicineByName = async (name) => {
   if (!name) return [];
 
   try {
-    const response = await axios.get(`${API_BASE}/api/medicine`, {
+    const response = await axios.get(`${API_BASE}/medicine`, {
       params: { q: name },
       timeout: 30000,
     });
@@ -45,7 +45,7 @@ export const fetchDurByProductName = async (name) => {
   if (!name) return [];
 
   try {
-    const response = await axios.get(`${API_BASE}/api/dur/product`, {
+    const response = await axios.get(`${API_BASE}/dur/product`, {
       params: { name },
       timeout: 30000,
     });
@@ -95,7 +95,7 @@ export const fetchMedicineSummary = async ({ medicine, durList }) => {
   if (!medicine) return "";
 
   try {
-    const response = await axios.post(`${API_BASE}/api/summary/medicine`, {
+    const response = await axios.post(`${API_BASE}/summary/medicine`, {
       medicine,
       durList,
     });
