@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchAnalysisDetail } from "../../api/analysisApi.js";
-import { useEffect, useMemo, useState } from "react";
-import { useOcrStore } from "../../store/ocrStore.js";
+import { useBookmarkStore } from "../../store/bookmarkStore.js";
 
 import Container from "../../components/Container/Container";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import Card from "../../components/Card/Card";
 import Badge from "../../components/Badge/Badge";
+import BookmarkButton from "../../components/Bookmark/Bookmark";
 
 import {
   FiActivity,
@@ -21,7 +21,6 @@ import {
 } from "react-icons/fi";
 
 import styles from "./AISummary.module.css";
-// import { useOcrStore } from "../../store/ocrStore.js";
 
 /* ==============================
   Utils
@@ -164,6 +163,7 @@ const MedicineSummary = ({ medicine }) => {
     <Card>
       <div className={styles.medicineHeader}>
         <div className={styles.largeInitial}>{medicine.name.slice(0, 1)}</div>
+
         <div className={styles.medicineInfo}>
           <h2 className={styles.medicineName}>{medicine.name}</h2>
 
@@ -179,6 +179,12 @@ const MedicineSummary = ({ medicine }) => {
             {isNotFound && <Badge variant="gray">조회 결과 없음</Badge>}
           </div>
         </div>
+
+        {!isNotFound && (
+          <div className={styles.bookmarkArea}>
+            <BookmarkButton medicineId={medicine.id} />
+          </div>
+        )}
       </div>
     </Card>
   );
@@ -523,17 +529,31 @@ const OneLineSummaryCard = ({ medicine }) => {
 ================================ */
 const AISummary = () => {
   const { id } = useParams();
+
   const [analysisData, setAnalysisData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedId, setSelectedId] = useState(null);
+
+  const fetchBookmarks = useBookmarkStore((s) => s.fetchBookmarks);
 
   useEffect(() => {
-    setIsLoading(true);
-    fetchAnalysisDetail(id)
-      .then(setAnalysisData)
-      .catch(console.error)
-      .finally(() => setIsLoading(false));
+    if (!id) return;
+
+    const loadAnalysisDetail = async () => {
+      setIsLoading(true);
+
+      try {
+        const data = await fetchAnalysisDetail(id);
+        setAnalysisData(data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadAnalysisDetail();
   }, [id]);
-  const fetchBookmarks = useBookmarkStore((s) => s.fetchBookmarks);
 
   useEffect(() => {
     fetchBookmarks();
@@ -544,15 +564,16 @@ const AISummary = () => {
     [analysisData],
   );
 
-  const [selectedId, setSelectedId] = useState(null);
-
   const selectedMedicine =
     medicines.find((medicine) => medicine.id === selectedId) || medicines[0];
 
   if (isLoading) {
     return (
       <Container>
-        <PageHeader title="AI 처방전 분석" description="분석 결과를 불러오는 중입니다." />
+        <PageHeader
+          title="AI 처방전 분석"
+          description="분석 결과를 불러오는 중입니다."
+        />
         <Card>
           <p className={styles.bodyText}>불러오는 중...</p>
         </Card>
