@@ -65,7 +65,7 @@ const Dashboard = ({ rate, alarms }) => {
           {/* 처방전 업로드 */}
           <div className={styles.uploadArea}>
             <UploadCard />
-          </div>가
+          </div>
 
           {/* 오늘 상태 요약 */}
           <div className={styles.summaryArea}>
