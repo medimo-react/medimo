@@ -6,6 +6,7 @@ import { useBookmarkStore } from '../../store/bookmarkStore';
 import Button from '../../components/Button/Button'
 import Container from '../../components/Container/Container'
 import Pagination from '../../components/Pagination/Pagination';
+import { ClipLoader } from "react-spinners";
 
 const FOLDER_COLORS = [
   { bg: '#DBEAFE', text: '#1D4ED8' },
@@ -66,6 +67,8 @@ export default function Bookmark() {
     fetchBookmarks();
   }, [fetchBookmarks]);
 
+  
+
   const folders = useMemo(
     () => ['전체', ...new Set([...customFolders, ...medicines.flatMap((m) => m.folders)])],
     [customFolders, medicines]
@@ -95,7 +98,16 @@ export default function Bookmark() {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  if (loading) return <div className={styles.page}>불러오는 중...</div>;
+  if (loading) return <Container>
+    <div className={styles.center}>
+      <ClipLoader
+          loading={loading}
+          size={150}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+      />
+    </div>
+  </Container>;
 
   return (
     <Container>
