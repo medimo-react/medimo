@@ -65,7 +65,7 @@ const Dashboard = ({ rate, alarms }) => {
           {/* 처방전 업로드 */}
           <div className={styles.uploadArea}>
             <UploadCard />
-          </div>
+          </div>가
 
           {/* 오늘 상태 요약 */}
           <div className={styles.summaryArea}>
@@ -131,7 +131,7 @@ const Dashboard = ({ rate, alarms }) => {
         {/* 하단 영역 */}
         <section className={styles.bottomGrid}>
           {/* AI 분석 내역 */}
-          <AiAnalysisHistorySection />
+          <AiAnalysisHistorySection showMore={true} />
 
           {/* 다가오는 알림 */}
           <Card radius="sm">
