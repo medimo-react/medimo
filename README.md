@@ -258,3 +258,11 @@ src
 ├─ sw.js
 └─ main.jsx
 ```
+
+---
+
+<div align="center">
+
+Made with ❤️ by Team Medimo
+
+</div>
