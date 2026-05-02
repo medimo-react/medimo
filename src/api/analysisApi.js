@@ -27,3 +27,10 @@ export const fetchAnalysisDetail = async (id) => {
   });
   return response.data;
 };
+
+export const deleteAnalysisRecord = async (id) => {
+  const response = await axios.delete(`${API_BASE}/analysis/${id}`, {
+    headers: authHeader(),
+  });
+  return response.data;
+};

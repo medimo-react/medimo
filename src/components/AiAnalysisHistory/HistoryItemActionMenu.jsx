@@ -6,6 +6,7 @@ import {useAnalysisStore} from "../../store/analysisStore.js";
 const HistoryItemActionMenu = ({recordId}) => {
 
   const pinRecords = useAnalysisStore((s) => s.pinRecords);
+  const deleteRecord = useAnalysisStore((s) => s.deleteRecord);
   const records = useAnalysisStore((s) => s.records);
   const isPinned = records.find((r) => r._id === recordId)?.isPinned ?? false;
 
@@ -19,7 +20,7 @@ const HistoryItemActionMenu = ({recordId}) => {
             <Popover.Content side="bottom" align="center" className={styles.popover_content}>
               <div><button>이름 변경</button></div>
               <div><button onClick={ () => pinRecords(recordId)}>{isPinned ? '상단 고정 해제' : '내역 상단 고정'}</button></div>
-              <div><button>삭제</button></div>
+              <div><button onClick={() => deleteRecord(recordId)}>삭제</button></div>
             </Popover.Content>
           </Popover.Portal>
         </Popover.Root>
