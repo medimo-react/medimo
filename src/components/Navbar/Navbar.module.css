@@ -158,6 +158,13 @@
   padding: 1.05rem 0.75rem;
   border-top: 1px solid var(--border-color);
 }
+.bottomButtons {
+  display: flex;        
+  align-items: center;   
+  gap: 12px;            
+  padding: 0 16px;       
+  margin-bottom: 16px;   
+}
 
 .helpButton {
   display: flex;
@@ -177,12 +184,27 @@
 
   transition: color 0.15s ease;
 }
+.logoutButton {
+  background-color: #5e5ce6; 
+  color: white;
+  border: none;
+  border-radius: 8px;        
+  padding: 6px 12px;         
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.logoutButton:hover {
+  background-color: #4a48c5;
+}
 
 .helpButton:hover {
   color: var(--primary-color);
 }
 
-/* ── user profile ── */
+/* ── Mypage ── */
 .userProfile {
   display: flex;
   align-items: center;

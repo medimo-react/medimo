@@ -29,8 +29,8 @@ const Login = () => {
     setError('');
     try {
       const data = await loginApi(email, password);
-      setUser({ email, name: data.name ?? '', token: data.token });
-      navigate('/');
+      setUser({ email: data.user.email, name: data.user.name ?? '', token: data.token });
+      navigate('/dashboard');
     } catch (err) {
       setError(err.response?.data?.message ?? '로그인에 실패했습니다. 다시 시도해주세요.');
     } finally {
@@ -45,8 +45,7 @@ const Login = () => {
         <div className={styles.heroSection}>
           <div className={styles.heroContent}>
             <div className={styles.logoArea}>
-              <div className={styles.logoSymbol}>💊</div>
-              <span className={styles.logoText}>MEDIMO</span>
+              <img src="/logo.png" alt = "MEDIMO Logo" className={styles.logoImage}/>
             </div>
             
             <h1 className={styles.mainTitle}>

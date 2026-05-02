@@ -7,13 +7,15 @@ import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { HiOutlineBellAlert } from "react-icons/hi2";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { FiMenu, FiX } from "react-icons/fi";
+import { useUserStore } from "../../store/userStore";
+import { HiOutlineLogout } from "react-icons/hi";
 
 import styles from "./Navbar.module.css";
 
 const NAV_ITEMS = [
   {
     id: "prescription",
-    label: "처방전 분석",
+    label: "AI 처방전 분석",
     path: "/dashboard",
     icon: <LuScanLine />,
   },
@@ -25,12 +27,6 @@ const NAV_ITEMS = [
   },
   { id: "alert", label: "알림", path: "/alert", icon: <HiOutlineBellAlert /> },
   { id: "history", label: "AI 분석 기록", path: "/history", icon: <LuHistory /> },
-  {
-    id: "settings",
-    label: "설정",
-    path: "/settings",
-    icon: <IoSettingsOutline />,
-  },
 ];
 
 const user = {
@@ -43,10 +39,24 @@ export default function Navbar() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const { name, email, isLoggedIn,clearUser } = useUserStore();
 
   const handleNavigate = (path) => {
     navigate(path);
     setIsOpen(false);
+  };
+
+  const handleLogout = () => {
+    if (window.confirm("로그아웃 하시겠습니까?")) {
+      clearUser(); 
+      navigate("/"); 
+    }
+  };
+
+  const displayUser = {
+    name: isLoggedIn && name ? name : "로그인 필요",
+    email: isLoggedIn && email ? email : "로그인 해주세요",
+    initial: name ? name[0] : "사",
   };
 
   return (
@@ -101,6 +111,7 @@ export default function Navbar() {
         </ul>
 
         <div className={styles.bottom}>
+          <div className={styles.bottomButtons}>
           <button
             type="button"
             className={`${styles.helpButton} ${
@@ -114,12 +125,24 @@ export default function Navbar() {
             <span className={styles.navLabel}>도움말</span>
           </button>
 
-          <button type="button" className={styles.userProfile}>
-            <div className={styles.userAvatar}>{user.initial}</div>
+          {isLoggedIn && (
+              <button
+                type="button"
+                className={styles.logoutButton}
+                onClick={handleLogout}
+              >
+                <span className={styles.navIcon}><HiOutlineLogout /></span>
+                {/* <span className={styles.navLabel}>로그아웃</span> */}
+              </button>
+            )}
+          </div>
+
+          <button type="button" className={styles.userProfile} onClick={() => handleNavigate("/Mypage")}>
+            <div className={styles.userAvatar}>{displayUser.initial}</div>
 
             <div className={styles.userInfo}>
-              <span className={styles.userName}>{user.name}</span>
-              <span className={styles.userEmail}>{user.email}</span>
+              <span className={styles.userName}>{displayUser.name}</span>
+              <span className={styles.userEmail}>{displayUser.email}</span>
             </div>
 
             <MdOutlineKeyboardArrowRight className={styles.chevron} />

@@ -344,28 +344,46 @@
   color: #e5484d;
 }
 
-@media (max-width: 1024px) {
+.medicineImage {
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  background-color: #f8f8ff;
+}
+
+.imageCardBody {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  background-color: #f8f8ff;
+}
+
+.medicineImage {
+  max-width: 12rem;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 1200px) {
   .layout {
-    grid-template-columns: 16rem 1fr;
+    grid-template-columns: 1fr;
+  }
+
+  .sidePanel,
+  .detailPanel {
+    width: 100%;
   }
 
   .infoGrid {
     grid-template-columns: 1fr;
   }
-}
 
-@media (max-width: 768px) {
-  .layout {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 480px) {
   .medicineHeader {
     flex-direction: column;
-  }
-
-  .badgeGroup {
-    gap: 0.25rem;
   }
 }
