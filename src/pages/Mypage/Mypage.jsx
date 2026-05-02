@@ -16,7 +16,12 @@ const MyPage = () => {
 
   const [isEditing, setIsEditing] = useState(false);
   const [tempName, setTempName] = useState("");
+
   const [isPasswordEditing, setIsPasswordEditing] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const navigate = useNavigate();
 
@@ -46,13 +51,31 @@ const MyPage = () => {
   };
 
   const handlePasswordCancel = () => {
+    setCurrentPassword("");
+    setNewPassword("");
+    setConfirmPassword("");
     setIsPasswordEditing(false);
   };
 
   const handlePasswordSave = () => {
-    // API 로직 추가
-    alert("비밀번호가 변경되었습니다.");
-    setIsPasswordEditing(false);
+   if (!currentPassword || !newPassword || !confirmPassword) {
+      alert("모든 필드를 입력해주세요.");
+      return;
+    }
+
+    if (currentPassword === newPassword) {
+      alert("새 비밀번호는 기존 비밀번호와 다르게 입력해 주세요.");
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      alert("새 비밀번호와 새 비밀번호 확인이 일치하지 않습니다.");
+      return;
+    }
+
+    // 성공 로직
+    alert("비밀번호가 성공적으로 변경되었습니다.");
+    handlePasswordCancel(); 
   };
     
   return (
@@ -119,15 +142,17 @@ const MyPage = () => {
             <div className={styles.formGroup}>
               <div className={styles.inputItem}>
                 <label>현재 비밀번호</label>
-                <input type="password" placeholder="현재 비밀번호" className={styles.input} disabled={isPasswordEditing} />
+                <input type="password" placeholder="현재 비밀번호" className={styles.input} value = {currentPassword} onChange={(e)=> setCurrentPassword(e.target.value)} disabled={isPasswordEditing} />
               </div>
               <div className={styles.inputItem}>
                 <label>새 비밀번호</label>
-                <input type="password" placeholder="새 비밀번호" className={styles.input} disabled = {!isPasswordEditing}/>
+                <input type="password" placeholder="새 비밀번호" className={styles.input} value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)} disabled = {!isPasswordEditing}/>
               </div>
               <div className={styles.inputItem}>
                 <label>새 비밀번호 확인</label>
-                <input type="password" placeholder="비밀번호 확인" className={styles.input} disabled={!isPasswordEditing} />
+                <input type="password" placeholder="비밀번호 확인" className={styles.input} value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)} disabled={!isPasswordEditing} />
               </div>
             </div>
             <div className={styles.buttonArea}>
@@ -177,7 +202,6 @@ const MyPage = () => {
           confirmText="탈퇴하기"
           cancelText="취소"
           onConfirm={() => {
-            // 탈퇴 API 로직 추가
             setShowDeleteModal(false);
             alert("회원 탈퇴가 완료되었습니다.");
             navigate("/");

@@ -108,10 +108,22 @@ export default function Navbar() {
               </button>
             </li>
           ))}
+
+          {isLoggedIn && (
+            <li className={styles.logoutWrapper}>
+              <button
+                type="button"
+                className={styles.navItem} 
+                onClick={handleLogout}
+              >
+                <span className={styles.navIcon}><HiOutlineLogout /></span>
+                <span className={styles.navLabel}>로그아웃</span>
+              </button>
+            </li>
+          )}
         </ul>
 
         <div className={styles.bottom}>
-          <div className={styles.bottomButtons}>
           <button
             type="button"
             className={`${styles.helpButton} ${
@@ -124,18 +136,6 @@ export default function Navbar() {
             </span>
             <span className={styles.navLabel}>도움말</span>
           </button>
-
-          {isLoggedIn && (
-              <button
-                type="button"
-                className={styles.logoutButton}
-                onClick={handleLogout}
-              >
-                <span className={styles.navIcon}><HiOutlineLogout /></span>
-                {/* <span className={styles.navLabel}>로그아웃</span> */}
-              </button>
-            )}
-          </div>
 
           <button type="button" className={styles.userProfile} onClick={() => handleNavigate("/Mypage")}>
             <div className={styles.userAvatar}>{displayUser.initial}</div>
