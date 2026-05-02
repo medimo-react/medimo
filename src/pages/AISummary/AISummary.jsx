@@ -253,6 +253,7 @@ const EasyDrugDetailCards = ({ medicine }) => {
       icon: <FiZap />,
       value: toTextList(medicine.caution),
       content: <TextList items={medicine.caution} />,
+      full: true,
     },
   ];
 
@@ -263,7 +264,7 @@ const EasyDrugDetailCards = ({ medicine }) => {
   return (
     <div className={styles.infoGrid}>
       {visibleCards.map((card) => (
-        <Card key={card.title}>
+        <Card key={card.title} className={card.full ? styles.fullGridCard : ""}>
           <CardHeader
             icon={card.icon}
             title={card.title}
@@ -311,6 +312,7 @@ const PermitDetailCards = ({ medicine }) => {
       title: "상태 및 보험코드",
       icon: <FiAlertTriangle />,
       value: [medicine.status, medicine.ediCode].filter(Boolean),
+      full: true,
       content: (
         <>
           {hasValue(medicine.status) && (
@@ -338,7 +340,7 @@ const PermitDetailCards = ({ medicine }) => {
   return (
     <div className={styles.infoGrid}>
       {visibleCards.map((card) => (
-        <Card key={card.title}>
+        <Card key={card.title} className={card.full ? styles.fullGridCard : ""}>
           <CardHeader icon={card.icon} title={card.title} />
           {card.content}
         </Card>
