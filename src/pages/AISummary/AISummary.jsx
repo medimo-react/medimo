@@ -1,10 +1,13 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useOcrStore } from "../../store/ocrStore.js";
 
 import Container from "../../components/Container/Container";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import Card from "../../components/Card/Card";
 import Badge from "../../components/Badge/Badge";
+
+import BookmarkButton from "../../components/Bookmark/Bookmark";
+import { useBookmarkStore } from "../../store/bookmarkStore";
 
 import {
   FiActivity,
@@ -30,6 +33,13 @@ const hasValue = (value) => {
 
   return value !== undefined && value !== null && String(value).trim() !== "";
 };
+
+const cleanDisplayName = (value = "") =>
+  String(value)
+    .replace(/\([^)]*\)/g, "")
+    .replace(/\[[^\]]*\]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
 
 const toTextList = (value) => {
   if (!value) return [];
@@ -161,6 +171,7 @@ const MedicineSummary = ({ medicine }) => {
     <Card>
       <div className={styles.medicineHeader}>
         <div className={styles.largeInitial}>{medicine.name.slice(0, 1)}</div>
+
         <div className={styles.medicineInfo}>
           <h2 className={styles.medicineName}>{medicine.name}</h2>
 
@@ -176,6 +187,12 @@ const MedicineSummary = ({ medicine }) => {
             {isNotFound && <Badge variant="gray">조회 결과 없음</Badge>}
           </div>
         </div>
+
+        {!isNotFound && (
+          <div className={styles.bookmarkArea}>
+            <BookmarkButton medicineId={medicine.id} />
+          </div>
+        )}
       </div>
     </Card>
   );
@@ -369,19 +386,27 @@ const normalizeMedicines = (analysisData) => {
       const medicine = medicines?.[0];
 
       if (!medicine) {
+        const displayName = cleanDisplayName(keyword);
+
         return {
           id: `${keyword}-${index}`,
           keyword,
-          name: keyword,
+          name: displayName,
+          originalName: keyword,
           source: "notFound",
           durList: durList || [],
+          summary: summary || "",
         };
       }
 
+      const originalName = medicine.name || keyword;
+      const displayName = cleanDisplayName(originalName);
+
       return {
-        id: medicine._id || `${medicine.name}-${index}`,
+        id: medicine._id || `${originalName}-${index}`,
         keyword,
-        name: medicine.name || keyword,
+        name: displayName,
+        originalName,
         source: medicine.source || "unknown",
 
         effect: medicine.effect || "",
@@ -401,7 +426,6 @@ const normalizeMedicines = (analysisData) => {
         ediCode: medicine.ediCode || "",
 
         durList: durList || [],
-
         summary: summary || "",
       };
     },
@@ -520,6 +544,11 @@ const OneLineSummaryCard = ({ medicine }) => {
 ================================ */
 const AISummary = () => {
   const analysisData = useOcrStore((s) => s.ocrText);
+  const fetchBookmarks = useBookmarkStore((s) => s.fetchBookmarks);
+
+  useEffect(() => {
+    fetchBookmarks();
+  }, [fetchBookmarks]);
 
   const medicines = useMemo(
     () => normalizeMedicines(analysisData),
