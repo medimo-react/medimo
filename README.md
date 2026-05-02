@@ -68,6 +68,45 @@
 | OpenAI API | GPT-4o-mini 모델을 활용한 사용자 맞춤형 모임 카테고리 추천 |
 | radix UI | 접근성을 고려한 UI 컴포넌트 (모달, 드롭다운 등) |
 
+## 🐛 트러블슈팅
+
+| 이름     | 문제점                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | 해결 방법                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **민기** | -                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | -                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| **현욱** | -                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | -                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| **현주** | 북마크 클릭 시 여러 개가 동시에 선택되는 버그 발생. `git pull`을 받지 않아 최신 코드가 누락됨.                                                                                                                                                                                                                                                                                                                                                                                                             | `git pull`, `git merge`를 통해 최신 코드 동기화 후 해결                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| **지안** | 1. **Git 브랜치 동기화 문제**: `develop` 브랜치에서 `git pull`이 정상적으로 되지 않는 문제 발생<br/>2. **CSS Module `:global` 사용 문제**: CSS Module에서 `:global`을 사용하면서 스타일이 전역으로 적용되어 다른 페이지에도 영향을 주는 문제 발생<br/>3. **로그인 상태 유지 문제**: 로그인 여부를 `useState`로만 판단해 로그인되지 않았을 경우 로그인 페이지로 강제 이동하도록 구현했는데, 새로고침 시 로그인 상태에서도 로그인 화면으로 이동하는 문제 발생. Hydration 이전 상태를 `false`로 인식했기 때문 | 1. **Git 동기화 해결**: rebase 사용 시 발생하는 히스토리 오염 문제를 팀원들에게 공유. 이후 `git pull`이 되지 않는 경우 `rebase` 대신 `merge` 전략을 사용하도록 협업 방식을 정리하여 develop 브랜치와의 버전을 안정적으로 맞춤<br/>2. **CSS 격리**: `:global` 사용을 최소화하고, 필요한 경우 더 구체적인 선택자를 사용하여 적용 범위를 제한. 컴포넌트 단위로 스타일이 격리되도록 구조 개선<br/>3. **Hydration 처리**: `useStore.ts`에 `setHasHydrated`를 추가하여 상태가 hydration된 이후에만 로그인 여부를 판단하도록 수정. 새로고침 시에도 로그인 상태가 정상적으로 유지되도록 개선 |
+
+## 회고
+
+<details>
+  <summary>유나</summary>
+  <ul>
+    <li>좋았던 점:</li>
+    <li>아쉬웠던 점:</li>
+  </ul>
+</details>
+<details>
+  <summary>지수</summary>
+  <ul>
+    <li></li>
+    <li>좋았던 점: </li>
+    <li>아쉬웠던 점: </li>
+  </ul>
+</details>
+<details>
+  <summary>현주</summary>
+  <ul><li> 좋았던 점: React로 그룹프로젝트를 하면서 api를 이렇게 백엔드에도 적용하는구나 싶었습니다. </li>
+  <li>아쉬웠던 점: 경험이 더 많아서 더 잘했으면 좋았을텐데 아쉬웠습니다</li>
+  </ul>
+</details>
+<details>
+  <summary>민혁</summary>
+  <ul><li>좋았던 점: </li>
+  <li>아쉬웠던 점:  </li>
+  </ul>
+</details>
+
 
 - 회의록
 # 2026년 4월
@@ -89,3 +128,133 @@
 | 17 | 18 | 19 | 20 | 21 | 22 | 23 |
 | 24 | 25 | 26 | 27 | 28 | 29 | 30 |
 | 31 |   |   |   |   |   |   |
+
+## 📁 프로젝트 폴더 구조
+## 📁 폴더 구조
+
+```bash
+src
+├─ components
+│  ├─ AiAnalysisHistory
+│  |  ├─ AiAnalysisHistoryItem.jsx
+│  │  ├─  AiAnalysisHistoryItem.module.css
+│  |  ├─ AiAnalysisHistoryList.jsx
+│  │  ├─  AiAnalysisHistoryList.module.css
+│  |  ├─ AiAnalysisHistorySection.jsx
+│  │  ├─ AiAnalysisHistorySection.module.css
+│  |  ├─ HistoryEmpty.jsx
+│  |  ├─ HistoryItemActionMenu.jsx
+│  │  └─ HistoryItemActionMenu.module.css
+│  ├─ Badge
+│  |  ├─ Badge.jsx
+│  │  └─ Badge.module.css
+│  ├─ Button
+│  |  ├─ Button.jsx
+│  │  └─ Button.module.css
+│  ─ Card
+│  |  ├─ Card.jsx
+│  │  └─ Card.module.css
+│  ├─ Checkbox
+│  |  ├─ Checkbox.jsx
+│  │  └─ Checkbox.module.css
+│  ├─ Container
+│  |  ├─ Container.jsx
+│  │  └─ Container.module.css
+│  ├─ Form
+│  |  ├─ Form.jsx
+│  │  └─ Form.module.css
+│  ├─ Input
+│  |  ├─ Input.jsx
+│  │  └─ Input.module.css
+│  ├─ Modal
+│  |  ├─ Modal.jsx
+│  │  └─ Modal.module.css
+│  ├─ Pagination
+│  |  ├─ Pagination.jsx
+│  │  └─ Modal.module.css
+│  ├─ Navbar
+│  |  ├─ Navbar.jsx
+│  │  └─ Navbar.module.css
+│  ├─ PageHeader
+│  |  ├─ PageHeader.jsx
+│  │  └─ PageHeader.module.css
+│  ├─ Radio
+│  |  ├─ Radio.jsx
+│  │  └─ Radio.module.css
+│  ├─ Select
+│  |  ├─ Select.jsx
+│  │  └─ Select.module.css
+│  ├─ Tabs
+│  |  ├─ Tabs.jsx
+│  │  └─ Tabs.module.css
+│  ├─Textarea
+│  |  ├─ Textarea.jsx
+│  │  └─ Textarea.module.css
+│  ├─ UploadCard
+│  |  ├─ UploadActionBtn.jsx
+│  │  ├─ UploadActionBtn.module.css
+│  |  ├─ UploadCard.jsx
+│  │  ├─ UploadCard.module.css
+│  |  ├─ UploadDropBox.jsx
+│  │  └─ UploadDropBox.module.css
+|
+│
+├─ layout
+│  ├─ AppLayout.jsx
+│  └─ AppLayout.module.css
+│
+├─ lib
+│   └─ bookmarkMappers.jsx
+
+├─ pages
+│  ├─ About
+│  |  ├─ About.jsx
+│  │  └─ About.module.css
+│  ├─ AISummary
+│  │  ├─ AISummary.jsx
+│  │  ├─ AISummary.module.css
+│  │  ├─ MoreQuestion.jsx
+│  │  └─ MoreQuestion.module.css
+│  ├─ Dashboard
+│  │  ├─ Dashboard.jsx
+│  │  └─ Dashboard.module.css
+│  ├─ History
+│  │  ├─ History.jsx
+│  │  └─ History.module.css
+│  ├─ Info
+│  │  ├─ Dashboard.jsx
+│  │  └─ Dashboard.module.css
+│  ├─ Login
+│  │  ├─ Login.jsx
+│  │  ├─ Login.module.css
+│  │  ├─ Signup1.jsx
+│  │  ├─ Signup1.module.css
+│  │  ├─ Signup2.jsx
+│  │  └─ Signup2.module.css
+│  ├─ Medicine
+│  │  ├─ Medicine.jsx
+│  │  └─ Medicine.module.css
+│  ├─ Mypage
+│  │  ├─ Mypage.jsx
+│  │  └─ Mypageedicine.module.css
+│  └─ Setting
+│  │  ├─ Setting.jsx
+│  │  └─ Setting.module.css
+│
+├─ styles
+│  └─  global.css
+├─ providers
+│  ├─ ModalProvider.jsx
+│  └─ useModal.js
+├─ store
+│  ├─ bookmarkStore.jsx
+│  ├─ infoStore.js
+│  ├─ ocrStore.jsx
+│  └─ userStore.js
+├─ App.jsx
+├─ App.css
+├─ index.css
+├─ main.jsx
+├─ sw.js
+└─ main.jsx
+```
