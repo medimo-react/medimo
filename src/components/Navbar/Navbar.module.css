@@ -151,9 +151,18 @@
 }
 
 .logoutWrapper {
-  margin-top: 0.5rem; 
+  margin-top: 0.5rem;
   padding-top: 0.5rem;
+  margin-left: -0.75rem; 
+  margin-right: -0.75rem;
+  
   border-top: 1px solid var(--border-color);
+}
+
+.logoutWrapper .navItem {
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+  width: calc(100% - 1.5rem); 
 }
 
 /* ── bottom ── */
