@@ -4,7 +4,12 @@
   min-height: 100dvh;
   font-family: var(--font-body);
 }
-
+.center {
+  display: flex;
+  height: 100dvh;
+  align-items: center;
+  justify-content: center;
+}
 .topBar {
   display: flex;
   align-items: center;
