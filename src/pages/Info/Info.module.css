@@ -12,10 +12,10 @@
   margin-bottom: 1.25rem;
 }
 
-.pageTitle {
-  margin: 0;
-  font-size: var(--font-size-title-md);
-  color: var(--text-color);
+.title {
+  margin-bottom: 1.25rem;
+  font-size: var(--font-size-title-sm);
+  font-weight: var(--font-weight-bold);
 }
 
 .pageSubTitle {
@@ -195,12 +195,6 @@
   height: 20px;
   border-radius: var(--radius-max);
   background: var(--background-color);
-}
-
-.sideTitle {
-  margin: 0 0 0.75rem;
-  font-size: var(--font-size-title-sm);
-  color: #0f172a;
 }
 
 .rateCircle {

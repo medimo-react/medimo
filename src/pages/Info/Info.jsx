@@ -2,7 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import { Dialog } from '@radix-ui/themes';
 import Button from '../../components/Button/Button'
 import Container from '../../components/Container/Container'
-import Select from '../../components/Select/Select'
+import Select from '../../components/Select/Select';
+import PageHeader from '../../components/PageHeader/PageHeader';
 
 import { useInfoStore } from '../../store/infoStore';
 import styles from './Info.module.css';
@@ -45,6 +46,7 @@ export default function Info() {
     addSchedule, addAlarm,
     deleteAlarm, deleteSchedule,
     soundEnabled, toggleSound,
+    resetForNewDay,
   } = useInfoStore();
 
   const [addScheduleOpen, setAddScheduleOpen] = useState(false);
@@ -104,6 +106,11 @@ export default function Info() {
       console.error('알림 소리 재생 실패:', e);
     }
   };
+
+  useEffect(() => {
+    const today = new Date().toISOString().slice(0, 10);
+    resetForNewDay(today);
+  }, [resetForNewDay]);
 
   // 앱 시작 시 알림 권한 요청
   useEffect(() => {
@@ -191,7 +198,7 @@ export default function Info() {
     <div className={styles.page}>
       <div className={styles.headerRow}>
         <div>
-          <h1 className={styles.pageTitle}>복용 알림</h1>
+          <PageHeader title="복용 알림" />
           <p className={styles.pageSubTitle}>오늘의 복용 일정을 확인하고 관리하세요</p>
         </div>
         <div className={styles.headerActions}>
@@ -394,7 +401,7 @@ export default function Info() {
         <section className={styles.leftCol}>
           <article className={styles.card}>
             <div className={styles.cardHeader}>
-              <h2>오늘의 복용 일정</h2>
+              <h2 className={styles.title}>오늘의 복용 일정</h2>
               <span className={styles.dateChip}>{formatDateChip()}</span>
             </div>
             <div className={styles.list}>
@@ -435,7 +442,7 @@ export default function Info() {
 
           <article className={styles.card}>
             <div className={styles.cardHeader}>
-              <h2>알림 설정 목록</h2>
+              <h2 className={styles.title}>알림 설정 목록</h2>
               <button
                 type="button"
                 className={styles.outlineBtnSmall}
@@ -479,7 +486,7 @@ export default function Info() {
 
         <aside className={styles.rightCol}>
           <article className={styles.card}>
-            <h3 className={styles.sideTitle}>오늘의 복용률</h3>
+            <h3 className={styles.title}>오늘의 복용률</h3>
             <div
               className={`${styles.rateCircle} ${rate === 100 ? styles.rateCircleFull : ''}`}
               style={{ '--rate': `${rate}%` }}
