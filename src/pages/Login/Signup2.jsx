@@ -91,7 +91,7 @@ const Signup2 = () => {
         <div className={styles.heroSection}>
           <div className={styles.heroContent}>
             <div className={styles.logoArea}>
-              <img src="/logo.png" alt = "MEDIMO Logo" className={styles.logoImage}/>
+              <img src="/logo_auth.png" alt = "MEDIMO Logo" className={styles.logoImage}/>
             </div>
             
             <h1 className={styles.mainTitle}>

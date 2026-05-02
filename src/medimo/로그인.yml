@@ -10,8 +10,9 @@ http:
     type: json
     data: |-
       {
-          "email": "khjoo1203@naver.com",
-          "password": "12345678"
+          "email": "harryleo@naver.com",
+          "password": "12345678",
+          "name": "김민혁"
       }
   auth: inherit
 
