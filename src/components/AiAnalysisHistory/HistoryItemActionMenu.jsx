@@ -1,8 +1,14 @@
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import styles from "./HistoryItemActionMenu.module.css";
 import * as Popover from "@radix-ui/react-popover";
+import {useAnalysisStore} from "../../store/analysisStore.js";
 
-const HistoryItemActionMenu = () => {
+const HistoryItemActionMenu = ({recordId}) => {
+
+  const pinRecords = useAnalysisStore((s) => s.pinRecords);
+  const records = useAnalysisStore((s) => s.records);
+  const isPinned = records.find((r) => r._id === recordId)?.isPinned ?? false;
+
   return (
       <div className={styles.button}>
         <Popover.Root>
@@ -12,7 +18,7 @@ const HistoryItemActionMenu = () => {
           <Popover.Portal>
             <Popover.Content side="bottom" align="center" className={styles.popover_content}>
               <div><button>이름 변경</button></div>
-              <div><button>내역 상단 고정</button></div>
+              <div><button onClick={ () => pinRecords(recordId)}>{isPinned ? '상단 고정 해제' : '내역 상단 고정'}</button></div>
               <div><button>삭제</button></div>
             </Popover.Content>
           </Popover.Portal>

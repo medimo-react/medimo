@@ -1,18 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Card from '../Card/Card';
 import styles from './AiAnalysisHistorySection.module.css';
 import AiAnalysisHistoryList from './AiAnalysisHistoryList.jsx';
 import HistoryEmpty from './HistoryEmpty.jsx';
-import { fetchAnalysisList } from '../../api/analysisApi.js';
+import {useAnalysisStore} from "../../store/analysisStore.js";
 
 const AiAnalysisHistorySection = () => {
-  const [records, setRecords] = useState([]);
+  console.log('section 렌더링');
+  const records = useAnalysisStore((s) => s.records);
+  const fetchRecords = useAnalysisStore((s) => s.fetchRecords);
 
-  useEffect(() => {
-    fetchAnalysisList()
-      .then(setRecords)
-      .catch(console.error);
-  }, []);
+  useEffect( ()=>{
+    fetchRecords()
+  },[])
+
 
   return (
     <Card radius="sm">
