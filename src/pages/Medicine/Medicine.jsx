@@ -375,20 +375,38 @@ export default function Bookmark() {
                             <FolderIcon />
                             폴더 추가
                           </Button>
-                          <Button
-                            type="button"
-                            variant="danger"
-                            className={`${styles.dropdownItem} ${styles.dropdownItemDanger}`}
-                            onClick={() => deleteMedicine(medicine)}
-                          >
-                            <TrashIcon />
-                            삭제
-                          </Button>
-                        </>
-                      )}
-                    </div>
-                  )}
-                </div>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <button
+                          type="button"
+                          className={styles.dropdownItem}
+                          onClick={() => openFolderMove(medicine)}
+                        >
+                          <FolderIcon />
+                          폴더 이동
+                        </button>
+                        <button
+                          type="button"
+                          className={styles.dropdownItem}
+                          onClick={() => openFolderAdd(medicine.id)}
+                        >
+                          <FolderIcon />
+                          폴더 추가
+                        </button>
+                        <button
+                          type="button"
+                          className={`${styles.dropdownItem} ${styles.dropdownItemDanger}`}
+                          onClick={() => deleteMedicine(medicine)}
+                        >
+                          <TrashIcon />
+                          삭제
+                        </button>
+                      </>
+                    )}
+                  </div>
+                )}
               </div>
             ))}
           </div>
