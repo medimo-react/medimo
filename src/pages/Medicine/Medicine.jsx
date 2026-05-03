@@ -359,23 +359,23 @@ export default function Bookmark() {
                         </>
                       ) : (
                         <>
-                          <Button
+                          <button
                             type="button"
                             className={styles.dropdownItem}
                             onClick={() => openFolderMove(medicine)}
                           >
                             <FolderIcon />
                             폴더 이동
-                          </Button>
-                          <Button
+                          </button>
+                          <button
                             type="button"
                             className={styles.dropdownItem}
                             onClick={() => openFolderAdd(medicine.id)}
                           >
                             <FolderIcon />
                             폴더 추가
-                          </Button>
-                          <Button
+                          </button>
+                          <button
                             type="button"
                             variant="danger"
                             className={`${styles.dropdownItem} ${styles.dropdownItemDanger}`}
@@ -383,7 +383,7 @@ export default function Bookmark() {
                           >
                             <TrashIcon />
                             삭제
-                          </Button>
+                          </button>
                         </>
                       )}
                     </div>
