@@ -75,28 +75,33 @@
 - 회원가입 시 각 항목별 유효성 검사
 - 토큰 기반 인증 (accessToken, refreshToken)
 
-| 데스크톱 | 모바일 |
-| :---: | :---: |
+| 데스크톱 |
+| :---: |
 | <img src="docs/gif/로그인.gif" width="500"/>   | <img src="docs/gif/로그인_모바일버전.gif" width="200"/>   |
-| <img src="docs/gif/회원가입.gif" width="500"/> | <img src="docs/gif/회원가입_모바일버전.gif" width="200"/> |
+| <img src="docs/gif/회원가입.gif" width="500"/> |
 
 ---
 
 ### 🏠 대쉬보드 화면
 
 - 메인 배너 및 서비스 안내
-- 카테고리별 모임 리스트 추천
-- 
-- 키워드 검색 기능
-- AI 추천 모달
+
+- AI 검색 모달
 
 
-| 데스크톱 | 모바일 |
-| :---: | :---: |
-| <img src="https://github.com/user-attachments/assets/fa1023ff-5af8-46c7-a10a-fae2eeb2924a" width="500"/> | <img src="https://github.com/user-attachments/assets/09b66980-cd58-488a-bc7a-aa10c2ef8788" width="200"/> |
+| 데스크톱 |
+| :---: |
+| <img src="docs/gif/대쉬보드.gif" width="500"/>   |
 
+---
 
+### 🏠 AI분석 화면
 
+- AI로 분석한 약 정보 설명
+
+| 데스크톱 |
+| :---: |
+| <img src="docs/gif/ai분석.gif" width="500"/>   |
 
 ---
 
@@ -104,9 +109,9 @@
 
 - 북마크 토글로 목록 추가/제거
 
-| 데스크톱 | 모바일 |
-| :---: | :---: |
-| <img src="https://github.com/user-attachments/assets/67efefd9-5fec-4e38-bb4e-dafc0ecfb79f" width="500"/> | <img src="https://github.com/user-attachments/assets/c1c7cbdf-5a99-4f68-a495-54501f37b5ab" width="200"/> |
+| 데스크톱 |
+| :---: |
+| <img src="docs/gif/북마크.gif" width="500"/>   |
 
 ---
 
@@ -114,9 +119,9 @@
 
 
 
-| 데스크톱 | 모바일 |
-| :---: | :---: |
-| <img src="docs/gif/마이페이지.gif" width="500"/> | <img src="docs/gif/마이페이지_모바일버전.png" width="200"/> |
+| 데스크톱 |
+| :---: | 
+| <img src="docs/gif/마이페이지.gif" width="500"/> |
 
 
 ## 🐛 트러블슈팅
