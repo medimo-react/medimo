@@ -1,0 +1,662 @@
+.page {
+  /* padding: 24px; */
+  background: var(--background-color);
+  min-height: 100dvh;
+  font-family: var(--font-body);
+}
+.center {
+  display: flex;
+  height: 100dvh;
+  align-items: center;
+  justify-content: center;
+}
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.searchBox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--background-color);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.625rem 1rem;
+  width: 380px;
+}
+
+.searchIcon {
+  flex-shrink: 0;
+}
+
+.searchInput {
+  border: none;
+  font-size: var(--font-size-small);
+  color: var(--text-color);
+  width: 100%;
+  background: transparent;
+}
+
+.searchInput::placeholder {
+  color: var(--sub-text-color);
+}
+
+.topActions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filterBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.625rem 0.875rem;
+  border-radius: var(--radius-sm);
+  background: var(--background-color);
+  font-size: var(--font-size-small);
+  color: var(--sub-text-color);
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.filterBtn:hover {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+.filterBtnActive {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+}
+
+.favBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.625rem 0.875rem;
+  border-radius: var(--radius-sm);
+  color: var(--sub-text-color);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.favBtn:hover {
+  background: var(--primary-color);
+  color: var(--background-color);
+}
+
+.favBtnActive {
+  color: var(--background-color);
+  background: var(--primary-color);
+}
+
+/* 폴더 탭 */
+.folderTabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  justify-content: flex-end;
+}
+
+.folderTab {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  background: var(--background-color);
+  font-size: var(--font-size-small);
+  color: var(--sub-text-color);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.folderTab:hover {
+  border-color: var(--border-color);
+  color: var(--text-color);
+}
+
+.folderTabActive {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--background-color);
+}
+
+.folderTabActive .folderCount {
+  color: var(--background-color);
+}
+
+.folderCount {
+  font-size: var(--font-size-small);
+  color: var(--sub-text-color);
+}
+
+.folderTabDelete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  font-size: 14px;
+  line-height: 1;
+  margin-left: 2px;
+  opacity: 0.6;
+  transition: opacity 0.15s, background 0.15s;
+}
+
+.folderTabDelete:hover {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.folderTabActive .folderTabDelete:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* 표 */
+.tableWrapper {
+  background: var(--background-color);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  overflow: visible;
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr 1.2fr 0.8fr 1fr;
+  align-items: center;
+  padding: 0.875rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--background-color);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+.tableHeader span {
+  font-size: var(--font-size-small);
+  color: var(--sub-text-color);
+  font-weight: var(--font-weight-medium);
+}
+.empty {
+  padding: 0.625rem;
+}
+/* Row */
+.row {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr 1.2fr 0.8fr 1fr 40px;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  transition: background 0.1s;
+  position: relative;
+}
+
+.row:last-child {
+  border-bottom: none;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+}
+
+.row:hover {
+  background: #f9fafb;
+}
+
+.colName {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+.colCategory,
+.colDosage,
+.colDate {
+  display: flex;
+  align-items: center;
+}
+
+.colFolder {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.colDate {
+  gap: 0.375rem;
+}
+
+/* Pill Icon */
+.pillIconWrap {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-full);
+  background: var(--background-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.nameInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 0;
+}
+
+.medicineName {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-color);
+  white-space: nowrap;
+}
+
+.starInline,
+.warningInline {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.engName {
+  font-size: var(--font-size-tiny);
+  color: var(--sub-text-color);
+}
+
+/* Badges */
+.categoryBadge {
+  display: inline-block;
+  padding: 0.25rem 0.625rem;
+  border-radius: var(--radius-lg);
+  background: #cffafe;
+  color: #0e7490;
+  font-size: var(--font-size-tiny);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+}
+
+.folderBadge {
+  display: inline-block;
+  padding: 0.25rem 0.625rem;
+  border-radius: var(--radius-lg);
+  background: #ccfbf1;
+  color: #0f766e;
+  font-size: var(--font-size-tiny);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+}
+
+/* Dosage */
+.dosageText {
+  font-size: var(--font-size-small);
+  color: var(--sub-text-color);
+}
+
+/* Date */
+.dateText {
+  font-size: 13px;
+  color: var(--sub-text-color);
+}
+
+/* Menu Backdrop */
+.menuBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: transparent;
+}
+
+/* Menu */
+.menuCell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menuCellOpen {
+  z-index: 101;
+}
+
+.menuBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: var(--font-size-body);
+  color: var(--sub-text-color);
+  line-height: 1;
+  padding: 0.25rem 0.375rem;
+  border-radius: var(--radius-sm);
+  transition: background 0.1s, color 0.1s;
+  letter-spacing: 1px;
+}
+
+.menuBtn:hover {
+  color: #374151;
+}
+
+/* Dropdown */
+.dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  z-index: 100;
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  min-width: 220px;
+  flex-direction: column;
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 0.75rem;
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-small);
+  color: var(--sub-text-color);
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.1s;
+  width: 100%;
+}
+
+.dropdownItem:hover {
+  background: #f3f4f6;
+}
+
+.dropdownItemDanger {
+  color: #ef4444;
+}
+.dropdownItemDanger:hover {
+  background: #fef2f2;
+}
+
+.dropdownBack {
+  display: flex;
+  height: 30px;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-small);
+  color: var(--sub-text);
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: background 0.1s;
+}
+
+.dropdownBack:hover {
+  background: #F3F4F6;
+}
+
+.dropdownDivider {
+  height: 1px;
+  background: #f3f4f6;
+  margin: 0.125rem 0;
+}
+
+.dropdownCheckItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--font-size-small);
+  font-size: var(--font-size-small);
+  color: var(--sub-text-color);
+  cursor: pointer;
+  transition: background 0.1s;
+  width: 100%;
+}
+
+.dropdownCheckItem:hover {
+  background: #f3f4f6;
+}
+
+.folderCheckbox {
+  width: 15px;
+  height: 15px;
+  accent-color: var(--primary-color);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.folderMoveApply {
+  display: flex;
+  justify-self: center;
+  width: calc(100% -16px);
+  margin: 0.25rem 0.5rem;
+  padding: 0.5rem;
+  background: var(--primary-color);
+  color: var(--background-color);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.folderMoveApply:hover:not(:disabled) {
+  background: #2563EB;
+}
+
+.folderMoveApply:disabled {
+  background: #93c5fd;
+  cursor: not-allowed;
+}
+
+.folderAddWrap {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.5rem;
+}
+
+.folderAddInput {
+  flex: 1;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  font-size: var(--font-size-small);
+  color: var(--sub-text-color);
+  outline: none;
+  min-width: 0;
+  transition: border-color 0.15s;
+}
+
+.folderAddInput:focus {
+  border-color: var(--primary-color);
+}
+
+.folderAddInput::placeholder {
+  color: var(--sub-text-color);
+}
+
+.folderAddConfirm {
+  padding: 0.5rem 0.75rem;
+  background: var(--primary-color);
+  color: var(--background-color);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.folderAddConfirm:hover:not(:disabled) {
+  background: #2563eb;
+}
+.folderAddConfirm:disabled {
+  background: #93c5fd;
+  cursor: not-allowed;
+}
+
+@media (max-width: 1024px) {
+  .page {
+    padding: 1.25rem;
+  }
+
+  .topBar {
+    gap: 0.625rem;
+  }
+
+  .searchBox {
+    width: 100%;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .tableWrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tableHeader,
+  .row {
+    min-width: 900px;
+  }
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding: 1rem;
+  }
+
+  .topBar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .topActions {
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .filterBtn,
+  .favBtn {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .folderTabs {
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+    padding-bottom: 0.25rem;
+  }
+
+  .folderTab {
+    flex-shrink: 0;
+  }
+
+  .tableHeader {
+    padding: 12px 16px;
+  }
+
+  .row {
+    padding: 14px 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding: 12px;
+  }
+
+  .searchBox {
+    padding: 8px 12px;
+  }
+
+  .filterBtn,
+  .favBtn {
+    padding: 9px 10px;
+    font-size: 13px;
+  }
+
+  .folderTab {
+    padding: 7px 12px;
+    font-size: 13px;
+  }
+
+  /* 카드 레이아웃으로 전환 */
+  .tableHeader {
+    display: none;
+  }
+
+  .tableWrapper {
+    overflow: visible;
+  }
+
+  .row {
+    display: block;
+    padding: 14px 16px;
+    min-width: unset;
+    position: relative;
+  }
+
+  .colName {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding-right: 36px;
+  }
+
+  .pillIconWrap {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .medicineName {
+    font-size: 13px;
+    white-space: normal;
+    flex-wrap: wrap;
+  }
+
+  .colCategory,
+  .colDosage,
+  .colFolder,
+  .colDate {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 5px;
+  }
+
+  .colDate {
+    margin-bottom: 0;
+  }
+
+  .engName,
+  .dosageText,
+  .dateText {
+    font-size: 12px;
+  }
+
+  .menuCell {
+    position: absolute;
+    top: 14px;
+    right: 12px;
+  }
+}

@@ -1,21 +1,38 @@
+const cleanDisplayName = (value = "") =>
+  String(value)
+    .replace(/\([^)]*\)/g, "")
+    .replace(/\[[^\]]*\]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
 const toFolderArray = (folder) => {
   if (!folder) return [];
   if (Array.isArray(folder)) return folder.filter(Boolean);
   return [folder];
 };
 
-export const mapBookmarks = (bookmarks) => bookmarks.map((b) => {
-  const med = b.medecineId || {};
-  return {
-    id: b._id || b.id,
-    medicineId: (typeof b.medecineId === 'object' ? b.medecineId?._id : b.medecineId) || '',
-    name: med.name || b.name || '',
-    engName: med.normalizedName || b.engName || '',
-    category: med.effect || b.category || '',
-    dosage: med.dosage || b.dosage || '',
-    folders: toFolderArray(b.folder),
-    starred: b.starred,
-    warning: (med.warning?.length ?? b.warning?.length) > 0,
-    date: b.date || ''
-  }
-});
+export const mapBookmarks = (bookmarks = []) =>
+  bookmarks.map((b) => {
+    const medicineId = b.id || "";
+
+    return {
+      id: String(medicineId),
+      medicineId: String(medicineId),
+
+      // 큰 글씨용: 원본 이름 그대로
+      name: b.name || "",
+
+      // 작은 글씨용: 괄호 제거된 이름
+      normalizedName:
+        b.normalizedName || cleanDisplayName(b.name || "") || "",
+      engName:
+        b.normalizedName || b.engName || cleanDisplayName(b.name || "") || "",
+
+      category: b.category || "",
+      dosage: b.dosage || b.usage || "",
+      folders: toFolderArray(b.folder),
+      starred: b.starred ?? false,
+      warning: Boolean(b.warning),
+      date: b.date || "",
+    };
+  });

@@ -5,14 +5,13 @@ import UploadDropBox from "./UploadDropBox.jsx";
 import UploadActionBtn from "./UploadActionBtn.jsx";
 import styles from "./UploadCard.module.css";
 import { scanAndFetchMedicines } from "../../api/scanMedicine.js";
-import { useOcrStore } from "../../store/ocrStore.js";
+import { saveAnalysisRecord } from "../../api/analysisApi.js";
 import { useModal } from "../../providers/useModal.js";
 
 const UploadCard = () => {
   const [file, setFile] = useState(null);
   const [isDrag, setIsDrag] = useState(false);
 
-  const setOcrText = useOcrStore((s) => s.setOcrText);
   const navigate = useNavigate();
   const { loading, alert } = useModal();
 
@@ -24,21 +23,10 @@ const UploadCard = () => {
 
     try {
       const result = await scanAndFetchMedicines(selectedFile);
-
-      console.log("분석 결과:", result);
-
-      // OCR 원문만 저장하는 게 아니라 전체 분석 결과 저장
-      setOcrText(result);
-
-      navigate("/ai-summary");
+      const recordId = await saveAnalysisRecord(result);
+      navigate(`/ai-summary/${recordId}`);
     } catch (err) {
-      console.error("처방전 분석 실패 상세:", {
-        message: err.message,
-        status: err.response?.status,
-        data: err.response?.data,
-        url: err.config?.url,
-      });
-
+      console.error("처방전 분석 실패:", err.message);
       await alert("처방전 분석에 실패했습니다. 다시 시도해 주세요.");
     } finally {
       close();

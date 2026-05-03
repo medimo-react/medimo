@@ -4,6 +4,61 @@
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-body);
   cursor: pointer;
+  border: 1px solid transparent;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* variant */
+.primary {
+  background-color: #6367ff;
+  border-color: #6367ff;
+  color: #ffffff;
+}
+
+.primary:hover {
+  background-color: #5559e8;
+  border-color: #5559e8;
+  box-shadow: 0 0.375rem 1rem #6367ff38;
+}
+
+.primary:active {
+  background-color: #474bd1;
+  border-color: #474bd1;
+}
+
+/* outline */
+.outline {
+  background-color: transparent;
+  border-color: #6367ff;
+  color: #6367ff;
+  box-shadow: none;
+}
+
+.outline:hover {
+  background-color: #f0f1ff;
+  border-color: #5559e8;
+  color: #5559e8;
+}
+
+.outline:active {
+  background-color: #e3e5ff;
+  border-color: #474bd1;
+  color: #474bd1;
+}
+
+/* disabled */
+.button:disabled {
+  background-color: #e5e7eb;
+  border-color: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+  box-shadow: none;
+  filter: none;
 }
 
 /* 일반 크기 */
