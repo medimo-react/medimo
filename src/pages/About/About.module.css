@@ -791,7 +791,7 @@
 ================================ */
 @media (max-width: 1024px) {
   .nav {
-    padding-inline: var(--layout-padding-tablet);
+    display: none;
   }
 
   .heroInner,
