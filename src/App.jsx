@@ -31,7 +31,7 @@ function App() {
         <Route path="/alert" element={<Info rate={rate} alarms={alarms} />} />
         <Route path="/history" element={ <History />} />
         <Route path="/demo" element={<Demo />} />
-        <Route path="/ai-summary" element={<AiSummary />} />
+        <Route path="/ai-summary/:id" element={<AiSummary />} />
         <Route path="/about" element={<About />} />
         <Route path="/mypage" element={<Mypage />} />
       </Route>

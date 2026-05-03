@@ -1,11 +1,13 @@
-import { useMemo, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { useOcrStore } from "../../store/ocrStore.js";
+import { useEffect, useMemo, useState } from "react";
+import { useParams } from "react-router-dom";
+import { fetchAnalysisDetail } from "../../api/analysisApi.js";
+import { useBookmarkStore } from "../../store/bookmarkStore.js";
 
 import Container from "../../components/Container/Container";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import Card from "../../components/Card/Card";
 import Badge from "../../components/Badge/Badge";
+import BookmarkButton from "../../components/Bookmark/Bookmark";
 
 import {
   FiActivity,
@@ -19,7 +21,6 @@ import {
 } from "react-icons/fi";
 
 import styles from "./AISummary.module.css";
-// import { useOcrStore } from "../../store/ocrStore.js";
 
 /* ==============================
   Utils
@@ -162,6 +163,7 @@ const MedicineSummary = ({ medicine }) => {
     <Card>
       <div className={styles.medicineHeader}>
         <div className={styles.largeInitial}>{medicine.name.slice(0, 1)}</div>
+
         <div className={styles.medicineInfo}>
           <h2 className={styles.medicineName}>{medicine.name}</h2>
 
@@ -177,6 +179,12 @@ const MedicineSummary = ({ medicine }) => {
             {isNotFound && <Badge variant="gray">조회 결과 없음</Badge>}
           </div>
         </div>
+
+        {!isNotFound && (
+          <div className={styles.bookmarkArea}>
+            <BookmarkButton medicineId={medicine.id} />
+          </div>
+        )}
       </div>
     </Card>
   );
@@ -245,6 +253,7 @@ const EasyDrugDetailCards = ({ medicine }) => {
       icon: <FiZap />,
       value: toTextList(medicine.caution),
       content: <TextList items={medicine.caution} />,
+      full: true,
     },
   ];
 
@@ -255,7 +264,7 @@ const EasyDrugDetailCards = ({ medicine }) => {
   return (
     <div className={styles.infoGrid}>
       {visibleCards.map((card) => (
-        <Card key={card.title}>
+        <Card key={card.title} className={card.full ? styles.fullGridCard : ""}>
           <CardHeader
             icon={card.icon}
             title={card.title}
@@ -303,6 +312,7 @@ const PermitDetailCards = ({ medicine }) => {
       title: "상태 및 보험코드",
       icon: <FiAlertTriangle />,
       value: [medicine.status, medicine.ediCode].filter(Boolean),
+      full: true,
       content: (
         <>
           {hasValue(medicine.status) && (
@@ -330,7 +340,7 @@ const PermitDetailCards = ({ medicine }) => {
   return (
     <div className={styles.infoGrid}>
       {visibleCards.map((card) => (
-        <Card key={card.title}>
+        <Card key={card.title} className={card.full ? styles.fullGridCard : ""}>
           <CardHeader icon={card.icon} title={card.title} />
           {card.content}
         </Card>
@@ -520,21 +530,58 @@ const OneLineSummaryCard = ({ medicine }) => {
   Page
 ================================ */
 const AISummary = () => {
-  const analysisData = useOcrStore((s) => s.ocrText);
+  const { id } = useParams();
+
+  const [analysisData, setAnalysisData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [selectedId, setSelectedId] = useState(null);
+
+  const fetchBookmarks = useBookmarkStore((s) => s.fetchBookmarks);
+
+  useEffect(() => {
+    if (!id) return;
+
+    const loadAnalysisDetail = async () => {
+      setIsLoading(true);
+
+      try {
+        const data = await fetchAnalysisDetail(id);
+        setAnalysisData(data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadAnalysisDetail();
+  }, [id]);
+
+  useEffect(() => {
+    fetchBookmarks();
+  }, [fetchBookmarks]);
 
   const medicines = useMemo(
     () => normalizeMedicines(analysisData),
     [analysisData],
   );
 
-  // scan 후 텍스트 추출 데이터
-  // const { ocrText } = useOcrStore();
-  // console.log(ocrText);
-
-  const [selectedId, setSelectedId] = useState(null);
-
   const selectedMedicine =
     medicines.find((medicine) => medicine.id === selectedId) || medicines[0];
+
+  if (isLoading) {
+    return (
+      <Container>
+        <PageHeader
+          title="AI 처방전 분석"
+          description="분석 결과를 불러오는 중입니다."
+        />
+        <Card>
+          <p className={styles.bodyText}>불러오는 중...</p>
+        </Card>
+      </Container>
+    );
+  }
 
   if (!analysisData || medicines.length === 0) {
     return (
@@ -543,7 +590,6 @@ const AISummary = () => {
           title="AI 처방전 분석"
           description="처방전 이미지를 먼저 업로드하고 분석을 진행해 주세요."
         />
-
         <Card>
           <p className={styles.bodyText}>
             분석 결과가 없습니다. 처방전 이미지를 먼저 업로드해 주세요.

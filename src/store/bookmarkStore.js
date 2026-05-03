@@ -1,17 +1,22 @@
-import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
-import { getBookmarks, addBookmark, updateBookmark, deleteBookmark } from '../api/bookmarks';
-import { mapBookmarks } from '../lib/bookmarkMappers';
+import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
+import {
+  getBookmarks,
+  addBookmark,
+  updateBookmark,
+  deleteBookmark,
+} from "../api/bookmarks";
+import { mapBookmarks } from "../lib/bookmarkMappers";
 
-const STORE_KEY = 'medimo-bookmark-store';
-const LEGACY_FOLDERS_KEY = 'bookmark-folders';
+const STORE_KEY = "medimo-bookmark-store";
+const LEGACY_FOLDERS_KEY = "bookmark-folders";
 
 const menuInitial = () => ({
   openMenuId: null,
   folderMoveId: null,
   folderMoveSelection: [],
   folderAddId: null,
-  newFolderName: '',
+  newFolderName: "",
 });
 
 const bookmarkStorage = createJSONStorage(() => ({
@@ -41,8 +46,8 @@ export const useBookmarkStore = create(
     (set, get) => ({
       medicines: [],
       loading: true,
-      search: '',
-      selectedFolders: new Set(['전체']),
+      search: "",
+      selectedFolders: new Set(["전체"]),
       customFolders: [],
       ...menuInitial(),
 
@@ -56,13 +61,15 @@ export const useBookmarkStore = create(
           folderMoveId: null,
           folderMoveSelection: [],
           folderAddId: null,
-          newFolderName: '',
+          newFolderName: "",
         })),
 
       setFolderMoveSelection: (updater) =>
         set((s) => ({
           folderMoveSelection:
-            typeof updater === 'function' ? updater(s.folderMoveSelection) : updater,
+            typeof updater === "function"
+              ? updater(s.folderMoveSelection)
+              : updater,
         })),
 
       setNewFolderName: (newFolderName) => set({ newFolderName }),
@@ -73,20 +80,21 @@ export const useBookmarkStore = create(
           folderMoveSelection: [...medicine.folders],
         }),
 
-      backFromFolderMove: () => set({ folderMoveId: null, folderMoveSelection: [] }),
+      backFromFolderMove: () =>
+        set({ folderMoveId: null, folderMoveSelection: [] }),
 
       openFolderAdd: (medicineId) =>
-        set({ folderAddId: medicineId, newFolderName: '' }),
+        set({ folderAddId: medicineId, newFolderName: "" }),
 
-      backFromFolderAdd: () => set({ folderAddId: null, newFolderName: '' }),
+      backFromFolderAdd: () => set({ folderAddId: null, newFolderName: "" }),
 
       selectFolderTab: (folder) =>
         set((s) => {
-          if (folder === '전체') {
-            return { selectedFolders: new Set(['전체']) };
+          if (folder === "전체") {
+            return { selectedFolders: new Set(["전체"]) };
           }
           if (s.selectedFolders.has(folder)) {
-            return { selectedFolders: new Set(['전체']) };
+            return { selectedFolders: new Set(["전체"]) };
           }
           return { selectedFolders: new Set([folder]) };
         }),
@@ -99,16 +107,18 @@ export const useBookmarkStore = create(
         } else if (data?.id) {
           const updated = mapBookmarks([data])[0];
           set((s) => ({
-            medicines: s.medicines.map((m) => (m.id === updated.id ? updated : m)),
+            medicines: s.medicines.map((m) =>
+              m.id === updated.id ? updated : m,
+            ),
           }));
         }
       },
 
       addMedicine: async (medicineId) => {
         const data = await addBookmark(medicineId);
+
         if (data) {
-          const mapped = mapBookmarks([data])[0];
-          set((s) => ({ medicines: [...s.medicines, mapped] }));
+          get().syncFromServer(data);
         }
       },
 
@@ -140,8 +150,11 @@ export const useBookmarkStore = create(
 
       deleteMedicine: async (medicine) => {
         get().closeMenu();
-        set((s) => ({ medicines: s.medicines.filter((m) => m.id !== medicine.id) }));
-        await deleteBookmark(medicine.id);
+        set((s) => ({
+          medicines: s.medicines.filter((m) => m.id !== medicine.id),
+        }));
+        const data = await deleteBookmark(medicine.id);
+        get().syncFromServer(data);
       },
 
       applyFolderMove: async (medicine) => {
@@ -149,18 +162,25 @@ export const useBookmarkStore = create(
         get().closeMenu();
         set((s) => ({
           medicines: s.medicines.map((m) =>
-            m.id === medicine.id ? { ...m, folders: folderMoveSelection } : m
+            m.id === medicine.id ? { ...m, folders: folderMoveSelection } : m,
           ),
         }));
-        const data = await updateBookmark(medicine.id, { folder: folderMoveSelection });
+        const data = await updateBookmark(medicine.id, {
+          folder: folderMoveSelection,
+        });
         get().syncFromServer(data);
       },
 
       addToNewFolder: () => {
         const trimmed = get().newFolderName.trim();
         if (!trimmed) return;
-        const { customFolders } = get();
-        if (trimmed !== '전체' && !customFolders.includes(trimmed)) {
+        const { medicines, customFolders } = get();
+        const known = new Set([
+          "전체",
+          ...customFolders,
+          ...medicines.flatMap((m) => m.folders),
+        ]);
+        if (!known.has(trimmed)) {
           set({ customFolders: [...customFolders, trimmed] });
         }
         get().closeMenu();
@@ -177,7 +197,7 @@ export const useBookmarkStore = create(
     {
       name: STORE_KEY,
       storage: bookmarkStorage,
-      partialize: (state) => ({ customFolders: state.customFolders, medicines: state.medicines }),
-    }
-  )
+      partialize: (state) => ({ customFolders: state.customFolders }),
+    },
+  ),
 );

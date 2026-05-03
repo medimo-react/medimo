@@ -130,6 +130,10 @@
   margin-top: 1.5rem;
 }
 
+.footer > * {
+  flex: 1;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .content[data-state="open"],
   .content[data-state="closed"] {

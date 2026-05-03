@@ -5,6 +5,10 @@
   margin-top: 1.5rem;
 }
 
+.fullGridCard {
+  grid-column: 1 / -1;
+}
+
 .sidePanel {
   min-width: 0;
 }
@@ -369,7 +373,13 @@
   object-fit: contain;
 }
 
-@media (max-width: 1200px) {
+.bookmarkArea {
+  margin-left: auto;
+  display: flex;
+  align-items: flex-start;
+}
+
+@media (max-width: 1024px) {
   .layout {
     grid-template-columns: 1fr;
   }

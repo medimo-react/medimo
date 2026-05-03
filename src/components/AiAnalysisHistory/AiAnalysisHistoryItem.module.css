@@ -2,13 +2,57 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
+  transition: background-color 0.2s;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.item:last-child {
+  border-bottom:0;
 }
 
 .content {
   flex: auto;
   text-align: left;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.title {
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  overflow: hidden;
+}
+
+.title_text {
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.title_input {
+  height:2rem;
+  width:calc(100% - 4rem);
+}
+
+.pin_icon {
+  color: #7c5cbf;
+  flex-shrink: 0;
+  font-size: 1.3rem;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top:0.75rem;
+  color: #888;
+}
+
+.meta .tag {
+  display: flex;
+  gap: 0.4rem;
 }
