@@ -10,6 +10,13 @@ import {
 } from 'react-icons/hi';
 import { signupApi } from '../../api/auth';
 
+
+// 비밀번호 조합 로직 강화
+const validatePasswordFormat = (password) => {
+  const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  return regex.test(password);
+};
+
 const Signup2 = () => {
   const location = useLocation();
   const email = location.state?.email ?? '';
@@ -62,11 +69,18 @@ const Signup2 = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // 빈값 체크
     if (!formData.name || !phone || !formData.password || !formData.confirmPassword) {
       setSubmitError('모든 정보를 입력해주세요.');
       return;
     }
-
+    // 비밀번호 형식 검사 (조합 강화)
+    if (!validatePasswordFormat(formData.password)) {
+    setPasswordError('비밀번호는 8자 이상이며 영문, 숫자, 특수문자를 포함해야 합니다.');
+    return;
+    }
+    
+    // 비밀번호 일치 여부
     if (formData.password !== formData.confirmPassword) {
       setPasswordError('비밀번호가 일치하지 않습니다.');
       return;
@@ -74,6 +88,7 @@ const Signup2 = () => {
 
     setLoading(true);
     setSubmitError('');
+
     try {
       await signupApi({ email, name: formData.name, phone, password: formData.password });
       navigate('/login', { state: { signupSuccess: true } });
@@ -177,6 +192,11 @@ const Signup2 = () => {
                     {showPassword ? <HiOutlineEyeOff /> : <HiOutlineEye />}
                   </button>
                 </div>
+                {formData.password && !validatePasswordFormat(formData.password) && (
+                  <p className={styles.errorMessage} style={{ fontSize: '12px' }}>
+                    * 8자 이상, 영문/숫자/특수문자 조합이 필요합니다.
+                  </p>
+                )}
               </div>
 
               <div className={styles.inputGroup}>
