@@ -112,6 +112,19 @@ export default function Navbar() {
 
           {isLoggedIn && (
             <div className={styles.logoutWrapper}>
+
+              <button
+                  type="button"
+                  className={`${styles.helpButton} ${
+                      pathname === "/about" ? styles.active : ""
+                  }`}
+                  onClick={() => handleNavigate("/about")}
+              >
+            <span className={styles.navIcon}>
+              <AiOutlineQuestionCircle />
+            </span>
+                <span className={styles.navLabel}>도움말</span>
+              </button>
               <button
                 type="button"
                 className={styles.navItem} 
@@ -124,18 +137,6 @@ export default function Navbar() {
           )}
 
         <div className={styles.bottom}>
-          <button
-            type="button"
-            className={`${styles.helpButton} ${
-              pathname === "/about" ? styles.active : ""
-            }`}
-            onClick={() => handleNavigate("/about")}
-          >
-            <span className={styles.navIcon}>
-              <AiOutlineQuestionCircle />
-            </span>
-            <span className={styles.navLabel}>도움말</span>
-          </button>
 
           <button type="button" className={styles.userProfile} onClick={() => handleNavigate("/Mypage")}>
             <div className={styles.userAvatar}>{displayUser.initial}</div>
