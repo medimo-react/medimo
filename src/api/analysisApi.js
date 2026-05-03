@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://127.0.0.1:5000/api';
+const API_BASE = import.meta.env.VITE_API_BASE || '/api';
 
 const authHeader = () => {
   const token = localStorage.getItem('token');
@@ -41,3 +41,11 @@ export const renameAnalysisRecord = async ({id, title}) => {
   });
   return response.data;
 }
+
+export const fetchRecentAnalysis = async () => {
+  const response = await axios.get(`${API_BASE}/analysis/recent`, {
+    headers: authHeader(),
+  });
+
+  return response.data;
+};

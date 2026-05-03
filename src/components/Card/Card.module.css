@@ -8,6 +8,20 @@
   background-color: var(--background-color);
   color: var(--text-color);
   box-sizing: border-box;
+
+    transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+/* hover */
+.card:hover {
+  border-color: var(--secondary-color);
+  background-color: rgba(255, 255, 255, 0.04);
+  transform: translateY(-0.075rem);
+  box-shadow: 0 0.5rem 1rem rgba(99, 103, 255, 0.15);
 }
 
 /* radius size */
