@@ -1,5 +1,9 @@
 import {create} from 'zustand';
-import {fetchAnalysisList, deleteAnalysisRecord} from "../api/analysisApi.js";
+import {
+  fetchAnalysisList,
+  deleteAnalysisRecord,
+  renameAnalysisRecord
+} from "../api/analysisApi.js";
 import {toggleAnalysisPin} from "../api/toggleAnalysisPin.js";
 
 // set: 상태 바꿀때
@@ -22,4 +26,9 @@ export const useAnalysisStore = create ((set,get) => ({
     await deleteAnalysisRecord(id);
     await get().fetchRecords();
   },
+  // 이름 변경
+  renameRecord: async (id,title) => {
+    await renameAnalysisRecord({id,title})
+    await get().fetchRecords();
+  }
 }))
