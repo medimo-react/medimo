@@ -155,7 +155,7 @@
 
 .logoutWrapper .navItem {
   margin: 0;
-  width: calc(100% - 1.5rem); 
+  /*width: calc(100% - 1.5rem); */
 }
 
 /* ── bottom ── */
