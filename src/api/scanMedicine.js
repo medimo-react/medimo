@@ -1,4 +1,5 @@
 import axios from "axios";
+import imageCompression from "browser-image-compression";
 
 const API_BASE = import.meta.env.VITE_API_BASE || "/api";
 
@@ -98,13 +99,33 @@ const createCompactCautionPayload = (medicineResults = []) => {
     .slice(0, 8);
 };
 
+const compressMedicineImage = async (file) => {
+  if (!file.type.startsWith("image/")) {
+    throw new Error("이미지 파일만 업로드할 수 있습니다.");
+  }
+
+  return await imageCompression(file, {
+    maxSizeMB: 1.2,
+    maxWidthOrHeight: 1600,
+    useWebWorker: true,
+    initialQuality: 0.85,
+  });
+};
+
 export const scanMedicineImage = async (file) => {
   if (!file) {
     throw new Error("이미지 파일이 없습니다.");
   }
 
+  const compressedFile = await compressMedicineImage(file);
+
+  console.log("[이미지 압축]", {
+    beforeMB: (file.size / 1024 / 1024).toFixed(2),
+    afterMB: (compressedFile.size / 1024 / 1024).toFixed(2),
+  });
+
   const formData = new FormData();
-  formData.append("image", file);
+  formData.append("image", compressedFile);
 
   const response = await axios.post(`${API_BASE}/scan`, formData, {
     timeout: 60000,
