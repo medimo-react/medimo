@@ -534,6 +534,7 @@ const AISummary = () => {
 
   const [analysisData, setAnalysisData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [fetchError, setFetchError] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
 
   const fetchBookmarks = useBookmarkStore((s) => s.fetchBookmarks);
@@ -548,7 +549,8 @@ const AISummary = () => {
         const data = await fetchAnalysisDetail(id);
         setAnalysisData(data);
       } catch (error) {
-        console.error(error);
+        console.error("[분석 결과 로드 실패]", error);
+        setFetchError(true);
       } finally {
         setIsLoading(false);
       }
@@ -583,16 +585,38 @@ const AISummary = () => {
     );
   }
 
+  if (fetchError) {
+    return (
+      <Container>
+        <PageHeader
+          title="AI 처방전 분석"
+          description="분석 결과를 불러오지 못했습니다."
+        />
+        <Card>
+          <p className={styles.bodyText}>
+            분석 결과를 불러오는 데 실패했습니다. 로그인 상태를 확인하거나 다시 시도해 주세요.
+          </p>
+        </Card>
+      </Container>
+    );
+  }
+
   if (!analysisData || medicines.length === 0) {
     return (
       <Container>
         <PageHeader
           title="AI 처방전 분석"
-          description="처방전 이미지를 먼저 업로드하고 분석을 진행해 주세요."
+          description={
+            analysisData
+              ? "처방전에서 약품 정보를 추출하지 못했습니다."
+              : "처방전 이미지를 먼저 업로드하고 분석을 진행해 주세요."
+          }
         />
         <Card>
           <p className={styles.bodyText}>
-            분석 결과가 없습니다. 처방전 이미지를 먼저 업로드해 주세요.
+            {analysisData
+              ? "OCR 분석은 완료됐지만 인식된 약품 정보가 없습니다. 처방전 이미지가 선명한지 확인하고 다시 시도해 주세요."
+              : "분석 결과가 없습니다. 처방전 이미지를 먼저 업로드해 주세요."}
           </p>
         </Card>
       </Container>
